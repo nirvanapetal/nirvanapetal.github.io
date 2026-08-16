@@ -2136,36 +2136,45 @@ function hasCompletedOnboarding(){
 
 }
 
-
 function startApp(){
 
   const onboarding =
-    document.getElementById(
-      "onboarding"
-    );
+    document.getElementById("onboarding");
 
   const app =
-    document.getElementById(
-      "app"
-    );
+    document.getElementById("app");
 
-
-  if(hasCompletedOnboarding()){
-
-    onboarding.classList.add("hidden");
-    app.style.display = "block";
-
-    initialiseApp();
-
-  }else{
-
-    onboarding.classList.remove("hidden");
-    app.style.display = "none";
-
+  if(!onboarding || !app){
+    console.error("Petal: onboarding/app elements not found.");
+    return;
   }
 
-}
+  /*
+    New visitors:
+    show the beautiful Petal onboarding screen.
+  */
 
+  if(!hasCompletedOnboarding()){
+
+    onboarding.classList.remove("hidden");
+
+    app.style.display = "none";
+
+    return;
+  }
+
+  /*
+    Returning visitors:
+    go straight to the Petal dashboard.
+  */
+
+  onboarding.classList.add("hidden");
+
+  app.style.display = "block";
+
+  initialiseApp();
+
+}
 
 function nextOnboarding(step){
 

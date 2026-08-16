@@ -10036,29 +10036,6 @@ if (
 
 
   /* -------------------------------------------------------
-     IMPORTANT
-
-     We check whether Petal already has a saved name.
-
-     If there is no saved name, the person is treated as
-     a new user and the loading screen stays hidden so
-     onboarding can appear normally.
-     ------------------------------------------------------- */
-
-  const petalName =
-    localStorage.getItem("petalName");
-
-
-  if (!petalName) {
-
-    loadingScreen.classList.add("hidden");
-
-    return;
-
-  }
-
-
-  /* -------------------------------------------------------
      PETAL THOUGHTS
      ------------------------------------------------------- */
 

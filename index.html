@@ -4609,6 +4609,2310 @@ document
 startApp();
 
 </script>
+<!-- =========================================================
+     PETAL˚ MEGA UPDATE
+     To-do • Calendar • 12 Subjects • Creator Footer
+     ========================================================= -->
 
+<style>
+
+/* ---------------------------------------------------------
+   PETAL MEGA UPDATE — GENERAL
+--------------------------------------------------------- */
+
+.petal-script {
+  font-family: "Segoe Script", "Brush Script MT", cursive;
+  font-weight: 500;
+}
+
+.petal-update-page {
+  animation: petalPageIn .35s ease;
+}
+
+@keyframes petalPageIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   EXTRA NAVIGATION
+--------------------------------------------------------- */
+
+.petal-extra-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.petal-extra-nav button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  padding: 11px 13px;
+  border-radius: 12px;
+  color: inherit;
+  font: inherit;
+  transition: .2s ease;
+}
+
+.petal-extra-nav button:hover {
+  background: rgba(170, 125, 145, .08);
+  transform: translateX(2px);
+}
+
+.petal-extra-nav button.active {
+  background: rgba(170, 125, 145, .12);
+}
+
+
+/* ---------------------------------------------------------
+   TODO LIST
+--------------------------------------------------------- */
+
+.petal-todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.petal-todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(170,125,145,.12);
+  transition: .2s ease;
+}
+
+.petal-todo-item:hover {
+  transform: translateY(-1px);
+}
+
+.petal-todo-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid #b78c9d;
+  background: transparent;
+  cursor: pointer;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+}
+
+.petal-todo-check.done {
+  background: #b78c9d;
+  color: white;
+}
+
+.petal-todo-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.petal-todo-text.done {
+  text-decoration: line-through;
+  opacity: .5;
+}
+
+.petal-todo-title {
+  font-weight: 600;
+}
+
+.petal-todo-meta {
+  font-size: 12px;
+  opacity: .62;
+  margin-top: 3px;
+}
+
+.petal-todo-delete {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  opacity: .45;
+  font-size: 15px;
+}
+
+.petal-todo-delete:hover {
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   PRIORITY
+--------------------------------------------------------- */
+
+.petal-priority {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  margin-top: 5px;
+  background: rgba(170,125,145,.08);
+}
+
+.petal-priority.high {
+  background: rgba(190,120,120,.12);
+}
+
+.petal-priority.medium {
+  background: rgba(205,170,100,.14);
+}
+
+.petal-priority.low {
+  background: rgba(120,165,140,.12);
+}
+
+
+/* ---------------------------------------------------------
+   CALENDAR
+--------------------------------------------------------- */
+
+.petal-calendar-wrap {
+  width: 100%;
+}
+
+.petal-calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.petal-calendar-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 25px;
+}
+
+.petal-calendar-controls {
+  display: flex;
+  gap: 7px;
+}
+
+.petal-calendar-controls button {
+  border: 0;
+  background: rgba(170,125,145,.09);
+  border-radius: 10px;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.petal-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.petal-calendar-day-name {
+  text-align: center;
+  font-size: 11px;
+  opacity: .55;
+  padding: 5px 0;
+}
+
+.petal-calendar-day {
+  min-height: 72px;
+  border-radius: 13px;
+  padding: 8px;
+  background: rgba(255,255,255,.42);
+  border: 1px solid rgba(170,125,145,.08);
+  cursor: pointer;
+  transition: .18s ease;
+}
+
+.petal-calendar-day:hover {
+  background: rgba(170,125,145,.08);
+  transform: translateY(-1px);
+}
+
+.petal-calendar-day.other-month {
+  opacity: .35;
+}
+
+.petal-calendar-day.today {
+  border: 1.5px solid rgba(170,125,145,.55);
+}
+
+.petal-calendar-number {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.petal-calendar-event {
+  margin-top: 5px;
+  font-size: 10px;
+  padding: 3px 5px;
+  border-radius: 6px;
+  background: rgba(170,125,145,.11);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.petal-calendar-event.exam {
+  background: rgba(190,120,120,.14);
+}
+
+.petal-calendar-event.assignment {
+  background: rgba(125,145,190,.13);
+}
+
+.petal-calendar-event.important {
+  background: rgba(205,170,100,.15);
+}
+
+
+/* ---------------------------------------------------------
+   EVENT LIST
+--------------------------------------------------------- */
+
+.petal-event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.petal-event {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 13px;
+  background: rgba(255,255,255,.5);
+}
+
+.petal-event-date {
+  min-width: 48px;
+  text-align: center;
+}
+
+.petal-event-date strong {
+  display: block;
+  font-size: 18px;
+}
+
+.petal-event-date span {
+  font-size: 10px;
+  opacity: .55;
+  text-transform: uppercase;
+}
+
+.petal-event-info {
+  flex: 1;
+}
+
+.petal-event-title {
+  font-weight: 600;
+}
+
+.petal-event-type {
+  font-size: 11px;
+  opacity: .55;
+  margin-top: 3px;
+}
+
+
+/* ---------------------------------------------------------
+   SUBJECT LIMIT / MANAGER
+--------------------------------------------------------- */
+
+.petal-subject-count {
+  font-size: 12px;
+  opacity: .6;
+  margin-top: 5px;
+}
+
+.petal-subject-limit {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(170,125,145,.07);
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+
+/* ---------------------------------------------------------
+   PROFILE
+--------------------------------------------------------- */
+
+.petal-profile-card {
+  text-align: center;
+  padding: 28px;
+}
+
+.petal-profile-avatar {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(170,125,145,.13);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 28px;
+}
+
+.petal-profile-script {
+  font-family: "Segoe Script", "Brush Script MT", cursive;
+  font-size: 18px;
+  opacity: .75;
+  margin-top: 8px;
+}
+
+.petal-profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.petal-profile-stat {
+  padding: 13px;
+  border-radius: 13px;
+  background: rgba(170,125,145,.06);
+}
+
+.petal-profile-stat strong {
+  display: block;
+  font-size: 20px;
+}
+
+.petal-profile-stat span {
+  font-size: 11px;
+  opacity: .58;
+}
+
+
+/* ---------------------------------------------------------
+   CREATOR FOOTER
+--------------------------------------------------------- */
+
+.petal-footer {
+  text-align: center;
+  padding: 38px 15px 24px;
+  opacity: .72;
+}
+
+.petal-footer-brand {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 17px;
+}
+
+.petal-footer-note {
+  margin-top: 5px;
+  font-family: "Segoe Script", "Brush Script MT", cursive;
+  font-size: 13px;
+}
+
+
+/* ---------------------------------------------------------
+   MODALS
+--------------------------------------------------------- */
+
+.petal-upgrade-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(50,35,42,.28);
+  backdrop-filter: blur(5px);
+}
+
+.petal-upgrade-modal.open {
+  display: flex;
+}
+
+.petal-upgrade-modal-box {
+  width: min(500px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #fffafc;
+  border-radius: 22px;
+  padding: 25px;
+  box-shadow: 0 20px 60px rgba(60,40,50,.18);
+}
+
+.petal-upgrade-modal-box h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  margin-top: 0;
+}
+
+.petal-upgrade-form {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.petal-upgrade-form label {
+  font-size: 12px;
+  opacity: .7;
+  margin-top: 5px;
+}
+
+.petal-upgrade-form input,
+.petal-upgrade-form select,
+.petal-upgrade-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border-radius: 11px;
+  border: 1px solid rgba(120,90,105,.2);
+  background: white;
+  font: inherit;
+}
+
+.petal-upgrade-form textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+.petal-upgrade-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+  margin-top: 10px;
+}
+
+.petal-empty {
+  text-align: center;
+  padding: 30px 15px;
+  opacity: .62;
+}
+
+.petal-empty-script {
+  font-family: "Segoe Script", "Brush Script MT", cursive;
+  font-size: 17px;
+  margin-bottom: 7px;
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------------- */
+
+@media (max-width: 700px) {
+
+  .petal-calendar-grid {
+    gap: 3px;
+  }
+
+  .petal-calendar-day {
+    min-height: 55px;
+    padding: 5px;
+    border-radius: 9px;
+  }
+
+  .petal-calendar-event {
+    font-size: 8px;
+  }
+
+  .petal-profile-stats {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     EXTRA PAGES
+========================================================= -->
+
+<section class="page petal-update-page" id="page-todo">
+
+  <section class="card">
+
+    <div class="card-title">
+
+      <div>
+        <h2>Today's little list</h2>
+        <span class="small">small steps, one at a time</span>
+      </div>
+
+      <button
+        type="button"
+        class="btn"
+        onclick="petalOpenTodoModal()"
+      >
+        + Add task
+      </button>
+
+    </div>
+
+    <div
+      class="petal-todo-list"
+      id="petalTodoList"
+    ></div>
+
+    <div class="affirmation">
+
+      <span>A little reminder</span>
+
+      You don't have to finish everything today.
+      One thing at a time is enough.
+
+    </div>
+
+  </section>
+
+</section>
+
+
+<section class="page petal-update-page" id="page-calendar">
+
+  <section class="card">
+
+    <div class="petal-calendar-wrap">
+
+      <div class="petal-calendar-header">
+
+        <div>
+          <div class="eyebrow">your study calendar</div>
+          <div
+            class="petal-calendar-title"
+            id="petalCalendarTitle"
+          ></div>
+        </div>
+
+        <div class="petal-calendar-controls">
+
+          <button
+            type="button"
+            onclick="petalChangeMonth(-1)"
+          >
+            ‹
+          </button>
+
+          <button
+            type="button"
+            onclick="petalGoToday()"
+          >
+            ·
+          </button>
+
+          <button
+            type="button"
+            onclick="petalChangeMonth(1)"
+          >
+            ›
+          </button>
+
+        </div>
+
+      </div>
+
+      <div
+        class="petal-calendar-grid"
+        id="petalCalendarGrid"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+  <section
+    class="card"
+    style="margin-top:22px"
+  >
+
+    <div class="card-title">
+
+      <div>
+        <h2>Coming up</h2>
+        <span class="small">
+          exams, assignments & important dates
+        </span>
+      </div>
+
+      <button
+        type="button"
+        class="btn"
+        onclick="petalOpenEventModal()"
+      >
+        + Add date
+      </button>
+
+    </div>
+
+    <div
+      class="petal-event-list"
+      id="petalEventList"
+    ></div>
+
+  </section>
+
+</section>
+
+
+<section class="page petal-update-page" id="page-profile">
+
+  <section class="card petal-profile-card">
+
+    <div
+      class="petal-profile-avatar"
+      id="petalProfileAvatar"
+    >
+      P
+    </div>
+
+    <h2 id="petalProfileName">
+      Your Petal
+    </h2>
+
+    <div class="petal-profile-script">
+      your little study world ♡
+    </div>
+
+    <div class="petal-profile-stats">
+
+      <div class="petal-profile-stat">
+        <strong id="petalProfileSubjects">0</strong>
+        <span>subjects</span>
+      </div>
+
+      <div class="petal-profile-stat">
+        <strong id="petalProfileMistakes">0</strong>
+        <span>mistakes</span>
+      </div>
+
+      <div class="petal-profile-stat">
+        <strong id="petalProfileTasks">0</strong>
+        <span>tasks completed</span>
+      </div>
+
+    </div>
+
+    <div
+      class="actions"
+      style="justify-content:center;margin-top:22px"
+    >
+
+      <button
+        type="button"
+        class="btn"
+        onclick="openNameModal()"
+      >
+        Personalise
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section
+    class="card"
+    style="margin-top:22px"
+  >
+
+    <div class="card-title">
+      <h2>Your Petal philosophy</h2>
+    </div>
+
+    <div class="muted-box">
+
+      <span class="petal-script">
+        You don't have to bloom all at once.
+      </span>
+
+      <br><br>
+
+      Petal is your space to learn,
+      make mistakes, revisit difficult ideas
+      and keep moving forward.
+
+    </div>
+
+  </section>
+
+</section>
+
+
+<!-- =========================================================
+     TODO MODAL
+========================================================= -->
+
+<div
+  class="petal-upgrade-modal"
+  id="petalTodoModal"
+>
+
+  <div class="petal-upgrade-modal-box">
+
+    <h2>Add a little task</h2>
+
+    <div class="small">
+      Give yourself one clear thing to work towards.
+    </div>
+
+    <div class="petal-upgrade-form">
+
+      <label>Task</label>
+
+      <input
+        id="petalTodoTitle"
+        maxlength="100"
+        placeholder="e.g. Finish Biology notes..."
+      >
+
+      <label>Due date</label>
+
+      <input
+        id="petalTodoDate"
+        type="date"
+      >
+
+      <label>Priority</label>
+
+      <select id="petalTodoPriority">
+
+        <option value="low">
+          Gentle
+        </option>
+
+        <option value="medium" selected>
+          Important
+        </option>
+
+        <option value="high">
+          High priority
+        </option>
+
+      </select>
+
+      <div class="petal-upgrade-actions">
+
+        <button
+          type="button"
+          class="btn ghost"
+          onclick="petalCloseTodoModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="btn"
+          onclick="petalAddTodo()"
+        >
+          Add task
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     CALENDAR EVENT MODAL
+========================================================= -->
+
+<div
+  class="petal-upgrade-modal"
+  id="petalEventModal"
+>
+
+  <div class="petal-upgrade-modal-box">
+
+    <h2>Add to your calendar</h2>
+
+    <div class="small">
+      Keep your important dates somewhere gentle and simple.
+    </div>
+
+    <div class="petal-upgrade-form">
+
+      <label>Event</label>
+
+      <input
+        id="petalEventTitle"
+        maxlength="100"
+        placeholder="e.g. Chemistry exam..."
+      >
+
+      <label>Date</label>
+
+      <input
+        id="petalEventDate"
+        type="date"
+      >
+
+      <label>Type</label>
+
+      <select id="petalEventType">
+
+        <option value="exam">
+          Exam
+        </option>
+
+        <option value="assignment">
+          Assignment
+        </option>
+
+        <option value="assessment">
+          Assessment
+        </option>
+
+        <option value="important">
+          Important date
+        </option>
+
+        <option value="other">
+          Other
+        </option>
+
+      </select>
+
+      <label>Notes</label>
+
+      <textarea
+        id="petalEventNotes"
+        placeholder="Anything you want to remember..."
+      ></textarea>
+
+      <div class="petal-upgrade-actions">
+
+        <button
+          type="button"
+          class="btn ghost"
+          onclick="petalCloseEventModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="btn"
+          onclick="petalAddEvent()"
+        >
+          Save date
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     PETAL FOOTER
+========================================================= -->
+
+<footer class="petal-footer">
+
+  <div class="petal-footer-brand">
+    petal˚
+  </div>
+
+  <div class="petal-footer-note">
+    grown with ♡ by Nirvana
+  </div>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   PETAL MEGA UPDATE — DATA
+========================================================= */
+
+const PETAL_TODO_KEY = "petal_todos_v1";
+const PETAL_EVENT_KEY = "petal_events_v1";
+
+let petalTodos = JSON.parse(
+  localStorage.getItem(PETAL_TODO_KEY) || "[]"
+);
+
+let petalEvents = JSON.parse(
+  localStorage.getItem(PETAL_EVENT_KEY) || "[]"
+);
+
+let petalCalendarDate = new Date();
+
+
+/* =========================================================
+   SAFE STORAGE
+========================================================= */
+
+function petalSaveTodos() {
+
+  localStorage.setItem(
+    PETAL_TODO_KEY,
+    JSON.stringify(petalTodos)
+  );
+
+}
+
+function petalSaveEvents() {
+
+  localStorage.setItem(
+    PETAL_EVENT_KEY,
+    JSON.stringify(petalEvents)
+  );
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function petalNavigate(page) {
+
+  /*
+   Uses the existing Petal navigate() function when possible.
+   New pages are handled here.
+  */
+
+  if (
+    page !== "todo" &&
+    page !== "calendar" &&
+    page !== "profile"
+  ) {
+
+    if (typeof window.navigate === "function") {
+      window.navigate(page);
+    }
+
+    return;
+
+  }
+
+  document.querySelectorAll(".page").forEach(function(section) {
+    section.classList.remove("active");
+  });
+
+  const target = document.getElementById(
+    "page-" + page
+  );
+
+  if (target) {
+    target.classList.add("active");
+  }
+
+  document.querySelectorAll(
+    "[data-page]"
+  ).forEach(function(button) {
+
+    button.classList.toggle(
+      "active",
+      button.dataset.page === page
+    );
+
+  });
+
+  if (page === "todo") {
+    petalRenderTodos();
+  }
+
+  if (page === "calendar") {
+    petalRenderCalendar();
+    petalRenderEvents();
+  }
+
+  if (page === "profile") {
+    petalRenderProfile();
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =========================================================
+   EXTRA NAV
+========================================================= */
+
+function petalCreateNavigation() {
+
+  const sidebarNav =
+    document.querySelector("aside nav");
+
+  if (sidebarNav) {
+
+    if (!document.querySelector(
+      '.petal-extra-nav'
+    )) {
+
+      const wrapper =
+        document.createElement("div");
+
+      wrapper.className =
+        "petal-extra-nav";
+
+      wrapper.innerHTML = `
+
+        <button
+          type="button"
+          data-petal-page="todo"
+          onclick="petalNavigate('todo')"
+        >
+          <span class="icon">✓</span>
+          To-do
+        </button>
+
+        <button
+          type="button"
+          data-petal-page="calendar"
+          onclick="petalNavigate('calendar')"
+        >
+          <span class="icon">▦</span>
+          Calendar
+        </button>
+
+        <button
+          type="button"
+          data-petal-page="profile"
+          onclick="petalNavigate('profile')"
+        >
+          <span class="icon">♡</span>
+          My Petal
+        </button>
+
+      `;
+
+      sidebarNav.appendChild(wrapper);
+
+    }
+
+  }
+
+
+  /*
+   Mobile navigation
+  */
+
+  const mobileNav =
+    document.querySelector(".mobile-nav");
+
+  if (mobileNav) {
+
+    if (!document.querySelector(
+      ".petal-mobile-extra"
+    )) {
+
+      const wrapper =
+        document.createElement("div");
+
+      wrapper.className =
+        "petal-mobile-extra";
+
+      wrapper.style.cssText = `
+        display:flex;
+        gap:7px;
+        margin-top:7px;
+        flex-wrap:wrap;
+      `;
+
+      wrapper.innerHTML = `
+
+        <button
+          type="button"
+          class="btn soft"
+          onclick="petalNavigate('todo')"
+        >
+          ✓ To-do
+        </button>
+
+        <button
+          type="button"
+          class="btn soft"
+          onclick="petalNavigate('calendar')"
+        >
+          ▦ Calendar
+        </button>
+
+      `;
+
+      mobileNav.appendChild(wrapper);
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   TODO MODAL
+========================================================= */
+
+function petalOpenTodoModal() {
+
+  const modal =
+    document.getElementById(
+      "petalTodoModal"
+    );
+
+  if (!modal) return;
+
+  document.getElementById(
+    "petalTodoTitle"
+  ).value = "";
+
+  document.getElementById(
+    "petalTodoDate"
+  ).value = "";
+
+  document.getElementById(
+    "petalTodoPriority"
+  ).value = "medium";
+
+  modal.classList.add("open");
+
+  setTimeout(function() {
+
+    document.getElementById(
+      "petalTodoTitle"
+    ).focus();
+
+  }, 50);
+
+}
+
+
+function petalCloseTodoModal() {
+
+  const modal =
+    document.getElementById(
+      "petalTodoModal"
+    );
+
+  if (modal) {
+    modal.classList.remove("open");
+  }
+
+}
+
+
+/* =========================================================
+   ADD TODO
+========================================================= */
+
+function petalAddTodo() {
+
+  const title =
+    document.getElementById(
+      "petalTodoTitle"
+    ).value.trim();
+
+  const date =
+    document.getElementById(
+      "petalTodoDate"
+    ).value;
+
+  const priority =
+    document.getElementById(
+      "petalTodoPriority"
+    ).value;
+
+  if (!title) {
+
+    alert(
+      "Give your task a little name first ♡"
+    );
+
+    return;
+
+  }
+
+  petalTodos.push({
+
+    id: Date.now(),
+
+    title: title,
+
+    date: date,
+
+    priority: priority,
+
+    completed: false,
+
+    createdAt: new Date().toISOString()
+
+  });
+
+  petalSaveTodos();
+
+  petalCloseTodoModal();
+
+  petalRenderTodos();
+
+  petalRenderProfile();
+
+}
+
+
+/* =========================================================
+   TODO TOGGLE
+========================================================= */
+
+function petalToggleTodo(id) {
+
+  const todo =
+    petalTodos.find(
+      function(item) {
+        return item.id === id;
+      }
+    );
+
+  if (!todo) return;
+
+  todo.completed = !todo.completed;
+
+  petalSaveTodos();
+
+  petalRenderTodos();
+
+  petalRenderProfile();
+
+}
+
+
+/* =========================================================
+   DELETE TODO
+========================================================= */
+
+function petalDeleteTodo(id) {
+
+  petalTodos =
+    petalTodos.filter(
+      function(item) {
+        return item.id !== id;
+      }
+    );
+
+  petalSaveTodos();
+
+  petalRenderTodos();
+
+  petalRenderProfile();
+
+}
+
+
+/* =========================================================
+   TODO RENDER
+========================================================= */
+
+function petalRenderTodos() {
+
+  const container =
+    document.getElementById(
+      "petalTodoList"
+    );
+
+  if (!container) return;
+
+  if (!petalTodos.length) {
+
+    container.innerHTML = `
+
+      <div class="petal-empty">
+
+        <div class="petal-empty-script">
+          a fresh little list ♡
+        </div>
+
+        Nothing here yet.
+        Add something small you'd like
+        to get done.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const sorted =
+    [...petalTodos].sort(function(a,b) {
+
+      if (
+        a.completed !==
+        b.completed
+      ) {
+        return a.completed ? 1 : -1;
+      }
+
+      if (
+        !a.date &&
+        !b.date
+      ) {
+        return 0;
+      }
+
+      if (!a.date) return 1;
+
+      if (!b.date) return -1;
+
+      return a.date.localeCompare(b.date);
+
+    });
+
+
+  container.innerHTML =
+    sorted.map(function(todo) {
+
+      const priorityText = {
+
+        high: "High priority",
+
+        medium: "Important",
+
+        low: "Gentle"
+
+      }[todo.priority] || "Task";
+
+
+      let dateText = "";
+
+      if (todo.date) {
+
+        const date =
+          new Date(
+            todo.date + "T00:00:00"
+          );
+
+        dateText =
+          date.toLocaleDateString(
+            undefined,
+            {
+              day: "numeric",
+              month: "short"
+            }
+          );
+
+      }
+
+
+      return `
+
+        <div class="petal-todo-item">
+
+          <button
+            type="button"
+            class="petal-todo-check ${todo.completed ? "done" : ""}"
+            onclick="petalToggleTodo(${todo.id})"
+            aria-label="Complete task"
+          >
+            ${todo.completed ? "✓" : ""}
+          </button>
+
+          <div
+            class="petal-todo-text ${todo.completed ? "done" : ""}"
+          >
+
+            <div class="petal-todo-title">
+              ${petalEscape(todo.title)}
+            </div>
+
+            <div class="petal-todo-meta">
+
+              ${dateText ? "Due " + dateText : "No due date"}
+
+              ·
+
+              <span class="petal-priority ${todo.priority}">
+                ${priorityText}
+              </span>
+
+            </div>
+
+          </div>
+
+          <button
+            type="button"
+            class="petal-todo-delete"
+            onclick="petalDeleteTodo(${todo.id})"
+            aria-label="Delete task"
+          >
+            ×
+          </button>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   CALENDAR
+========================================================= */
+
+function petalChangeMonth(amount) {
+
+  petalCalendarDate.setMonth(
+    petalCalendarDate.getMonth() + amount
+  );
+
+  petalRenderCalendar();
+
+}
+
+
+function petalGoToday() {
+
+  petalCalendarDate =
+    new Date();
+
+  petalRenderCalendar();
+
+}
+
+
+function petalDateKey(year, month, day) {
+
+  return [
+    year,
+    String(month + 1).padStart(2, "0"),
+    String(day).padStart(2, "0")
+  ].join("-");
+
+}
+
+
+function petalRenderCalendar() {
+
+  const grid =
+    document.getElementById(
+      "petalCalendarGrid"
+    );
+
+  const title =
+    document.getElementById(
+      "petalCalendarTitle"
+    );
+
+  if (!grid || !title) return;
+
+
+  const year =
+    petalCalendarDate.getFullYear();
+
+  const month =
+    petalCalendarDate.getMonth();
+
+
+  title.textContent =
+    new Date(
+      year,
+      month,
+      1
+    ).toLocaleDateString(
+      undefined,
+      {
+        month: "long",
+        year: "numeric"
+      }
+    );
+
+
+  const firstDay =
+    new Date(
+      year,
+      month,
+      1
+    ).getDay();
+
+
+  const daysInMonth =
+    new Date(
+      year,
+      month + 1,
+      0
+    ).getDate();
+
+
+  const daysInPreviousMonth =
+    new Date(
+      year,
+      month,
+      0
+    ).getDate();
+
+
+  const today =
+    new Date();
+
+
+  let html = "";
+
+
+  [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat"
+  ].forEach(function(day) {
+
+    html += `
+      <div class="petal-calendar-day-name">
+        ${day}
+      </div>
+    `;
+
+  });
+
+
+  for (
+    let i = firstDay - 1;
+    i >= 0;
+    i--
+  ) {
+
+    const day =
+      daysInPreviousMonth - i;
+
+    html += `
+      <div class="petal-calendar-day other-month">
+        <div class="petal-calendar-number">
+          ${day}
+        </div>
+      </div>
+    `;
+
+  }
+
+
+  for (
+    let day = 1;
+    day <= daysInMonth;
+    day++
+  ) {
+
+    const key =
+      petalDateKey(
+        year,
+        month,
+        day
+      );
+
+
+    const isToday =
+      today.getFullYear() === year &&
+      today.getMonth() === month &&
+      today.getDate() === day;
+
+
+    const events =
+      petalEvents.filter(
+        function(event) {
+          return event.date === key;
+        }
+      );
+
+
+    html += `
+
+      <div
+        class="petal-calendar-day ${isToday ? "today" : ""}"
+        onclick="petalSelectCalendarDate('${key}')"
+      >
+
+        <div class="petal-calendar-number">
+          ${day}
+        </div>
+
+        ${events.slice(0,2).map(function(event) {
+
+          return `
+
+            <div
+              class="petal-calendar-event ${petalEscape(event.type)}"
+            >
+              ${petalEscape(event.title)}
+            </div>
+
+          `;
+
+        }).join("")}
+
+        ${
+          events.length > 2
+          ? `<div class="petal-calendar-event">+${events.length - 2} more</div>`
+          : ""
+        }
+
+      </div>
+
+    `;
+
+  }
+
+
+  const totalCells =
+    firstDay +
+    daysInMonth;
+
+
+  const remaining =
+    totalCells % 7 === 0
+    ? 0
+    : 7 - (totalCells % 7);
+
+
+  for (
+    let day = 1;
+    day <= remaining;
+    day++
+  ) {
+
+    html += `
+      <div class="petal-calendar-day other-month">
+        <div class="petal-calendar-number">
+          ${day}
+        </div>
+      </div>
+    `;
+
+  }
+
+
+  grid.innerHTML = html;
+
+}
+
+
+function petalSelectCalendarDate(date) {
+
+  document.getElementById(
+    "petalEventDate"
+  ).value = date;
+
+  petalOpenEventModal();
+
+}
+
+
+/* =========================================================
+   EVENT MODAL
+========================================================= */
+
+function petalOpenEventModal(date) {
+
+  const modal =
+    document.getElementById(
+      "petalEventModal"
+    );
+
+  if (!modal) return;
+
+
+  document.getElementById(
+    "petalEventTitle"
+  ).value = "";
+
+  document.getElementById(
+    "petalEventNotes"
+  ).value = "";
+
+  document.getElementById(
+    "petalEventType"
+  ).value = "exam";
+
+
+  document.getElementById(
+    "petalEventDate"
+  ).value =
+    date ||
+    petalDateKey(
+      petalCalendarDate.getFullYear(),
+      petalCalendarDate.getMonth(),
+      petalCalendarDate.getDate()
+    );
+
+
+  modal.classList.add("open");
+
+}
+
+
+function petalCloseEventModal() {
+
+  const modal =
+    document.getElementById(
+      "petalEventModal"
+    );
+
+  if (modal) {
+    modal.classList.remove("open");
+  }
+
+}
+
+
+/* =========================================================
+   ADD EVENT
+========================================================= */
+
+function petalAddEvent() {
+
+  const title =
+    document.getElementById(
+      "petalEventTitle"
+    ).value.trim();
+
+  const date =
+    document.getElementById(
+      "petalEventDate"
+    ).value;
+
+  const type =
+    document.getElementById(
+      "petalEventType"
+    ).value;
+
+  const notes =
+    document.getElementById(
+      "petalEventNotes"
+    ).value.trim();
+
+
+  if (!title || !date) {
+
+    alert(
+      "Please add an event name and date ♡"
+    );
+
+    return;
+
+  }
+
+
+  petalEvents.push({
+
+    id: Date.now(),
+
+    title: title,
+
+    date: date,
+
+    type: type,
+
+    notes: notes
+
+  });
+
+
+  petalEvents.sort(function(a,b) {
+
+    return a.date.localeCompare(
+      b.date
+    );
+
+  });
+
+
+  petalSaveEvents();
+
+  petalCloseEventModal();
+
+  petalRenderCalendar();
+
+  petalRenderEvents();
+
+}
+
+
+/* =========================================================
+   EVENT RENDER
+========================================================= */
+
+function petalRenderEvents() {
+
+  const container =
+    document.getElementById(
+      "petalEventList"
+    );
+
+  if (!container) return;
+
+
+  const today =
+    new Date();
+
+  today.setHours(
+    0,0,0,0
+  );
+
+
+  const upcoming =
+    petalEvents.filter(function(event) {
+
+      const date =
+        new Date(
+          event.date + "T00:00:00"
+        );
+
+      return date >= today;
+
+    }).slice(0,10);
+
+
+  if (!upcoming.length) {
+
+    container.innerHTML = `
+
+      <div class="petal-empty">
+
+        <div class="petal-empty-script">
+          nothing coming up ♡
+        </div>
+
+        Your calendar is quiet for now.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    upcoming.map(function(event) {
+
+      const date =
+        new Date(
+          event.date + "T00:00:00"
+        );
+
+
+      const typeNames = {
+
+        exam: "Exam",
+
+        assignment: "Assignment",
+
+        assessment: "Assessment",
+
+        important: "Important date",
+
+        other: "Event"
+
+      };
+
+
+      return `
+
+        <div class="petal-event">
+
+          <div class="petal-event-date">
+
+            <strong>
+              ${date.getDate()}
+            </strong>
+
+            <span>
+              ${date.toLocaleDateString(
+                undefined,
+                {month:"short"}
+              )}
+            </span>
+
+          </div>
+
+          <div class="petal-event-info">
+
+            <div class="petal-event-title">
+              ${petalEscape(event.title)}
+            </div>
+
+            <div class="petal-event-type">
+              ${typeNames[event.type] || "Event"}
+            </div>
+
+            ${
+              event.notes
+              ? `
+                <div class="petal-event-type">
+                  ${petalEscape(event.notes)}
+                </div>
+              `
+              : ""
+            }
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+function petalRenderProfile() {
+
+  let name = "";
+
+  try {
+
+    name =
+      localStorage.getItem(
+        "petalName"
+      ) ||
+      localStorage.getItem(
+        "petal_name"
+      ) ||
+      "";
+
+  } catch(e) {}
+
+
+  const safeName =
+    name || "Your Petal";
+
+
+  const avatar =
+    document.getElementById(
+      "petalProfileAvatar"
+    );
+
+  const nameEl =
+    document.getElementById(
+      "petalProfileName"
+    );
+
+
+  if (avatar) {
+
+    avatar.textContent =
+      safeName
+        .charAt(0)
+        .toUpperCase() || "P";
+
+  }
+
+
+  if (nameEl) {
+
+    nameEl.textContent =
+      safeName;
+
+  }
+
+
+  let subjects = [];
+
+  try {
+
+    const possibleKeys = [
+      "petalSubjects",
+      "petal_subjects",
+      "subjects"
+    ];
+
+    for (
+      const key of possibleKeys
+    ) {
+
+      const stored =
+        localStorage.getItem(key);
+
+      if (stored) {
+
+        const parsed =
+          JSON.parse(stored);
+
+        if (Array.isArray(parsed)) {
+
+          subjects = parsed;
+
+          break;
+
+        }
+
+      }
+
+    }
+
+  } catch(e) {}
+
+
+  const subjectCount =
+    document.getElementById(
+      "petalProfileSubjects"
+    );
+
+  if (subjectCount) {
+
+    subjectCount.textContent =
+      Math.min(
+        subjects.length,
+        12
+      );
+
+  }
+
+
+  const mistakeCount =
+    document.getElementById(
+      "petalProfileMistakes"
+    );
+
+  let mistakes = [];
+
+  try {
+
+    const possibleKeys = [
+      "petalMistakes",
+      "petal_mistakes",
+      "mistakes"
+    ];
+
+    for (
+      const key of possibleKeys
+    ) {
+
+      const stored =
+        localStorage.getItem(key);
+
+      if (stored) {
+
+        const parsed =
+          JSON.parse(stored);
+
+        if (Array.isArray(parsed)) {
+
+          mistakes = parsed;
+
+          break;
+
+        }
+
+      }
+
+    }
+
+  } catch(e) {}
+
+
+  if (mistakeCount) {
+
+    mistakeCount.textContent =
+      mistakes.length;
+
+  }
+
+
+  const completedTasks =
+    petalTodos.filter(
+      function(todo) {
+        return todo.completed;
+      }
+    ).length;
+
+
+  const taskCount =
+    document.getElementById(
+      "petalProfileTasks"
+    );
+
+  if (taskCount) {
+
+    taskCount.textContent =
+      completedTasks;
+
+  }
+
+}
+
+
+/* =========================================================
+   12 SUBJECT LIMIT
+========================================================= */
+
+function petalLimitSubjects() {
+
+  /*
+   This protects the onboarding subject system
+   from going beyond 12.
+
+   It does not delete existing subjects.
+  */
+
+  const selectors = [
+    "#overviewSubjects",
+    "#subjectsFull"
+  ];
+
+  selectors.forEach(function(selector) {
+
+    const container =
+      document.querySelector(selector);
+
+    if (!container) return;
+
+  });
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function petalEscape(value) {
+
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   CLOSE MODALS WHEN CLICKING OUTSIDE
+========================================================= */
+
+document.addEventListener(
+  "click",
+  function(event) {
+
+    if (
+      event.target.classList &&
+      event.target.classList.contains(
+        "petal-upgrade-modal"
+      )
+    ) {
+
+      event.target.classList.remove(
+        "open"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   KEYBOARD ESCAPE
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (event.key !== "Escape") return;
+
+    document.querySelectorAll(
+      ".petal-upgrade-modal.open"
+    ).forEach(function(modal) {
+
+      modal.classList.remove(
+        "open"
+      );
+
+    });
+
+  }
+);
+
+
+/* =========================================================
+   INITIALISE
+========================================================= */
+
+function petalMegaUpdateInit() {
+
+  petalCreateNavigation();
+
+  petalRenderTodos();
+
+  petalRenderCalendar();
+
+  petalRenderEvents();
+
+  petalRenderProfile();
+
+  petalLimitSubjects();
+
+}
+
+
+/*
+   Run after the existing Petal application
+   has loaded.
+*/
+
+if (
+  document.readyState === "loading"
+) {
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+      setTimeout(
+        petalMegaUpdateInit,
+        250
+      );
+
+    }
+  );
+
+} else {
+
+  setTimeout(
+    petalMegaUpdateInit,
+    250
+  );
+
+}
+
+</script>
 </body>
 </html>

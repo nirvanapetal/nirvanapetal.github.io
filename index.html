@@ -1,1170 +1,2149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>petal — intelligent revision</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --ink:#292729;
-      --muted:#8c8589;
-      --cream:#fbf8f4;
-      --paper:#fffdfa;
-      --rose:#ead6d8;
-      --rose-deep:#c9939b;
-      --rose-soft:#f3e9e9;
-      --sage:#dce3d8;
-      --lavender:#e5ddea;
-      --gold:#eadfca;
-      --line:#eee7e3;
-      --shadow:0 18px 50px rgba(70,54,60,.08);
-      --radius:24px;
-    }
-
-    * {
-      box-sizing:border-box;
-    }
-
-    html {
-      scroll-behavior:smooth;
-    }
-
-    body {
-      margin:0;
-      background:var(--cream);
-      color:var(--ink);
-      font-family:"DM Sans",sans-serif;
-    }
-
-    button,input,textarea,select {
-      font:inherit;
-    }
-
-    button {
-      cursor:pointer;
-    }
-
-    .shell {
-      display:flex;
-      min-height:100vh;
-    }
-
-    aside {
-      width:245px;
-      background:rgba(255,253,250,.9);
-      border-right:1px solid var(--line);
-      padding:30px 20px;
-      position:sticky;
-      top:0;
-      height:100vh;
-      z-index:20;
-    }
-
-    .brand {
-      font-family:"Playfair Display",serif;
-      font-size:29px;
-      letter-spacing:.2px;
-      padding:0 12px 35px;
-    }
-
-    .brand span {
-      color:var(--rose-deep);
-    }
-
-    nav button {
-      display:flex;
-      width:100%;
-      border:0;
-      background:transparent;
-      padding:13px 14px;
-      margin:4px 0;
-      border-radius:14px;
-      color:#817a7e;
-      text-align:left;
-      gap:12px;
-      align-items:center;
-      transition:.2s;
-    }
-
-    nav button.active,
-    nav button:hover {
-      background:var(--rose-soft);
-      color:var(--ink);
-    }
-
-    .icon {
-      width:22px;
-      text-align:center;
-    }
-
-    .side-note {
-      position:absolute;
-      bottom:28px;
-      left:28px;
-      right:28px;
-      padding:16px;
-      background:#f2f0e9;
-      border-radius:18px;
-      font-size:12px;
-      line-height:1.55;
-      color:#817c73;
-    }
-
-    main {
-      flex:1;
-      max-width:1250px;
-      margin:auto;
-      padding:44px 52px;
-      width:100%;
-    }
-
-    .top {
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      margin-bottom:35px;
-    }
-
-    .eyebrow {
-      text-transform:uppercase;
-      letter-spacing:2px;
-      font-size:10px;
-      color:var(--rose-deep);
-      font-weight:600;
-    }
-
-    h1 {
-      font-family:"Playfair Display",serif;
-      font-size:42px;
-      font-weight:500;
-      margin:7px 0 5px;
-    }
-
-    .sub {
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .avatar {
-      width:43px;
-      height:43px;
-      border:0;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      background:var(--rose);
-      font-family:"Playfair Display",serif;
-      flex:none;
-      color:var(--ink);
-    }
-
-    .page {
-      display:none;
-      animation:fade .25s ease;
-    }
-
-    .page.active {
-      display:block;
-    }
-
-    @keyframes fade {
-      from {
-        opacity:.3;
-        transform:translateY(5px);
-      }
-      to {
-        opacity:1;
-        transform:none;
-      }
-    }
-
-    .grid {
-      display:grid;
-      grid-template-columns:1.5fr 1fr;
-      gap:22px;
-    }
-
-    .card {
-      background:var(--paper);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:24px;
-      box-shadow:var(--shadow);
-    }
-
-    .card-title {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:20px;
-      gap:15px;
-    }
-
-    h2 {
-      font-family:"Playfair Display",serif;
-      font-weight:500;
-      font-size:22px;
-      margin:0;
-    }
-
-    .small {
-      font-size:12px;
-      color:var(--muted);
-    }
-
-    .subject-grid {
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-    }
-
-    .subject {
-      padding:17px;
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:#fffefa;
-    }
-
-    .subject-head {
-      display:flex;
-      justify-content:space-between;
-      font-size:13px;
-      margin-bottom:11px;
-    }
-
-    .bar {
-      height:6px;
-      background:#f0ece9;
-      border-radius:99px;
-      overflow:hidden;
-    }
-
-    .fill {
-      height:100%;
-      border-radius:99px;
-      transition:width .4s ease;
-    }
-
-    .rose {
-      background:#d9aeb5;
-    }
-
-    .sage {
-      background:#aebfa8;
-    }
-
-    .lav {
-      background:#bdaacb;
-    }
-
-    .gold {
-      background:#d7bd86;
-    }
-
-    .today {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:15px 0;
-      border-bottom:1px solid var(--line);
-      gap:12px;
-    }
-
-    .today:last-child {
-      border-bottom:0;
-    }
-
-    .tag {
-      font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:1px;
-      padding:6px 9px;
-      border-radius:99px;
-      background:#f2e7e8;
-      color:#a27078;
-      white-space:nowrap;
-    }
-
-    .tag.s {
-      background:#e8eee5;
-      color:#6f816b;
-    }
-
-    .tag.l {
-      background:#eee9f2;
-      color:#796783;
-    }
-
-    .mistake {
-      padding:16px;
-      background:#faf6f4;
-      border-radius:17px;
-      margin-bottom:10px;
-      border:1px solid transparent;
-      transition:.2s;
-    }
-
-    .mistake:hover {
-      border-color:var(--line);
-      transform:translateY(-1px);
-    }
-
-    .mistake strong {
-      font-size:13px;
-      font-weight:600;
-    }
-
-    .mistake p {
-      margin:6px 0 0;
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.5;
-    }
-
-    .mistake-row {
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      align-items:flex-start;
-    }
-
-    .btn {
-      border:0;
-      border-radius:13px;
-      padding:11px 15px;
-      background:var(--ink);
-      color:white;
-      font-size:12px;
-      transition:.2s;
-    }
-
-    .btn:hover {
-      transform:translateY(-1px);
-      opacity:.92;
-    }
-
-    .btn.soft {
-      background:#f2e7e8;
-      color:#815d63;
-    }
-
-    .btn.ghost {
-      background:transparent;
-      border:1px solid var(--line);
-      color:#756f72;
-    }
-
-    .btn.sage-btn {
-      background:#e8eee5;
-      color:#61745e;
-    }
-
-    .actions {
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-
-    .stats {
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-bottom:22px;
-    }
-
-    .stat {
-      padding:18px;
-      background:var(--paper);
-      border:1px solid var(--line);
-      border-radius:20px;
-    }
-
-    .stat-number {
-      font-family:"Playfair Display",serif;
-      font-size:29px;
-      margin-bottom:3px;
-    }
-
-    .stat-label {
-      font-size:11px;
-      color:var(--muted);
-    }
-
-    .toolbar {
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:18px;
-    }
-
-    .toolbar input,
-    .toolbar select {
-      max-width:260px;
-    }
-
-    .empty {
-      padding:42px 20px;
-      text-align:center;
-      color:var(--muted);
-      font-size:13px;
-      background:#faf6f4;
-      border-radius:18px;
-    }
-
-    .empty-title {
-      font-family:"Playfair Display",serif;
-      font-size:21px;
-      color:var(--ink);
-      margin-bottom:6px;
-    }
-
-    .revision-card {
-      text-align:center;
-      padding:38px;
-    }
-
-    .revision-subject {
-      font-size:11px;
-      text-transform:uppercase;
-      letter-spacing:2px;
-      color:var(--rose-deep);
-      font-weight:600;
-      margin-bottom:8px;
-    }
-
-    .revision-title {
-      font-family:"Playfair Display",serif;
-      font-size:30px;
-      line-height:1.25;
-      margin-bottom:12px;
-    }
-
-    .revision-body {
-      max-width:650px;
-      margin:0 auto 25px;
-      color:var(--muted);
-      line-height:1.7;
-      font-size:14px;
-    }
-
-    .reveal {
-      background:#faf6f4;
-      border-radius:18px;
-      padding:18px;
-      text-align:left;
-      margin:0 auto 20px;
-      max-width:650px;
-    }
-
-    .reveal b {
-      font-size:11px;
-      text-transform:uppercase;
-      letter-spacing:1px;
-      color:#81797d;
-    }
-
-    .reveal p {
-      font-size:13px;
-      line-height:1.6;
-      margin:7px 0 0;
-    }
-
-    .muted-box {
-      padding:20px;
-      background:#f2f0e9;
-      border-radius:18px;
-      color:#817c73;
-      font-size:12px;
-      line-height:1.6;
-    }
-
-    .welcome-card {
-      background:linear-gradient(135deg,#fffdfa 0%,#f8eeee 100%);
-    }
-
-    .modal-bg {
-      position:fixed;
-      inset:0;
-      background:rgba(35,29,31,.28);
-      display:none;
-      place-items:center;
-      padding:20px;
-      backdrop-filter:blur(5px);
-      z-index:100;
-    }
-
-    .modal-bg.open {
-      display:grid;
-    }
-
-    .modal {
-      width:min(570px,100%);
-      background:var(--paper);
-      border-radius:28px;
-      padding:30px;
-      box-shadow:0 30px 90px rgba(0,0,0,.16);
-      max-height:90vh;
-      overflow:auto;
-    }
-
-    .modal h2 {
-      font-size:28px;
-      margin-bottom:5px;
-    }
-
-    label {
-      display:block;
-      font-size:11px;
-      color:#81797d;
-      text-transform:uppercase;
-      letter-spacing:1px;
-      margin:18px 0 7px;
-    }
-
-    input,
-    textarea,
-    select {
-      width:100%;
-      border:1px solid var(--line);
-      background:#fff;
-      border-radius:13px;
-      padding:12px;
-      color:var(--ink);
-      outline:none;
-    }
-
-    textarea {
-      min-height:90px;
-      resize:vertical;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color:#d6b6bb;
-      box-shadow:0 0 0 3px #f4e7e8;
-    }
-
-    .modal-actions {
-      display:flex;
-      justify-content:flex-end;
-      gap:8px;
-      margin-top:22px;
-    }
-
-    .toast {
-      position:fixed;
-      bottom:24px;
-      right:24px;
-      background:var(--ink);
-      color:white;
-      padding:12px 16px;
-      border-radius:14px;
-      font-size:12px;
-      box-shadow:var(--shadow);
-      opacity:0;
-      transform:translateY(10px);
-      pointer-events:none;
-      transition:.25s;
-      z-index:200;
-    }
-
-    .toast.show {
-      opacity:1;
-      transform:none;
-    }
-
-    .mobile-nav {
-      display:none;
-    }
-
-    @media(max-width:850px) {
-      aside {
-        display:none;
-      }
-
-      main {
-        padding:28px 18px;
-      }
-
-      .grid {
-        grid-template-columns:1fr;
-      }
-
-      .top {
-        margin-bottom:25px;
-      }
-
-      h1 {
-        font-size:34px;
-      }
-
-      .stats {
-        grid-template-columns:1fr 1fr;
-      }
-
-      .mobile-nav {
-        display:flex;
-        position:sticky;
-        top:0;
-        z-index:15;
-        background:rgba(251,248,244,.95);
-        backdrop-filter:blur(10px);
-        padding:10px 0;
-        margin:-10px 0 20px;
-        gap:6px;
-        overflow:auto;
-      }
-
-      .mobile-nav button {
-        border:0;
-        background:transparent;
-        padding:9px 11px;
-        border-radius:12px;
-        font-size:11px;
-        color:var(--muted);
-        white-space:nowrap;
-      }
-
-      .mobile-nav button.active {
-        background:var(--rose-soft);
-        color:var(--ink);
-      }
-    }
-
-    @media(max-width:500px) {
-      .subject-grid {
-        grid-template-columns:1fr;
-      }
-
-      .card {
-        padding:18px;
-      }
-
-      .stats {
-        grid-template-columns:1fr;
-      }
-
-      .revision-card {
-        padding:25px 16px;
-      }
-
-      .actions .btn {
-        flex:1;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>petal˚ — intelligent revision</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --ink:#272529;
+  --muted:#8c8589;
+
+  --white:#fff;
+  --cream:#fdfbf9;
+  --paper:#ffffff;
+
+  --pink:#f3d9df;
+  --pink-deep:#d894a2;
+  --pink-soft:#f9edef;
+
+  --blue:#d9e8f2;
+  --blue-deep:#89aec8;
+
+  --yellow:#f5e7b9;
+  --yellow-deep:#c9aa5f;
+
+  --purple:#e4dbef;
+  --purple-deep:#a993bd;
+
+  --red:#efd2d2;
+  --red-deep:#bd7d82;
+
+  --sage:#dce9da;
+  --sage-deep:#8ea88a;
+
+  --line:#eee9e7;
+
+  --shadow:
+    0 18px 55px rgba(65,49,57,.07);
+
+  --shadow-hover:
+    0 22px 65px rgba(65,49,57,.11);
+
+  --radius:24px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* =========================
+   ONBOARDING
+========================= */
+
+.onboarding{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(243,217,223,.55),transparent 25%),
+    radial-gradient(circle at 85% 25%,rgba(217,232,242,.6),transparent 25%),
+    radial-gradient(circle at 50% 90%,rgba(228,219,239,.45),transparent 30%),
+    #fffdfa;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:30px;
+
+  transition:
+    opacity .5s ease,
+    visibility .5s ease;
+}
+
+.onboarding.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.onboard-container{
+  width:min(720px,100%);
+  text-align:center;
+}
+
+.onboard-brand{
+  font-family:"Playfair Display",serif;
+  font-size:42px;
+  margin-bottom:50px;
+}
+
+.onboard-brand span{
+  color:var(--pink-deep);
+}
+
+.onboard-step{
+  display:none;
+  animation:onboardFade .45s ease;
+}
+
+.onboard-step.active{
+  display:block;
+}
+
+@keyframes onboardFade{
+
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+
+  to{
+    opacity:1;
+    transform:none;
+  }
+
+}
+
+.onboard-eyebrow{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  color:var(--pink-deep);
+  font-weight:600;
+  margin-bottom:15px;
+}
+
+.onboard-title{
+  font-family:"Playfair Display",serif;
+  font-weight:500;
+  font-size:52px;
+  line-height:1.08;
+  margin:0 auto 18px;
+  max-width:680px;
+}
+
+.onboard-sub{
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.7;
+  max-width:520px;
+  margin:0 auto 30px;
+}
+
+.onboard-input{
+  width:min(430px,100%);
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:17px;
+  padding:16px 18px;
+  outline:none;
+  text-align:center;
+  font-size:15px;
+  transition:.2s;
+}
+
+.onboard-input:focus{
+  border-color:var(--pink-deep);
+  box-shadow:0 0 0 4px var(--pink-soft);
+}
+
+.onboard-button{
+  border:0;
+  background:var(--ink);
+  color:white;
+  padding:14px 23px;
+  border-radius:14px;
+  font-size:12px;
+  margin-top:17px;
+  transition:.2s;
+}
+
+.onboard-button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 25px rgba(39,37,41,.12);
+}
+
+.progress-dots{
+  display:flex;
+  justify-content:center;
+  gap:7px;
+  margin-top:45px;
+}
+
+.progress-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#e9e3e1;
+  transition:.2s;
+}
+
+.progress-dot.active{
+  width:22px;
+  border-radius:99px;
+  background:var(--pink-deep);
+}
+
+/* SUBJECT CHOICES */
+
+.subject-choices{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:11px;
+  max-width:600px;
+  margin:30px auto 18px;
+}
+
+.subject-choice{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:17px;
+  padding:17px 10px;
+  font-size:12px;
+  transition:.2s;
+}
+
+.subject-choice:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow);
+}
+
+.subject-choice.selected{
+  border-color:var(--pink-deep);
+  background:var(--pink-soft);
+}
+
+.subject-emoji{
+  display:block;
+  font-size:20px;
+  margin-bottom:7px;
+}
+
+.custom-subject{
+  display:none;
+  width:min(430px,100%);
+  margin:12px auto 0;
+}
+
+.custom-subject.visible{
+  display:block;
+}
+
+/* =========================
+   APP
+========================= */
+
+.app{
+  min-height:100vh;
+}
+
+.shell{
+  display:flex;
+  min-height:100vh;
+}
+
+aside{
+  width:250px;
+  background:rgba(255,255,255,.88);
+  border-right:1px solid var(--line);
+  padding:30px 20px;
+  position:sticky;
+  top:0;
+  height:100vh;
+  z-index:20;
+  backdrop-filter:blur(15px);
+}
+
+.brand{
+  font-family:"Playfair Display",serif;
+  font-size:30px;
+  padding:0 12px 35px;
+}
+
+.brand span{
+  color:var(--pink-deep);
+}
+
+nav button{
+  display:flex;
+  width:100%;
+  border:0;
+  background:transparent;
+  padding:13px 14px;
+  margin:4px 0;
+  border-radius:14px;
+  color:#817a7e;
+  text-align:left;
+  gap:12px;
+  align-items:center;
+  transition:.2s;
+}
+
+nav button.active,
+nav button:hover{
+  background:var(--pink-soft);
+  color:var(--ink);
+}
+
+.icon{
+  width:22px;
+  text-align:center;
+}
+
+.side-note{
+  position:absolute;
+  bottom:28px;
+  left:28px;
+  right:28px;
+  padding:16px;
+  background:#f7f4ef;
+  border-radius:18px;
+  font-size:12px;
+  line-height:1.6;
+  color:#817c73;
+}
+
+main{
+  flex:1;
+  max-width:1250px;
+  margin:auto;
+  padding:45px 52px;
+  width:100%;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:35px;
+}
+
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:10px;
+  color:var(--pink-deep);
+  font-weight:600;
+}
+
+h1{
+  font-family:"Playfair Display",serif;
+  font-size:42px;
+  font-weight:500;
+  margin:7px 0 5px;
+}
+
+.sub{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.avatar{
+  width:45px;
+  height:45px;
+  border:0;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--pink);
+  font-family:"Playfair Display",serif;
+  color:var(--ink);
+}
+
+.page{
+  display:none;
+  animation:fade .3s ease;
+}
+
+.page.active{
+  display:block;
+}
+
+@keyframes fade{
+
+  from{
+    opacity:.3;
+    transform:translateY(5px);
+  }
+
+  to{
+    opacity:1;
+    transform:none;
+  }
+
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:22px;
+}
+
+.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:25px;
+  box-shadow:var(--shadow);
+  transition:.25s;
+}
+
+.card:hover{
+  box-shadow:var(--shadow-hover);
+}
+
+.card-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+  gap:15px;
+}
+
+h2{
+  font-family:"Playfair Display",serif;
+  font-weight:500;
+  font-size:22px;
+  margin:0;
+}
+
+.small{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* =========================
+   SUBJECTS
+========================= */
+
+.subject-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.subject{
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:19px;
+  background:#fff;
+  transition:.2s;
+}
+
+.subject:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow);
+}
+
+.subject-head{
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  margin-bottom:12px;
+}
+
+.bar{
+  height:6px;
+  background:#f0ece9;
+  border-radius:99px;
+  overflow:hidden;
+}
+
+.fill{
+  height:100%;
+  border-radius:99px;
+  transition:width .5s ease;
+}
+
+.rose{
+  background:#e4b0ba;
+}
+
+.blue{
+  background:#a9c9dd;
+}
+
+.lav{
+  background:#c2afd4;
+}
+
+.gold{
+  background:#e0c776;
+}
+
+.red{
+  background:#d79a9e;
+}
+
+.sage{
+  background:#a9c4a4;
+}
+
+/* =========================
+   TODAY
+========================= */
+
+.today{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+  gap:12px;
+}
+
+.today:last-child{
+  border-bottom:0;
+}
+
+.tag{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  padding:6px 9px;
+  border-radius:99px;
+  background:var(--pink-soft);
+  color:#a27078;
+  white-space:nowrap;
+}
+
+.tag.blue-tag{
+  background:#eaf3f8;
+  color:#6c91a8;
+}
+
+.tag.lav-tag{
+  background:#f0ebf5;
+  color:#796783;
+}
+
+.tag.yellow-tag{
+  background:#f8f1d9;
+  color:#927a35;
+}
+
+.tag.green-tag{
+  background:#eaf2e8;
+  color:#6d8468;
+}
+
+/* =========================
+   MISTAKES
+========================= */
+
+.mistake{
+  padding:16px;
+  background:#fcf9f7;
+  border-radius:18px;
+  margin-bottom:10px;
+  border:1px solid transparent;
+  transition:.2s;
+}
+
+.mistake:hover{
+  border-color:var(--line);
+  transform:translateY(-1px);
+}
+
+.mistake strong{
+  font-size:13px;
+  font-weight:600;
+}
+
+.mistake p{
+  margin:6px 0 0;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.55;
+}
+
+.mistake-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+}
+
+.btn{
+  border:0;
+  border-radius:13px;
+  padding:11px 15px;
+  background:var(--ink);
+  color:white;
+  font-size:12px;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+}
+
+.btn.soft{
+  background:var(--pink-soft);
+  color:#815d63;
+}
+
+.btn.blue-btn{
+  background:#eaf3f8;
+  color:#668ba2;
+}
+
+.btn.yellow-btn{
+  background:#f8f1d9;
+  color:#8f7734;
+}
+
+.btn.sage-btn{
+  background:#eaf2e8;
+  color:#60775c;
+}
+
+.btn.ghost{
+  background:transparent;
+  border:1px solid var(--line);
+  color:#756f72;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:22px;
+}
+
+.stat{
+  padding:19px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+}
+
+.stat:nth-child(1){
+  background:#fff7f8;
+}
+
+.stat:nth-child(2){
+  background:#f4f9fc;
+}
+
+.stat:nth-child(3){
+  background:#f7f3fb;
+}
+
+.stat-number{
+  font-family:"Playfair Display",serif;
+  font-size:29px;
+  margin-bottom:3px;
+}
+
+.stat-label{
+  font-size:11px;
+  color:var(--muted);
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+
+.toolbar input,
+.toolbar select{
+  max-width:260px;
+}
+
+/* =========================
+   REVISION
+========================= */
+
+.revision-card{
+  text-align:center;
+  padding:45px;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(243,217,223,.4),transparent 30%),
+    radial-gradient(circle at 80% 80%,rgba(228,219,239,.45),transparent 30%),
+    white;
+}
+
+.revision-subject{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:var(--pink-deep);
+  font-weight:600;
+  margin-bottom:8px;
+}
+
+.revision-title{
+  font-family:"Playfair Display",serif;
+  font-size:30px;
+  line-height:1.25;
+  margin-bottom:12px;
+}
+
+.revision-body{
+  max-width:650px;
+  margin:0 auto 25px;
+  color:var(--muted);
+  line-height:1.7;
+  font-size:14px;
+}
+
+.reveal{
+  background:#faf7f5;
+  border-radius:18px;
+  padding:18px;
+  text-align:left;
+  margin:0 auto 20px;
+  max-width:650px;
+}
+
+.reveal b{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:#81797d;
+}
+
+.reveal p{
+  font-size:13px;
+  line-height:1.6;
+  margin:7px 0 0;
+}
+
+/* =========================
+   AFFIRMATIONS
+========================= */
+
+.affirmation{
+  padding:19px;
+  border-radius:19px;
+  margin-top:22px;
+  background:linear-gradient(
+    135deg,
+    #fff7f8,
+    #f8f3fb
+  );
+  color:#70676b;
+  font-family:"Playfair Display",serif;
+  font-size:17px;
+  line-height:1.45;
+  text-align:center;
+}
+
+.affirmation span{
+  display:block;
+  font-family:"DM Sans",sans-serif;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  color:var(--pink-deep);
+  margin-bottom:6px;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  padding:42px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  background:#fcf9f7;
+  border-radius:18px;
+}
+
+.empty-title{
+  font-family:"Playfair Display",serif;
+  font-size:21px;
+  color:var(--ink);
+  margin-bottom:6px;
+}
+
+.muted-box{
+  padding:20px;
+  background:#f7f4ef;
+  border-radius:18px;
+  color:#817c73;
+  font-size:12px;
+  line-height:1.65;
+}
+
+/* =========================
+   MODALS
+========================= */
+
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(35,29,31,.28);
+  display:none;
+  place-items:center;
+  padding:20px;
+  backdrop-filter:blur(6px);
+  z-index:100;
+}
+
+.modal-bg.open{
+  display:grid;
+}
+
+.modal{
+  width:min(570px,100%);
+  background:white;
+  border-radius:28px;
+  padding:30px;
+  box-shadow:0 30px 90px rgba(0,0,0,.16);
+  max-height:90vh;
+  overflow:auto;
+}
+
+.modal h2{
+  font-size:28px;
+  margin-bottom:5px;
+}
+
+label{
+  display:block;
+  font-size:11px;
+  color:#81797d;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin:18px 0 7px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:13px;
+  padding:12px;
+  color:var(--ink);
+  outline:none;
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--pink-deep);
+  box-shadow:0 0 0 3px var(--pink-soft);
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:22px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  background:var(--ink);
+  color:white;
+  padding:12px 16px;
+  border-radius:14px;
+  font-size:12px;
+  box-shadow:var(--shadow);
+  opacity:0;
+  transform:translateY(10px);
+  pointer-events:none;
+  transition:.25s;
+  z-index:200;
+}
+
+.toast.show{
+  opacity:1;
+  transform:none;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+.mobile-nav{
+  display:none;
+}
+
+@media(max-width:850px){
+
+  aside{
+    display:none;
+  }
+
+  main{
+    padding:28px 18px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .top{
+    margin-bottom:25px;
+  }
+
+  h1{
+    font-size:34px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .mobile-nav{
+    display:flex;
+    position:sticky;
+    top:0;
+    z-index:15;
+    background:rgba(253,251,249,.95);
+    backdrop-filter:blur(10px);
+    padding:10px 0;
+    margin:-10px 0 20px;
+    gap:6px;
+    overflow:auto;
+  }
+
+  .mobile-nav button{
+    border:0;
+    background:transparent;
+    padding:9px 11px;
+    border-radius:12px;
+    font-size:11px;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+
+  .mobile-nav button.active{
+    background:var(--pink-soft);
+    color:var(--ink);
+  }
+
+}
+
+@media(max-width:600px){
+
+  .onboard-title{
+    font-size:38px;
+  }
+
+  .onboard-brand{
+    font-size:34px;
+    margin-bottom:35px;
+  }
+
+  .subject-choices{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:500px){
+
+  .subject-grid{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    padding:18px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .revision-card{
+    padding:28px 18px;
+  }
+
+  .actions .btn{
+    flex:1;
+  }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-<div class="shell">
 
-  <aside>
-    <div class="brand">petal<span>˚</span></div>
+<!-- =====================================================
+     ONBOARDING
+===================================================== -->
 
-    <nav>
-      <button class="active" data-page="overview">
-        <span class="icon">⌂</span> Overview
-      </button>
+<div class="onboarding" id="onboarding">
 
-      <button data-page="mistakes">
-        <span class="icon">✦</span> My mistakes
-      </button>
+  <div class="onboard-container">
 
-      <button data-page="revision">
-        <span class="icon">◷</span> Revision
-      </button>
-
-      <button data-page="subjects">
-        <span class="icon">♡</span> Subjects
-      </button>
-    </nav>
-
-    <div class="side-note">
-      <b>A little reminder</b><br>
-      Small, consistent revision beats panic the night before.
-      You’re doing better than you think.
-    </div>
-  </aside>
-
-
-  <main>
-
-    <div class="mobile-nav">
-      <button class="active" data-page="overview">Overview</button>
-      <button data-page="mistakes">Mistakes</button>
-      <button data-page="revision">Revision</button>
-      <button data-page="subjects">Subjects</button>
+    <div class="onboard-brand">
+      petal<span>˚</span>
     </div>
 
 
-    <div class="top">
-      <div>
-        <div class="eyebrow" id="dateLabel"></div>
+    <!-- STEP 1 -->
 
-        <h1 id="greeting">
-          Good morning.
-        </h1>
+    <div class="onboard-step active" id="step1">
 
-        <div class="sub">
-          Let’s make today’s revision feel a little lighter.
-        </div>
+      <div class="onboard-eyebrow">
+        intelligent revision
       </div>
 
-      <button class="avatar" id="avatarBtn">
-        P
+      <h1 class="onboard-title">
+        Revision that remembers where you struggle.
+      </h1>
+
+      <p class="onboard-sub">
+        Petal turns your mistakes into a personalised
+        revision system, helping you spend less time
+        repeating what you already know and more time
+        improving what actually matters.
+      </p>
+
+      <button
+        class="onboard-button"
+        onclick="nextOnboarding(2)"
+      >
+        Let's begin →
       </button>
+
+      <div class="affirmation">
+        <span>A little reminder</span>
+        You don't need to know everything today.
+        You just need to keep going.
+      </div>
+
     </div>
 
 
-    <!-- OVERVIEW -->
+    <!-- STEP 2 -->
 
-    <section class="page active" id="page-overview">
+    <div class="onboard-step" id="step2">
 
-      <div class="grid">
-
-        <section class="card welcome-card">
-
-          <div class="card-title">
-
-            <div>
-              <h2>Your subjects</h2>
-              <span class="small">
-                based on your Petal progress
-              </span>
-            </div>
-
-            <button class="btn soft" onclick="navigate('subjects')">
-              View all
-            </button>
-
-          </div>
-
-          <div class="subject-grid" id="overviewSubjects"></div>
-
-        </section>
-
-
-        <section class="card">
-
-          <div class="card-title">
-            <h2>Today’s revision</h2>
-            <span class="small" id="todayCount">
-              0 ready
-            </span>
-          </div>
-
-          <div id="todayList"></div>
-
-        </section>
-
-
-        <section class="card">
-
-          <div class="card-title">
-
-            <div>
-              <h2>Mistakes to revisit</h2>
-              <span class="small">
-                your recent errors
-              </span>
-            </div>
-
-            <button class="btn soft" onclick="openMistakeModal()">
-              + Add
-            </button>
-
-          </div>
-
-          <div id="overviewMistakes"></div>
-
-        </section>
-
-
-        <section class="card">
-
-          <div class="card-title">
-            <h2>Your little win</h2>
-            <span>✦</span>
-          </div>
-
-          <div class="stat-number" id="winNumber">
-            0 mistakes
-          </div>
-
-          <div class="small">
-            Every mistake you understand is one less mistake
-            you’ll make on exam day.
-          </div>
-
-          <div style="margin-top:18px" class="actions">
-
-            <button class="btn" onclick="navigate('revision')">
-              Start revision
-            </button>
-
-            <button class="btn ghost" onclick="openNameModal()">
-              Personalise
-            </button>
-
-          </div>
-
-        </section>
-
+      <div class="onboard-eyebrow">
+        make it yours
       </div>
 
-    </section>
+      <h1 class="onboard-title">
+        First, let's make Petal yours.
+      </h1>
+
+      <p class="onboard-sub">
+        What should we call you?
+      </p>
+
+      <input
+        class="onboard-input"
+        id="nameInput"
+        maxlength="30"
+        placeholder="Your name..."
+        autocomplete="name"
+      >
+
+      <br>
+
+      <button
+        class="onboard-button"
+        onclick="saveOnboardingName()"
+      >
+        Continue →
+      </button>
+
+    </div>
 
 
-    <!-- MISTAKES -->
+    <!-- STEP 3 -->
 
-    <section class="page" id="page-mistakes">
+    <div class="onboard-step" id="step3">
 
-      <div class="stats">
-
-        <div class="stat">
-          <div class="stat-number" id="statTotal">0</div>
-          <div class="stat-label">mistakes recorded</div>
-        </div>
-
-        <div class="stat">
-          <div class="stat-number" id="statReview">0</div>
-          <div class="stat-label">ready to review</div>
-        </div>
-
-        <div class="stat">
-          <div class="stat-number" id="statMastered">0</div>
-          <div class="stat-label">mastered</div>
-        </div>
-
+      <div class="onboard-eyebrow">
+        your study world
       </div>
 
+      <h1 class="onboard-title">
+        What are you studying?
+      </h1>
 
-      <section class="card">
-
-        <div class="card-title">
-
-          <div>
-            <h2>My mistakes</h2>
-            <span class="small">
-              Your mistakes are your revision map.
-            </span>
-          </div>
-
-          <button class="btn" onclick="openMistakeModal()">
-            + Add mistake
-          </button>
-
-        </div>
+      <p class="onboard-sub">
+        Choose everything you'd like Petal to
+        remember. You can add your own subjects too.
+      </p>
 
 
-        <div class="toolbar">
+      <div class="subject-choices">
 
-          <input
-            id="searchMistakes"
-            placeholder="Search your mistakes..."
-            oninput="renderMistakesPage()"
-          >
-
-          <select id="filterSubject" onchange="renderMistakesPage()">
-            <option value="All">All subjects</option>
-            <option>Biology</option>
-            <option>Chemistry</option>
-            <option>Physics</option>
-            <option>Methods</option>
-            <option>Specialist</option>
-          </select>
-
-          <select id="filterStatus" onchange="renderMistakesPage()">
-            <option value="All">All statuses</option>
-            <option value="review">Needs review</option>
-            <option value="mastered">Mastered</option>
-          </select>
-
-        </div>
-
-        <div id="mistakesList"></div>
-
-      </section>
-
-    </section>
-
-
-    <!-- REVISION -->
-
-    <section class="page" id="page-revision">
-
-      <section class="card revision-card">
-
-        <div class="revision-subject" id="revisionSubject">
-          PETAL REVISION
-        </div>
-
-        <div class="revision-title" id="revisionTitle">
-          You're ready when you are.
-        </div>
-
-        <div class="revision-body" id="revisionIntro">
-          Petal will choose a mistake that still needs your attention.
-          The goal isn't to remember that you were wrong —
-          it's to understand why.
-        </div>
-
-        <div id="revisionContent">
-
-          <div class="muted-box">
-            Add a few mistakes first and Petal will build your
-            revision queue here.
-          </div>
-
-        </div>
-
-        <div
-          class="actions"
-          style="justify-content:center;margin-top:22px"
+        <button
+          class="subject-choice"
+          data-subject="Biology"
+          onclick="toggleSubject(this)"
         >
-
-          <button
-            class="btn"
-            id="revisionStartBtn"
-            onclick="startRevision()"
-          >
-            Start revision
-          </button>
-
-          <button
-            class="btn ghost"
-            onclick="navigate('mistakes')"
-          >
-            View mistake bank
-          </button>
-
-        </div>
-
-      </section>
-
-    </section>
+          <span class="subject-emoji">🧬</span>
+          Biology
+        </button>
 
 
-    <!-- SUBJECTS -->
-
-    <section class="page" id="page-subjects">
-
-      <section class="card">
-
-        <div class="card-title">
-
-          <div>
-            <h2>Your subjects</h2>
-
-            <span class="small">
-              Progress is based on mistakes you have mastered.
-            </span>
-          </div>
-
-          <button class="btn soft" onclick="openMistakeModal()">
-            + Add mistake
-          </button>
-
-        </div>
-
-        <div class="subject-grid" id="subjectsFull"></div>
-
-      </section>
+        <button
+          class="subject-choice"
+          data-subject="Chemistry"
+          onclick="toggleSubject(this)"
+        >
+          <span class="subject-emoji">⚗️</span>
+          Chemistry
+        </button>
 
 
-      <section class="card" style="margin-top:22px">
+        <button
+          class="subject-choice"
+          data-subject="Physics"
+          onclick="toggleSubject(this)"
+        >
+          <span class="subject-emoji">⚡</span>
+          Physics
+        </button>
 
-        <div class="card-title">
-          <h2>How Petal reads your progress</h2>
-        </div>
 
-        <div class="muted-box">
-          Each subject begins with a clean slate.
-          As you record mistakes and later mark them as mastered,
-          Petal calculates how much of your recorded mistake bank
-          has been resolved. It is not a grade — it is a picture
-          of where your revision effort is going.
-        </div>
+        <button
+          class="subject-choice"
+          data-subject="Mathematics"
+          onclick="toggleSubject(this)"
+        >
+          <span class="subject-emoji">📐</span>
+          Mathematics
+        </button>
 
-      </section>
 
-    </section>
+        <button
+          class="subject-choice"
+          data-subject="English"
+          onclick="toggleSubject(this)"
+        >
+          <span class="subject-emoji">🌸</span>
+          English
+        </button>
 
-  </main>
+
+        <button
+          class="subject-choice"
+          data-subject="Geography"
+          onclick="toggleSubject(this)"
+        >
+          <span class="subject-emoji">🌎</span>
+          Geography
+        </button>
+
+
+        <button
+          class="subject-choice"
+          data-subject="Psychology"
+          onclick="toggleSubject(this)"
+        >
+          <span class="subject-emoji">🧠</span>
+          Psychology
+        </button>
+
+
+        <button
+          class="subject-choice"
+          data-subject="Other"
+          onclick="toggleOtherSubject(this)"
+        >
+          <span class="subject-emoji">✦</span>
+          Other
+        </button>
+
+      </div>
+
+
+      <input
+        class="onboard-input custom-subject"
+        id="customSubject"
+        placeholder="Type your subject..."
+        maxlength="40"
+      >
+
+
+      <button
+        class="onboard-button"
+        onclick="saveSubjects()"
+      >
+        Continue →
+      </button>
+
+    </div>
+
+
+    <!-- STEP 4 -->
+
+    <div class="onboard-step" id="step4">
+
+      <div class="onboard-eyebrow">
+        your space is ready
+      </div>
+
+      <h1
+        class="onboard-title"
+        id="welcomeTitle"
+      >
+        Welcome.
+      </h1>
+
+      <p class="onboard-sub">
+        Your Petal garden is ready to grow.
+
+        Every mistake you record,
+        every concept you understand,
+        and every small study session
+        becomes part of your progress.
+      </p>
+
+
+      <div class="affirmation">
+
+        <span>Your first Petal thought</span>
+
+        Progress doesn't have to be loud.
+        Small steps still count.
+
+      </div>
+
+
+      <button
+        class="onboard-button"
+        onclick="finishOnboarding()"
+      >
+        Enter Petal →
+      </button>
+
+    </div>
+
+
+    <div class="progress-dots">
+
+      <div
+        class="progress-dot active"
+        id="dot1"
+      ></div>
+
+      <div
+        class="progress-dot"
+        id="dot2"
+      ></div>
+
+      <div
+        class="progress-dot"
+        id="dot3"
+      ></div>
+
+      <div
+        class="progress-dot"
+        id="dot4"
+      ></div>
+
+    </div>
+
+  </div>
 
 </div>
 
 
-<!-- ADD MISTAKE MODAL -->
+<!-- =====================================================
+     APP
+===================================================== -->
 
-<div class="modal-bg" id="mistakeModal">
+<div class="app" id="app">
 
-  <div class="modal">
+<div class="shell">
 
-    <h2>Add a mistake</h2>
 
-    <div class="small">
-      Tell Petal what happened.
-      Your mistakes become your personalised revision map.
+<aside>
+
+  <div class="brand">
+    petal<span>˚</span>
+  </div>
+
+
+  <nav>
+
+    <button
+      class="active"
+      data-page="overview"
+    >
+      <span class="icon">⌂</span>
+      Overview
+    </button>
+
+
+    <button data-page="mistakes">
+
+      <span class="icon">✦</span>
+      My mistakes
+
+    </button>
+
+
+    <button data-page="revision">
+
+      <span class="icon">◷</span>
+      Revision
+
+    </button>
+
+
+    <button data-page="subjects">
+
+      <span class="icon">♡</span>
+      Subjects
+
+    </button>
+
+  </nav>
+
+
+  <div class="side-note">
+
+    <b>A little reminder</b>
+
+    <br>
+
+    You are allowed to learn slowly.
+    Understanding one difficult thing
+    is still progress.
+
+  </div>
+
+</aside>
+
+
+<main>
+
+
+<!-- MOBILE NAV -->
+
+<div class="mobile-nav">
+
+  <button
+    class="active"
+    data-page="overview"
+  >
+    Overview
+  </button>
+
+  <button data-page="mistakes">
+    Mistakes
+  </button>
+
+  <button data-page="revision">
+    Revision
+  </button>
+
+  <button data-page="subjects">
+    Subjects
+  </button>
+
+</div>
+
+
+<!-- HEADER -->
+
+<div class="top">
+
+  <div>
+
+    <div
+      class="eyebrow"
+      id="dateLabel"
+    ></div>
+
+
+    <h1 id="greeting">
+      Good morning.
+    </h1>
+
+
+    <div class="sub">
+      Let's make today's revision feel
+      a little lighter.
+    </div>
+
+  </div>
+
+
+  <button
+    class="avatar"
+    id="avatarBtn"
+  >
+    P
+  </button>
+
+</div>
+
+
+<!-- =====================================================
+     OVERVIEW
+===================================================== -->
+
+<section
+  class="page active"
+  id="page-overview"
+>
+
+<div class="grid">
+
+
+<!-- SUBJECTS -->
+
+<section class="card">
+
+  <div class="card-title">
+
+    <div>
+
+      <h2>Your subjects</h2>
+
+      <span class="small">
+        your study world
+      </span>
+
     </div>
 
 
-    <label>Subject</label>
+    <button
+      class="btn soft"
+      onclick="navigate('subjects')"
+    >
+      View all
+    </button>
 
-    <select id="subject">
+  </div>
 
-      <option>Biology</option>
-      <option>Chemistry</option>
-      <option>Physics</option>
-      <option>Methods</option>
-      <option>Specialist</option>
+
+  <div
+    class="subject-grid"
+    id="overviewSubjects"
+  ></div>
+
+
+  <div class="affirmation">
+
+    <span>Keep going</span>
+
+    You don't have to master everything
+    at once. One concept at a time.
+
+  </div>
+
+</section>
+
+
+<!-- TODAY -->
+
+<section class="card">
+
+  <div class="card-title">
+
+    <h2>Today's revision</h2>
+
+    <span
+      class="small"
+      id="todayCount"
+    >
+      0 ready
+    </span>
+
+  </div>
+
+
+  <div id="todayList"></div>
+
+</section>
+
+
+<!-- MISTAKES -->
+
+<section class="card">
+
+  <div class="card-title">
+
+    <div>
+
+      <h2>Mistakes to revisit</h2>
+
+      <span class="small">
+        your personal revision map
+      </span>
+
+    </div>
+
+
+    <button
+      class="btn soft"
+      onclick="openMistakeModal()"
+    >
+      + Add
+    </button>
+
+  </div>
+
+
+  <div id="overviewMistakes"></div>
+
+</section>
+
+
+<!-- WIN -->
+
+<section class="card">
+
+  <div class="card-title">
+
+    <h2>Your little win</h2>
+
+    <span>✦</span>
+
+  </div>
+
+
+  <div
+    class="stat-number"
+    id="winNumber"
+  >
+    0 mistakes
+  </div>
+
+
+  <div class="small">
+    Every mistake you understand
+    is one less mistake standing
+    between you and your goals.
+  </div>
+
+
+  <div
+    class="actions"
+    style="margin-top:18px"
+  >
+
+    <button
+      class="btn"
+      onclick="navigate('revision')"
+    >
+      Start revision
+    </button>
+
+
+    <button
+      class="btn ghost"
+      onclick="openNameModal()"
+    >
+      Personalise
+    </button>
+
+  </div>
+
+
+  <div class="affirmation">
+
+    <span>Remember</span>
+
+    You are more capable than
+    one difficult question makes you feel.
+
+  </div>
+
+</section>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MISTAKES
+===================================================== -->
+
+<section
+  class="page"
+  id="page-mistakes"
+>
+
+
+<div class="stats">
+
+  <div class="stat">
+
+    <div
+      class="stat-number"
+      id="statTotal"
+    >
+      0
+    </div>
+
+    <div class="stat-label">
+      mistakes recorded
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div
+      class="stat-number"
+      id="statReview"
+    >
+      0
+    </div>
+
+    <div class="stat-label">
+      ready to review
+    </div>
+
+  </div>
+
+
+  <div class="stat">
+
+    <div
+      class="stat-number"
+      id="statMastered"
+    >
+      0
+    </div>
+
+    <div class="stat-label">
+      mastered
+    </div>
+
+  </div>
+
+</div>
+
+
+<section class="card">
+
+  <div class="card-title">
+
+    <div>
+
+      <h2>My mistakes</h2>
+
+      <span class="small">
+        Your mistakes are your revision map.
+      </span>
+
+    </div>
+
+
+    <button
+      class="btn"
+      onclick="openMistakeModal()"
+    >
+      + Add mistake
+    </button>
+
+  </div>
+
+
+  <div class="toolbar">
+
+    <input
+      id="searchMistakes"
+      placeholder="Search your mistakes..."
+      oninput="renderMistakesPage()"
+    >
+
+
+    <select
+      id="filterSubject"
+      onchange="renderMistakesPage()"
+    >
+
+      <option value="All">
+        All subjects
+      </option>
 
     </select>
 
 
-    <label>What did you get wrong?</label>
-
-    <input
-      id="mistakeTitle"
-      placeholder="e.g. Forgot the sign convention..."
+    <select
+      id="filterStatus"
+      onchange="renderMistakesPage()"
     >
 
+      <option value="All">
+        All statuses
+      </option>
 
-    <label>What went wrong?</label>
+      <option value="review">
+        Needs review
+      </option>
 
-    <textarea
-      id="mistakeBody"
-      placeholder="Explain the mistake in your own words..."
-    ></textarea>
+      <option value="mastered">
+        Mastered
+      </option>
 
+    </select>
 
-    <label>Topic</label>
-
-    <input
-      id="mistakeTopic"
-      placeholder="e.g. Differentiation, enzymes, acids & bases..."
-    >
+  </div>
 
 
-    <div class="modal-actions">
+  <div id="mistakesList"></div>
 
-      <button
-        class="btn ghost"
-        onclick="closeModal('mistakeModal')"
-      >
-        Cancel
-      </button>
 
-      <button
-        class="btn"
-        onclick="addMistake()"
-      >
-        Save mistake
-      </button>
+  <div class="affirmation">
 
-    </div>
+    <span>A note from Petal</span>
+
+    Mistakes aren't evidence that
+    you're bad at something.
+    They're evidence that you're learning.
+
+  </div>
+
+</section>
+
+</section>
+
+
+<!-- =====================================================
+     REVISION
+===================================================== -->
+
+<section
+  class="page"
+  id="page-revision"
+>
+
+
+<section class="card revision-card">
+
+
+<div
+  class="revision-subject"
+  id="revisionSubject"
+>
+  PETAL REVISION
+</div>
+
+
+<div
+  class="revision-title"
+  id="revisionTitle"
+>
+  You're ready when you are.
+</div>
+
+
+<div
+  class="revision-body"
+  id="revisionIntro"
+>
+  Petal will choose a mistake that still
+  needs your attention.
+
+  The goal isn't simply to remember
+  that you were wrong.
+
+  It's to understand why.
+</div>
+
+
+<div id="revisionContent">
+
+  <div class="muted-box">
+
+    Add a few mistakes first and Petal
+    will build your revision queue here.
 
   </div>
 
 </div>
 
 
-<!-- NAME MODAL -->
+<div
+  class="actions"
+  style="justify-content:center;margin-top:22px"
+>
 
-<div class="modal-bg" id="nameModal">
-
-  <div class="modal">
-
-    <h2>Make Petal yours</h2>
-
-    <div class="small">
-      Your name stays in this browser for now.
-      Later, we'll connect it to your Petal account.
-    </div>
-
-
-    <label>Your name</label>
-
-    <input
-      id="nameInput"
-      maxlength="30"
-      placeholder="e.g. Nirvana"
-    >
+  <button
+    class="btn"
+    id="revisionStartBtn"
+    onclick="startRevision()"
+  >
+    Start revision
+  </button>
 
 
-    <div class="modal-actions">
-
-      <button
-        class="btn ghost"
-        onclick="closeModal('nameModal')"
-      >
-        Cancel
-      </button>
-
-      <button
-        class="btn"
-        onclick="saveName()"
-      >
-        Save
-      </button>
-
-    </div>
-
-  </div>
+  <button
+    class="btn ghost"
+    onclick="navigate('mistakes')"
+  >
+    View mistake bank
+  </button>
 
 </div>
 
 
-<div class="toast" id="toast"></div>
+<div class="affirmation">
+
+  <span>Take your time</span>
+
+  Understanding something deeply
+  is more valuable than rushing through it.
+
+</div>
+
+
+</section>
+
+</section>
+
+
+<!-- =====================================================
+     SUBJECTS
+===================================================== -->
+
+<section
+  class="page"
+  id="page-subjects"
+>
+
+
+<section class="card">
+
+  <div class="card-title">
+
+    <div>
+
+      <h2>Your subjects</h2>
+
+      <span class="small">
+        Your progress, your pace.
+      </span>
+
+    </div>
+
+
+    <button
+      class="btn soft"
+      onclick="openMistakeModal()"
+    >
+      + Add mistake
+    </button>
+
+  </div>
+
+
+  <div
+    class="subject-grid"
+    id="subjectsFull"
+  ></div>
+
+
+</section>
+
+
+<section
+  class="card"
+  style="margin-top:22px"
+>
+
+  <div class="card-title">
+
+    <h2>Your Petal philosophy</h2>
+
+  </div>
+
+
+  <div class="muted-box">
+
+    Petal isn't here to tell you
+    how smart you are.
+
+    <br><br>
+
+    It helps you see where your
+    understanding can grow.
+
+    <br><br>
+
+    Your progress belongs to you.
+    There is no perfect pace.
+
+  </div>
+
+
+  <div class="affirmation">
+
+    <span>You've got this</span>
+
+    Slow progress is still progress.
+
+  </div>
+
+</section>
+
+</section>
+
+
+</main>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     ADD MISTAKE MODAL
+===================================================== -->
+
+<div
+  class="modal-bg"
+  id="mistakeModal"
+>
+
+<div class="modal">
+
+<h2>Add a mistake</h2>
+
+<div class="small">
+
+Tell Petal what happened.
+Your mistakes become your
+personalised revision map.
+
+</div>
+
+
+<label>
+Subject
+</label>
+
+<select id="subject"></select>
+
+
+<label>
+What did you get wrong?
+</label>
+
+<input
+  id="mistakeTitle"
+  placeholder="e.g. Forgot the sign convention..."
+>
+
+
+<label>
+What went wrong?
+</label>
+
+<textarea
+  id="mistakeBody"
+  placeholder="Explain the mistake in your own words..."
+></textarea>
+
+
+<label>
+Topic
+</label>
+
+<input
+  id="mistakeTopic"
+  placeholder="e.g. Differentiation, enzymes, acids & bases..."
+>
+
+
+<div class="modal-actions">
+
+<button
+  class="btn ghost"
+  onclick="closeModal('mistakeModal')"
+>
+Cancel
+</button>
+
+
+<button
+  class="btn"
+  onclick="addMistake()"
+>
+Save mistake
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     NAME MODAL
+===================================================== -->
+
+<div
+  class="modal-bg"
+  id="nameModal"
+>
+
+<div class="modal">
+
+<h2>Make Petal yours</h2>
+
+<div class="small">
+Update the name Petal uses for you.
+</div>
+
+
+<label>
+Your name
+</label>
+
+<input
+  id="nameInput"
+  maxlength="30"
+  placeholder="Your name..."
+>
+
+
+<div class="modal-actions">
+
+<button
+  class="btn ghost"
+  onclick="closeModal('nameModal')"
+>
+Cancel
+</button>
+
+
+<button
+  class="btn"
+  onclick="saveName()"
+>
+Save
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+  class="toast"
+  id="toast"
+></div>
 
 
 <script>
 
-const STORAGE_KEY = "petal_v1_data";
-const NAME_KEY = "petal_v1_name";
+/* =====================================================
+   STORAGE
+===================================================== */
+
+const DATA_KEY =
+  "petal_v15_data";
+
+const NAME_KEY =
+  "petal_v15_name";
+
+const SUBJECT_KEY =
+  "petal_v15_subjects";
+
+const ONBOARDING_KEY =
+  "petal_v15_onboarding";
 
 
-const defaultMistakes = [
+let mistakes =
+  loadMistakes();
 
-  {
-    id:"demo-1",
-    subject:"Chemistry",
-    title:"Forgot to account for concentration",
-    body:"I used the wrong concentration when completing the calculation.",
-    topic:"Acids & bases",
-    created:Date.now()-86400000*2,
-    mastered:false
-  },
 
-  {
-    id:"demo-2",
-    subject:"Biology",
-    title:"Confused competitive inhibition",
-    body:"I mixed up how the inhibitor interacts with the active site.",
-    topic:"Enzymes",
-    created:Date.now()-86400000*4,
-    mastered:false
-  },
+let selectedSubjects =
+  loadSubjects();
 
-  {
-    id:"demo-3",
-    subject:"Methods",
-    title:"Sign error in integration",
-    body:"I lost a negative sign when applying the integration rule.",
-    topic:"Calculus",
-    created:Date.now()-86400000,
-    mastered:false
-  }
 
-];
+let revisionIndex = 0;
 
+let revisionActive = false;
+
+
+/* =====================================================
+   SUBJECT METADATA
+===================================================== */
 
 const subjectMeta = {
 
@@ -1175,7 +2154,7 @@ const subjectMeta = {
 
   Chemistry:{
     emoji:"⚗️",
-    class:"sage"
+    class:"blue"
   },
 
   Physics:{
@@ -1183,40 +2162,72 @@ const subjectMeta = {
     class:"lav"
   },
 
-  Methods:{
+  Mathematics:{
     emoji:"📐",
     class:"gold"
   },
 
-  Specialist:{
-    emoji:"∑",
+  English:{
+    emoji:"🌸",
     class:"rose"
+  },
+
+  Geography:{
+    emoji:"🌎",
+    class:"blue"
+  },
+
+  Psychology:{
+    emoji:"🧠",
+    class:"lav"
   }
 
 };
 
 
-let mistakes = loadMistakes();
+const affirmationList = [
 
-let revisionIndex = 0;
+  "You don't have to understand everything today.",
 
-let revisionActive = false;
+  "One difficult question does not define your ability.",
 
+  "Small, consistent effort compounds.",
+
+  "You are allowed to learn at your own pace.",
+
+  "Understanding one thing deeply is progress.",
+
+  "You can do difficult things.",
+
+  "Your mistakes are giving you information.",
+
+  "Keep going. Future you will thank you.",
+
+  "Progress doesn't have to be perfect.",
+
+  "You already know more than you think."
+
+];
+
+
+/* =====================================================
+   STORAGE FUNCTIONS
+===================================================== */
 
 function loadMistakes(){
 
-  try {
+  try{
 
     const saved =
-      localStorage.getItem(STORAGE_KEY);
+      localStorage.getItem(DATA_KEY);
 
     return saved
       ? JSON.parse(saved)
-      : defaultMistakes.map(x => ({...x}));
+      : [];
 
-  } catch(e) {
+  }catch(e){
 
-    return defaultMistakes.map(x => ({...x}));
+    return [];
 
   }
 
@@ -1226,8 +2237,38 @@ function loadMistakes(){
 function saveMistakes(){
 
   localStorage.setItem(
-    STORAGE_KEY,
+    DATA_KEY,
     JSON.stringify(mistakes)
+  );
+
+}
+
+
+function loadSubjects(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(SUBJECT_KEY);
+
+    return saved
+      ? JSON.parse(saved)
+      : [];
+
+  }catch(e){
+
+    return [];
+
+  }
+
+}
+
+
+function saveSubjects(){
+
+  localStorage.setItem(
+    SUBJECT_KEY,
+    JSON.stringify(selectedSubjects)
   );
 
 }
@@ -1235,27 +2276,351 @@ function saveMistakes(){
 
 function getName(){
 
-  return localStorage.getItem(NAME_KEY) || "there";
+  return (
+    localStorage.getItem(NAME_KEY)
+    || ""
+  );
 
 }
 
 
-function updateHeader(){
+/* =====================================================
+   ONBOARDING
+===================================================== */
 
-  const now = new Date();
+function hasCompletedOnboarding(){
 
-  document.getElementById("dateLabel").textContent =
-    now.toLocaleDateString(
-      undefined,
-      {
-        weekday:"long",
-        day:"numeric",
-        month:"long"
-      }
+  return (
+    localStorage.getItem(
+      ONBOARDING_KEY
+    ) === "true"
+  );
+
+}
+
+
+function startApp(){
+
+  if(hasCompletedOnboarding()){
+
+    document
+      .getElementById("onboarding")
+      .classList.add("hidden");
+
+    document
+      .getElementById("app")
+      .style.display = "block";
+
+    initialiseApp();
+
+  }else{
+
+    document
+      .getElementById("app")
+      .style.display = "none";
+
+  }
+
+}
+
+
+function nextOnboarding(step){
+
+  document
+    .querySelectorAll(".onboard-step")
+    .forEach(
+      x => x.classList.remove("active")
     );
 
 
-  const hour = now.getHours();
+  document
+    .getElementById(
+      "step" + step
+    )
+    .classList.add("active");
+
+
+  updateDots(step);
+
+
+  if(step === 2){
+
+    setTimeout(
+      () =>
+        document
+          .getElementById("nameInput")
+          .focus(),
+      100
+    );
+
+  }
+
+}
+
+
+function updateDots(step){
+
+  document
+    .querySelectorAll(".progress-dot")
+    .forEach(
+      (dot,index) => {
+
+        dot.classList.toggle(
+          "active",
+          index === step - 1
+        );
+
+      }
+    );
+
+}
+
+
+function saveOnboardingName(){
+
+  const name =
+    document
+      .getElementById("nameInput")
+      .value
+      .trim();
+
+
+  if(!name){
+
+    showToast(
+      "Tell Petal your name first 🌷"
+    );
+
+    return;
+
+  }
+
+
+  localStorage.setItem(
+    NAME_KEY,
+    name
+  );
+
+
+  nextOnboarding(3);
+
+}
+
+
+function toggleSubject(button){
+
+  const subject =
+    button.dataset.subject;
+
+
+  if(selectedSubjects.includes(subject)){
+
+    selectedSubjects =
+      selectedSubjects.filter(
+        s => s !== subject
+      );
+
+    button.classList.remove(
+      "selected"
+    );
+
+  }else{
+
+    selectedSubjects.push(subject);
+
+    button.classList.add(
+      "selected"
+    );
+
+  }
+
+
+  if(subject === "Other"){
+
+    toggleOtherSubject(button);
+
+  }
+
+}
+
+
+function toggleOtherSubject(button){
+
+  button.classList.toggle(
+    "selected"
+  );
+
+
+  const input =
+    document.getElementById(
+      "customSubject"
+    );
+
+
+  input.classList.toggle(
+    "visible",
+    button.classList.contains(
+      "selected"
+    )
+  );
+
+
+  if(
+    !button.classList.contains(
+      "selected"
+    )
+  ){
+
+    selectedSubjects =
+      selectedSubjects.filter(
+        s => s !== "Other"
+      );
+
+  }else if(
+    !selectedSubjects.includes(
+      "Other"
+    )
+  ){
+
+    selectedSubjects.push(
+      "Other"
+    );
+
+  }
+
+}
+
+
+function saveSubjects(){
+
+  const custom =
+    document
+      .getElementById("customSubject")
+      .value
+      .trim();
+
+
+  if(
+    selectedSubjects.length === 0
+  ){
+
+    showToast(
+      "Choose at least one subject 🌷"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    selectedSubjects.includes("Other")
+  ){
+
+    if(!custom){
+
+      showToast(
+        "Type your subject in the Other box."
+      );
+
+      return;
+
+    }
+
+
+    selectedSubjects =
+      selectedSubjects.filter(
+        s => s !== "Other"
+      );
+
+
+    selectedSubjects.push(
+      custom
+    );
+
+  }
+
+
+  selectedSubjects =
+    [...new Set(
+      selectedSubjects
+    )];
+
+
+  saveSubjects();
+
+
+  const name =
+    getName();
+
+
+  document
+    .getElementById(
+      "welcomeTitle"
+    )
+    .textContent =
+      `Welcome, ${name}.`;
+
+
+  nextOnboarding(4);
+
+}
+
+
+function finishOnboarding(){
+
+  localStorage.setItem(
+    ONBOARDING_KEY,
+    "true"
+  );
+
+
+  document
+    .getElementById("onboarding")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("app")
+    .style.display = "block";
+
+
+  initialiseApp();
+
+
+  showToast(
+    `Welcome to Petal, ${getName()} 🌷`
+  );
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+function updateHeader(){
+
+  const now =
+    new Date();
+
+
+  document
+    .getElementById("dateLabel")
+    .textContent =
+      now.toLocaleDateString(
+        undefined,
+        {
+          weekday:"long",
+          day:"numeric",
+          month:"long"
+        }
+      );
+
+
+  const hour =
+    now.getHours();
+
 
   const greeting =
     hour < 12
@@ -1265,29 +2630,43 @@ function updateHeader(){
       : "Good evening";
 
 
-  const name = getName();
+  const name =
+    getName();
 
 
-  document.getElementById("greeting").textContent =
-    name === "there"
-      ? `${greeting}.`
-      : `${greeting}, ${name}.`;
+  document
+    .getElementById("greeting")
+    .textContent =
+      name
+        ? `${greeting}, ${name}.`
+        : `${greeting}.`;
 
 
-  document.getElementById("avatarBtn").textContent =
-    name !== "there"
-      ? name.charAt(0).toUpperCase()
-      : "P";
+  document
+    .getElementById("avatarBtn")
+    .textContent =
+      name
+        ? name
+            .charAt(0)
+            .toUpperCase()
+        : "P";
 
 }
 
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 function navigate(page){
 
   document
     .querySelectorAll(".page")
     .forEach(
-      p => p.classList.remove("active")
+      p =>
+        p.classList.remove(
+          "active"
+        )
     );
 
 
@@ -1297,33 +2676,39 @@ function navigate(page){
     );
 
 
-  if(target){
-
-    target.classList.add("active");
-
-  }
+  if(target)
+    target.classList.add(
+      "active"
+    );
 
 
   document
-    .querySelectorAll("[data-page]")
-    .forEach(btn => {
+    .querySelectorAll(
+      "[data-page]"
+    )
+    .forEach(
+      btn => {
 
-      btn.classList.toggle(
-        "active",
-        btn.dataset.page === page
-      );
+        btn.classList.toggle(
+          "active",
+          btn.dataset.page === page
+        );
 
-    });
+      }
+    );
 
 
   if(page === "overview")
     renderOverview();
 
+
   if(page === "mistakes")
     renderMistakesPage();
 
+
   if(page === "revision")
     renderRevisionPage();
+
 
   if(page === "subjects")
     renderSubjects();
@@ -1338,35 +2723,43 @@ function navigate(page){
 
 
 document
-  .querySelectorAll("[data-page]")
-  .forEach(btn => {
-
-    btn.addEventListener(
-      "click",
-      () => navigate(btn.dataset.page)
-    );
-
-  });
-
-
-document
-  .getElementById("avatarBtn")
-  .addEventListener(
-    "click",
-    openNameModal
+  .querySelectorAll(
+    "[data-page]"
+  )
+  .forEach(
+    btn =>
+      btn.addEventListener(
+        "click",
+        () =>
+          navigate(
+            btn.dataset.page
+          )
+      )
   );
 
 
+/* =====================================================
+   MODALS
+===================================================== */
+
 function openMistakeModal(){
 
+  populateSubjectSelectors();
+
+
   document
-    .getElementById("mistakeModal")
+    .getElementById(
+      "mistakeModal"
+    )
     .classList.add("open");
+
 
   setTimeout(
     () =>
       document
-        .getElementById("mistakeTitle")
+        .getElementById(
+          "mistakeTitle"
+        )
         .focus(),
     50
   );
@@ -1376,28 +2769,19 @@ function openMistakeModal(){
 
 function openNameModal(){
 
-  const current =
-    getName() === "there"
-      ? ""
-      : getName();
-
-
-  document.getElementById("nameInput").value =
-    current;
+  document
+    .getElementById(
+      "nameInput"
+    )
+    .value =
+      getName();
 
 
   document
-    .getElementById("nameModal")
+    .getElementById(
+      "nameModal"
+    )
     .classList.add("open");
-
-
-  setTimeout(
-    () =>
-      document
-        .getElementById("nameInput")
-        .focus(),
-    50
-  );
 
 }
 
@@ -1406,40 +2790,53 @@ function closeModal(id){
 
   document
     .getElementById(id)
-    .classList.remove("open");
+    .classList.remove(
+      "open"
+    );
 
 }
 
 
 document
-  .querySelectorAll(".modal-bg")
-  .forEach(bg => {
+  .querySelectorAll(
+    ".modal-bg"
+  )
+  .forEach(
+    bg =>
+      bg.addEventListener(
+        "click",
+        e => {
 
-    bg.addEventListener(
-      "click",
-      e => {
+          if(e.target === bg)
+            bg.classList.remove(
+              "open"
+            );
 
-        if(e.target === bg)
-          bg.classList.remove("open");
+        }
+      )
+  );
 
-      }
-    );
 
-  });
-
+/* =====================================================
+   NAME
+===================================================== */
 
 function saveName(){
 
   const name =
     document
-      .getElementById("nameInput")
+      .getElementById(
+        "nameInput"
+      )
       .value
       .trim();
 
 
   if(!name){
 
-    showToast("Please enter your name.");
+    showToast(
+      "Please enter your name."
+    );
 
     return;
 
@@ -1454,42 +2851,126 @@ function saveName(){
 
   updateHeader();
 
-  closeModal("nameModal");
+  closeModal(
+    "nameModal"
+  );
 
-  showToast("Petal is yours now 🌷");
+
+  showToast(
+    "Petal is yours now 🌷"
+  );
 
 }
 
 
+/* =====================================================
+   SUBJECT SELECTORS
+===================================================== */
+
+function populateSubjectSelectors(){
+
+  const select =
+    document.getElementById(
+      "subject"
+    );
+
+
+  select.innerHTML =
+    selectedSubjects
+      .map(
+        subject =>
+          `<option>
+            ${escapeHtml(subject)}
+          </option>`
+      )
+      .join("");
+
+}
+
+
+function getMeta(subject){
+
+  if(
+    subjectMeta[subject]
+  )
+    return subjectMeta[subject];
+
+
+  const colours =
+    [
+      "rose",
+      "blue",
+      "lav",
+      "gold",
+      "red",
+      "sage"
+    ];
+
+
+  const index =
+    subject
+      .split("")
+      .reduce(
+        (sum,char) =>
+          sum + char.charCodeAt(0),
+        0
+      )
+      %
+      colours.length;
+
+
+  return {
+    emoji:"✦",
+    class:colours[index]
+  };
+
+}
+
+
+/* =====================================================
+   ADD MISTAKE
+===================================================== */
+
 function addMistake(){
 
   const subject =
-    document.getElementById("subject").value;
+    document
+      .getElementById(
+        "subject"
+      )
+      .value;
+
 
   const title =
     document
-      .getElementById("mistakeTitle")
+      .getElementById(
+        "mistakeTitle"
+      )
       .value
       .trim();
+
 
   const body =
     document
-      .getElementById("mistakeBody")
+      .getElementById(
+        "mistakeBody"
+      )
       .value
       .trim();
 
+
   const topic =
     document
-      .getElementById("mistakeTopic")
+      .getElementById(
+        "mistakeTopic"
+      )
       .value
-      .trim() || "General";
+      .trim()
+      ||
+      "General";
 
 
   if(!title){
-
-    document
-      .getElementById("mistakeTitle")
-      .focus();
 
     showToast(
       "Give your mistake a short title first."
@@ -1500,9 +2981,10 @@ function addMistake(){
   }
 
 
-  const mistake = {
+  mistakes.unshift({
 
-    id:Date.now().toString(),
+    id:
+      Date.now().toString(),
 
     subject,
 
@@ -1512,14 +2994,14 @@ function addMistake(){
 
     topic,
 
-    created:Date.now(),
+    created:
+      Date.now(),
 
-    mastered:false
+    mastered:
+      false
 
-  };
+  });
 
-
-  mistakes.unshift(mistake);
 
   saveMistakes();
 
@@ -1531,13 +3013,19 @@ function addMistake(){
   ]
   .forEach(
     id =>
-      document.getElementById(id).value = ""
+      document
+        .getElementById(id)
+        .value = ""
   );
 
 
-  closeModal("mistakeModal");
+  closeModal(
+    "mistakeModal"
+  );
+
 
   renderAll();
+
 
   showToast(
     "Mistake added to your Petal map ✦"
@@ -1545,6 +3033,10 @@ function addMistake(){
 
 }
 
+
+/* =====================================================
+   MASTER / DELETE
+===================================================== */
 
 function markMastered(id){
 
@@ -1558,14 +3050,18 @@ function markMastered(id){
     return;
 
 
-  item.mastered = true;
+  item.mastered =
+    true;
 
-  item.masteredAt = Date.now();
+
+  item.masteredAt =
+    Date.now();
 
 
   saveMistakes();
 
   renderAll();
+
 
   showToast(
     "Beautiful. One less mistake to carry. 🌷"
@@ -1586,7 +3082,9 @@ function reopenMistake(id){
     return;
 
 
-  item.mastered = false;
+  item.mastered =
+    false;
+
 
   delete item.masteredAt;
 
@@ -1594,6 +3092,7 @@ function reopenMistake(id){
   saveMistakes();
 
   renderAll();
+
 
   showToast(
     "Added back to your revision queue."
@@ -1622,6 +3121,7 @@ function deleteMistake(id){
 
   renderAll();
 
+
   showToast(
     "Mistake removed."
   );
@@ -1629,11 +3129,18 @@ function deleteMistake(id){
 }
 
 
-function subjectProgress(subject){
+/* =====================================================
+   SUBJECT PROGRESS
+===================================================== */
+
+function subjectProgress(
+  subject
+){
 
   const items =
     mistakes.filter(
-      m => m.subject === subject
+      m =>
+        m.subject === subject
     );
 
 
@@ -1654,25 +3161,31 @@ function subjectProgress(subject){
 }
 
 
-function renderSubjectCard(subject){
+function renderSubjectCard(
+  subject
+){
 
   const meta =
-    subjectMeta[subject];
+    getMeta(subject);
 
 
   const progress =
-    subjectProgress(subject);
+    subjectProgress(
+      subject
+    );
 
 
   const items =
     mistakes.filter(
-      m => m.subject === subject
+      m =>
+        m.subject === subject
     );
 
 
   const mastered =
     items.filter(
-      m => m.mastered
+      m =>
+        m.mastered
     ).length;
 
 
@@ -1683,7 +3196,8 @@ function renderSubjectCard(subject){
       <div class="subject-head">
 
         <span>
-          ${meta.emoji} ${subject}
+          ${meta.emoji}
+          ${escapeHtml(subject)}
         </span>
 
         <b>
@@ -1723,53 +3237,71 @@ function renderSubjectCard(subject){
 }
 
 
+/* =====================================================
+   OVERVIEW
+===================================================== */
+
 function renderOverview(){
 
   document
-    .getElementById("overviewSubjects")
+    .getElementById(
+      "overviewSubjects"
+    )
     .innerHTML =
-      Object
-        .keys(subjectMeta)
-        .slice(0,4)
-        .map(renderSubjectCard)
+      selectedSubjects
+        .map(
+          renderSubjectCard
+        )
         .join("");
 
 
   const review =
     mistakes
-      .filter(m => !m.mastered)
+      .filter(
+        m => !m.mastered
+      )
       .slice(0,3);
 
 
   document
-    .getElementById("todayCount")
+    .getElementById(
+      "todayCount"
+    )
     .textContent =
-      `${mistakes.filter(m => !m.mastered).length} ready`;
+      `${
+        mistakes.filter(
+          m => !m.mastered
+        ).length
+      } ready`;
 
 
   document
-    .getElementById("todayList")
+    .getElementById(
+      "todayList"
+    )
     .innerHTML =
 
-    review.length
+      review.length
 
-      ? review
+        ?
+
+        review
           .map(
-            (m,i) => {
+            (m,index) => {
 
               const tag =
-                i === 0
+                index === 0
                   ? "priority"
-                  : i === 1
+                  : index === 1
                   ? "review"
                   : "quick";
 
 
               const cls =
-                i === 1
-                  ? "s"
-                  : i === 2
-                  ? "l"
+                index === 1
+                  ? "blue-tag"
+                  : index === 2
+                  ? "lav-tag"
                   : "";
 
 
@@ -1779,19 +3311,34 @@ function renderOverview(){
 
                   <div>
 
-                    <b style="font-size:13px">
-                      ${escapeHtml(m.title)}
+                    <b
+                      style="font-size:13px"
+                    >
+                      ${escapeHtml(
+                        m.title
+                      )}
                     </b>
 
                     <div class="small">
-                      ${escapeHtml(m.subject)}
+
+                      ${escapeHtml(
+                        m.subject
+                      )}
+
                       ·
-                      ${escapeHtml(m.topic)}
+
+                      ${escapeHtml(
+                        m.topic
+                      )}
+
                     </div>
 
                   </div>
 
-                  <span class="tag ${cls}">
+
+                  <span
+                    class="tag ${cls}"
+                  >
                     ${tag}
                   </span>
 
@@ -1803,7 +3350,8 @@ function renderOverview(){
           )
           .join("")
 
-      :
+
+        :
 
         `
 
@@ -1813,7 +3361,8 @@ function renderOverview(){
               A clear little mind.
             </div>
 
-            No mistakes are waiting for review.
+            No mistakes are waiting
+            for review.
 
           </div>
 
@@ -1822,17 +3371,28 @@ function renderOverview(){
 
   const recent =
     mistakes
-      .filter(m => !m.mastered)
+      .filter(
+        m => !m.mastered
+      )
       .slice(0,3);
 
 
   document
-    .getElementById("overviewMistakes")
+    .getElementById(
+      "overviewMistakes"
+    )
     .innerHTML =
 
       recent.length
 
-        ? recent.map(mistakeCard).join("")
+        ?
+
+        recent
+          .map(
+            mistakeCard
+          )
+          .join("")
+
 
         :
 
@@ -1844,8 +3404,8 @@ function renderOverview(){
               Nothing to revisit.
             </div>
 
-            Add a mistake when you learn
-            from an error.
+            Add a mistake when you
+            learn from an error.
 
           </div>
 
@@ -1859,7 +3419,9 @@ function renderOverview(){
 
 
   document
-    .getElementById("winNumber")
+    .getElementById(
+      "winNumber"
+    )
     .textContent =
       `${mastered} ${
         mastered === 1
@@ -1870,22 +3432,29 @@ function renderOverview(){
 }
 
 
+/* =====================================================
+   MISTAKE CARD
+===================================================== */
+
 function mistakeCard(m){
 
   const meta =
-    subjectMeta[m.subject]
-      || {emoji:"✦"};
+    getMeta(
+      m.subject
+    );
 
 
   const date =
-    new Date(m.created)
-      .toLocaleDateString(
-        undefined,
-        {
-          day:"numeric",
-          month:"short"
-        }
-      );
+    new Date(
+      m.created
+    )
+    .toLocaleDateString(
+      undefined,
+      {
+        day:"numeric",
+        month:"short"
+      }
+    );
 
 
   return `
@@ -1897,16 +3466,32 @@ function mistakeCard(m){
         <div>
 
           <strong>
+
             ${meta.emoji}
-            ${escapeHtml(m.title)}
+
+            ${escapeHtml(
+              m.title
+            )}
+
           </strong>
 
+
           <p>
-            ${escapeHtml(m.subject)}
+
+            ${escapeHtml(
+              m.subject
+            )}
+
             ·
-            ${escapeHtml(m.topic)}
+
+            ${escapeHtml(
+              m.topic
+            )}
+
             ·
+
             Added ${date}
+
           </p>
 
         </div>
@@ -1915,13 +3500,17 @@ function mistakeCard(m){
         ${
           m.mastered
 
-            ? `<span class="tag s">
-                mastered
-              </span>`
+            ?
 
-            : `<span class="tag">
-                review
-              </span>`
+            `<span class="tag green-tag">
+              mastered
+            </span>`
+
+            :
+
+            `<span class="tag">
+              review
+            </span>`
         }
 
       </div>
@@ -1935,33 +3524,41 @@ function mistakeCard(m){
         ${
           m.body
 
-            ? `<button
-                class="btn ghost"
-                onclick="showMistakeDetails('${m.id}')"
-              >
-                Read note
-              </button>`
+            ?
 
-            : ""
+            `<button
+              class="btn ghost"
+              onclick="showMistakeDetails('${m.id}')"
+            >
+              Read note
+            </button>`
+
+            :
+
+            ""
         }
 
 
         ${
           m.mastered
 
-            ? `<button
-                class="btn sage-btn"
-                onclick="reopenMistake('${m.id}')"
-              >
-                Review again
-              </button>`
+            ?
 
-            : `<button
-                class="btn soft"
-                onclick="markMastered('${m.id}')"
-              >
-                ✓ Mark mastered
-              </button>`
+            `<button
+              class="btn sage-btn"
+              onclick="reopenMistake('${m.id}')"
+            >
+              Review again
+            </button>`
+
+            :
+
+            `<button
+              class="btn soft"
+              onclick="markMastered('${m.id}')"
+            >
+              ✓ Mark mastered
+            </button>`
         }
 
 
@@ -1985,7 +3582,8 @@ function showMistakeDetails(id){
 
   const m =
     mistakes.find(
-      x => x.id === id
+      x =>
+        x.id === id
     );
 
 
@@ -1995,19 +3593,26 @@ function showMistakeDetails(id){
 
   alert(
     `${m.title}\n\n${
-      m.body || "No explanation was added."
+      m.body ||
+      "No explanation was added."
     }`
   );
 
 }
 
 
+/* =====================================================
+   MISTAKE PAGE
+===================================================== */
+
 function renderMistakesPage(){
 
   const search =
     (
       document
-        .getElementById("searchMistakes")
+        .getElementById(
+          "searchMistakes"
+        )
         ?.value
       || ""
     )
@@ -2016,74 +3621,94 @@ function renderMistakesPage(){
 
   const subject =
     document
-      .getElementById("filterSubject")
+      .getElementById(
+        "filterSubject"
+      )
       ?.value
-    || "All";
+    ||
+    "All";
 
 
   const status =
     document
-      .getElementById("filterStatus")
+      .getElementById(
+        "filterStatus"
+      )
       ?.value
-    || "All";
+    ||
+    "All";
 
 
   const list =
-    mistakes.filter(m => {
+    mistakes.filter(
+      m => {
 
-      const text =
-        [
-          m.title,
-          m.body,
-          m.topic,
-          m.subject
-        ]
-        .join(" ")
-        .toLowerCase();
-
-
-      const matchesSearch =
-        text.includes(search);
+        const text =
+          [
+            m.title,
+            m.body,
+            m.topic,
+            m.subject
+          ]
+          .join(" ")
+          .toLowerCase();
 
 
-      const matchesSubject =
-        subject === "All"
-        || m.subject === subject;
+        const matchesSearch =
+          text.includes(
+            search
+          );
 
 
-      const matchesStatus =
-        status === "All"
-        ||
-        (
-          status === "review"
-          && !m.mastered
-        )
-        ||
-        (
-          status === "mastered"
-          && m.mastered
+        const matchesSubject =
+          subject === "All"
+          ||
+          m.subject === subject;
+
+
+        const matchesStatus =
+          status === "All"
+          ||
+
+          (
+            status === "review"
+            &&
+            !m.mastered
+          )
+
+          ||
+
+          (
+            status === "mastered"
+            &&
+            m.mastered
+          );
+
+
+        return (
+          matchesSearch
+          &&
+          matchesSubject
+          &&
+          matchesStatus
         );
 
-
-      return (
-        matchesSearch
-        &&
-        matchesSubject
-        &&
-        matchesStatus
-      );
-
-    });
+      }
+    );
 
 
   document
-    .getElementById("statTotal")
+    .getElementById(
+      "statTotal"
+    )
     .textContent =
       mistakes.length;
 
 
   document
-    .getElementById("statReview")
+    .getElementById(
+      "statReview"
+    )
     .textContent =
       mistakes.filter(
         m => !m.mastered
@@ -2091,7 +3716,9 @@ function renderMistakesPage(){
 
 
   document
-    .getElementById("statMastered")
+    .getElementById(
+      "statMastered"
+    )
     .textContent =
       mistakes.filter(
         m => m.mastered
@@ -2099,14 +3726,21 @@ function renderMistakesPage(){
 
 
   document
-    .getElementById("mistakesList")
+    .getElementById(
+      "mistakesList"
+    )
     .innerHTML =
 
       list.length
 
-        ? list
-            .map(mistakeCard)
-            .join("")
+        ?
+
+        list
+          .map(
+            mistakeCard
+          )
+          .join("")
+
 
         :
 
@@ -2128,23 +3762,77 @@ function renderMistakesPage(){
 }
 
 
+/* =====================================================
+   SUBJECT PAGE
+===================================================== */
+
 function renderSubjects(){
 
   document
-    .getElementById("subjectsFull")
+    .getElementById(
+      "subjectsFull"
+    )
     .innerHTML =
-      Object
-        .keys(subjectMeta)
-        .map(renderSubjectCard)
+      selectedSubjects
+        .map(
+          renderSubjectCard
+        )
         .join("");
+
+
+  const filter =
+    document.getElementById(
+      "filterSubject"
+    );
+
+
+  if(filter){
+
+    const current =
+      filter.value;
+
+
+    filter.innerHTML =
+      `
+        <option value="All">
+          All subjects
+        </option>
+      `
+
+      +
+
+      selectedSubjects
+        .map(
+          s =>
+            `<option>
+              ${escapeHtml(s)}
+            </option>`
+        )
+        .join("");
+
+
+    filter.value =
+      selectedSubjects.includes(
+        current
+      )
+        ? current
+        : "All";
+
+  }
 
 }
 
 
+/* =====================================================
+   REVISION
+===================================================== */
+
 function getRevisionQueue(){
 
   return mistakes
-    .filter(m => !m.mastered)
+    .filter(
+      m => !m.mastered
+    )
     .sort(
       (a,b) =>
         a.created - b.created
@@ -2162,33 +3850,41 @@ function renderRevisionPage(){
   if(!queue.length){
 
     document
-      .getElementById("revisionSubject")
+      .getElementById(
+        "revisionSubject"
+      )
       .textContent =
         "PETAL REVISION";
 
 
     document
-      .getElementById("revisionTitle")
+      .getElementById(
+        "revisionTitle"
+      )
       .textContent =
-        "You've cleared your queue. 🌷";
+        "Your queue is clear. 🌷";
 
 
     document
-      .getElementById("revisionIntro")
+      .getElementById(
+        "revisionIntro"
+      )
       .textContent =
         "There are no unresolved mistakes waiting for you right now. Keep learning, and Petal will be here when you need it.";
 
 
     document
-      .getElementById("revisionContent")
+      .getElementById(
+        "revisionContent"
+      )
       .innerHTML =
 
         `
 
           <div class="muted-box">
 
-            When you add a new mistake,
-            it will appear here for a future review.
+            Your next mistake will appear here
+            when you need to revisit it.
 
           </div>
 
@@ -2196,7 +3892,9 @@ function renderRevisionPage(){
 
 
     document
-      .getElementById("revisionStartBtn")
+      .getElementById(
+        "revisionStartBtn"
+      )
       .style.display =
         "none";
 
@@ -2207,19 +3905,25 @@ function renderRevisionPage(){
 
 
   document
-    .getElementById("revisionStartBtn")
+    .getElementById(
+      "revisionStartBtn"
+    )
     .style.display =
       "";
 
 
   document
-    .getElementById("revisionSubject")
+    .getElementById(
+      "revisionSubject"
+    )
     .textContent =
       "TODAY'S REVISION";
 
 
   document
-    .getElementById("revisionTitle")
+    .getElementById(
+      "revisionTitle"
+    )
     .textContent =
       `${queue.length}
        ${
@@ -2231,24 +3935,34 @@ function renderRevisionPage(){
 
 
   document
-    .getElementById("revisionIntro")
+    .getElementById(
+      "revisionIntro"
+    )
     .textContent =
-      "Petal prioritises mistakes you haven't mastered yet, starting with the ones that have been waiting longest.";
+      "Petal prioritises the mistakes you haven't mastered yet, so you can spend your energy where it matters most.";
 
 
   document
-    .getElementById("revisionContent")
+    .getElementById(
+      "revisionContent"
+    )
     .innerHTML =
 
       `
 
         <div class="muted-box">
 
-          <b>Your first review:</b><br>
+          <b>Your first review:</b><br><br>
 
-          ${escapeHtml(queue[0].title)}
+          ${escapeHtml(
+            queue[0].title
+          )}
+
           ·
-          ${escapeHtml(queue[0].subject)}
+
+          ${escapeHtml(
+            queue[0].subject
+          )}
 
         </div>
 
@@ -2256,7 +3970,9 @@ function renderRevisionPage(){
 
 
   document
-    .getElementById("revisionStartBtn")
+    .getElementById(
+      "revisionStartBtn"
+    )
     .textContent =
       "Start revision";
 
@@ -2278,7 +3994,9 @@ function startRevision(){
   }
 
 
-  revisionActive = true;
+  revisionActive =
+    true;
+
 
   revisionIndex =
     Math.min(
@@ -2300,7 +4018,9 @@ function renderActiveRevision(){
 
   if(!queue.length){
 
-    revisionActive = false;
+    revisionActive =
+      false;
+
 
     renderRevisionPage();
 
@@ -2310,18 +4030,24 @@ function renderActiveRevision(){
 
 
   if(
-    revisionIndex >= queue.length
+    revisionIndex >=
+    queue.length
   ){
 
-    revisionActive = false;
+    revisionActive =
+      false;
+
 
     revisionIndex = 0;
 
+
     renderRevisionPage();
+
 
     showToast(
       "Revision session complete. 🌷"
     );
+
 
     return;
 
@@ -2329,16 +4055,21 @@ function renderActiveRevision(){
 
 
   const m =
-    queue[revisionIndex];
+    queue[
+      revisionIndex
+    ];
 
 
   const meta =
-    subjectMeta[m.subject]
-      || {emoji:"✦"};
+    getMeta(
+      m.subject
+    );
 
 
   document
-    .getElementById("revisionSubject")
+    .getElementById(
+      "revisionSubject"
+    )
     .textContent =
       `${meta.emoji}
        ${m.subject}
@@ -2347,37 +4078,49 @@ function renderActiveRevision(){
 
 
   document
-    .getElementById("revisionTitle")
+    .getElementById(
+      "revisionTitle"
+    )
     .textContent =
       m.title;
 
 
   document
-    .getElementById("revisionIntro")
+    .getElementById(
+      "revisionIntro"
+    )
     .textContent =
       `Mistake ${
         revisionIndex + 1
       } of ${
         queue.length
-      }. Before revealing your note, explain the correct idea to yourself.`;
+      }. Take a moment to explain the correct idea to yourself before deciding whether you've mastered it.`;
 
 
   document
-    .getElementById("revisionContent")
+    .getElementById(
+      "revisionContent"
+    )
     .innerHTML =
 
       `
 
         <div class="reveal">
 
-          <b>Your original note</b>
+          <b>
+            Your original note
+          </b>
 
           <p>
+
             ${
               m.body
-                ? escapeHtml(m.body)
+                ? escapeHtml(
+                    m.body
+                  )
                 : "You didn't add a note for this mistake."
             }
+
           </p>
 
         </div>
@@ -2409,7 +4152,9 @@ function renderActiveRevision(){
 
 
   document
-    .getElementById("revisionStartBtn")
+    .getElementById(
+      "revisionStartBtn"
+    )
     .style.display =
       "none";
 
@@ -2423,11 +4168,14 @@ function finishCurrentRevision(){
 
 
   const m =
-    queue[revisionIndex];
+    queue[
+      revisionIndex
+    ];
 
 
   if(m)
-    m.mastered = true;
+    m.mastered =
+      true;
 
 
   saveMistakes();
@@ -2446,13 +4194,17 @@ function finishCurrentRevision(){
 
     renderActiveRevision();
 
-  } else {
+  }else{
 
-    revisionActive = false;
+    revisionActive =
+      false;
+
 
     revisionIndex = 0;
 
+
     renderRevisionPage();
+
 
     showToast(
       "Beautiful. You understood it. ✦"
@@ -2473,17 +4225,21 @@ function nextRevision(){
     getRevisionQueue().length
   ){
 
-    revisionActive = false;
+    revisionActive =
+      false;
+
 
     revisionIndex = 0;
 
+
     renderRevisionPage();
+
 
     showToast(
       "Session finished. Keep going gently. 🌷"
     );
 
-  } else {
+  }else{
 
     renderActiveRevision();
 
@@ -2491,6 +4247,10 @@ function nextRevision(){
 
 }
 
+
+/* =====================================================
+   RENDER EVERYTHING
+===================================================== */
 
 function renderAll(){
 
@@ -2505,13 +4265,18 @@ function renderAll(){
 
   if(
     document
-      .getElementById("page-revision")
+      .getElementById(
+        "page-revision"
+      )
       .classList
-      .contains("active")
+      .contains(
+        "active"
+      )
   ){
 
     if(revisionActive)
       renderActiveRevision();
+
     else
       renderRevisionPage();
 
@@ -2520,37 +4285,70 @@ function renderAll(){
 }
 
 
-function showToast(message){
+/* =====================================================
+   APP INITIALISATION
+===================================================== */
+
+function initialiseApp(){
+
+  updateHeader();
+
+  renderAll();
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(
+  message
+){
 
   const toast =
-    document.getElementById("toast");
+    document.getElementById(
+      "toast"
+    );
 
 
   toast.textContent =
     message;
 
 
-  toast.classList.add("show");
-
-
-  clearTimeout(
-    window._petalToast
+  toast.classList.add(
+    "show"
   );
 
 
-  window._petalToast =
+  clearTimeout(
+    window.petalToast
+  );
+
+
+  window.petalToast =
     setTimeout(
       () =>
-        toast.classList.remove("show"),
-      2400
+        toast.classList.remove(
+          "show"
+        ),
+      2500
     );
 
 }
 
 
-function escapeHtml(s){
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
-  return String(s).replace(
+function escapeHtml(
+  s
+){
+
+  return String(
+    s
+  ).replace(
     /[&<>"']/g,
     m =>
       ({
@@ -2565,9 +4363,11 @@ function escapeHtml(s){
 }
 
 
-updateHeader();
+/* =====================================================
+   START
+===================================================== */
 
-renderAll();
+startApp();
 
 </script>
 

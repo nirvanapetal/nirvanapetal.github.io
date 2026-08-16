@@ -10136,5 +10136,387 @@ if (
 })();
 
 </script>
+   <!-- =========================================================
+     PETAL — ABOUT SECTION
+     ========================================================= -->
+
+<style>
+  /* =========================
+     ABOUT PETAL
+     ========================= */
+
+  .petal-about {
+    margin: 28px 0;
+    padding: 42px 34px;
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at top right, rgba(255,255,255,.9), transparent 35%),
+      linear-gradient(135deg, #fffdfb, #fdf8f8);
+    border: 1px solid rgba(180, 150, 150, .16);
+    box-shadow: 0 14px 40px rgba(90, 60, 60, .06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .petal-about::before {
+    content: "✿";
+    position: absolute;
+    right: 28px;
+    top: 16px;
+    font-size: 52px;
+    opacity: .08;
+    transform: rotate(15deg);
+  }
+
+  .petal-about::after {
+    content: "♡";
+    position: absolute;
+    left: 25px;
+    bottom: 15px;
+    font-size: 42px;
+    opacity: .06;
+  }
+
+  .petal-about-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    opacity: .55;
+    margin-bottom: 10px;
+  }
+
+  .petal-about-title {
+    margin: 0 0 14px;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1.1;
+    font-weight: 600;
+  }
+
+  .petal-about-title span {
+    font-family: "Brush Script MT", "Segoe Script", cursive;
+    font-weight: 400;
+  }
+
+  .petal-about-intro {
+    max-width: 720px;
+    font-size: 16px;
+    line-height: 1.75;
+    opacity: .72;
+    margin-bottom: 30px;
+  }
+
+  .petal-about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .petal-about-card {
+    padding: 22px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.68);
+    border: 1px solid rgba(180,150,150,.12);
+  }
+
+  .petal-about-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .petal-about-card h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+  }
+
+  .petal-about-card p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.65;
+    opacity: .65;
+  }
+
+  /* =========================
+     CREATOR MESSAGE
+     ========================= */
+
+  .petal-creator {
+    margin-top: 20px;
+    padding: 28px;
+    border-radius: 22px;
+    background: rgba(255,255,255,.55);
+    border: 1px solid rgba(180,150,150,.12);
+    text-align: center;
+  }
+
+  .petal-creator-flower {
+    font-size: 27px;
+    margin-bottom: 10px;
+  }
+
+  .petal-creator-title {
+    margin: 0 0 10px;
+    font-family: "Brush Script MT", "Segoe Script", cursive;
+    font-size: 28px;
+    font-weight: 400;
+  }
+
+  .petal-creator-text {
+    max-width: 600px;
+    margin: auto;
+    font-size: 13px;
+    line-height: 1.7;
+    opacity: .65;
+  }
+
+  .petal-creator-name {
+    display: inline-block;
+    margin-top: 15px;
+    font-family: "Brush Script MT", "Segoe Script", cursive;
+    font-size: 24px;
+  }
+
+  /* =========================
+     PETAL PHILOSOPHY
+     ========================= */
+
+  .petal-philosophy {
+    margin-top: 20px;
+    padding: 32px;
+    border-radius: 22px;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,.65),
+      rgba(252,246,247,.75)
+    );
+    border: 1px solid rgba(180,150,150,.1);
+  }
+
+  .petal-philosophy-quote {
+    max-width: 650px;
+    margin: 0 auto 12px;
+    font-family: "Brush Script MT", "Segoe Script", cursive;
+    font-size: 27px;
+    line-height: 1.4;
+  }
+
+  .petal-philosophy-small {
+    font-size: 12px;
+    opacity: .5;
+  }
+
+  /* =========================
+     MOBILE
+     ========================= */
+
+  @media (max-width: 760px) {
+
+    .petal-about {
+      padding: 30px 22px;
+      border-radius: 22px;
+    }
+
+    .petal-about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .petal-about-title {
+      font-size: 30px;
+    }
+
+    .petal-about-intro {
+      font-size: 14px;
+    }
+
+    .petal-creator {
+      padding: 24px 18px;
+    }
+
+    .petal-philosophy {
+      padding: 25px 18px;
+    }
+
+    .petal-philosophy-quote {
+      font-size: 23px;
+    }
+  }
+</style>
+
+
+<script>
+  /* =========================================================
+     PETAL — ABOUT PETAL CONTENT
+     ========================================================= */
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    /*
+      Try to place the About section inside the Subjects page.
+      If the subjects page isn't found, place it inside main.
+    */
+
+    const subjectsPage = document.getElementById("page-subjects");
+    const main = document.querySelector("main");
+
+    if (!subjectsPage && !main) return;
+
+    /* Prevent duplicates */
+    if (document.getElementById("petalAboutSection")) return;
+
+    const aboutSection = document.createElement("div");
+
+    aboutSection.id = "petalAboutSection";
+
+    aboutSection.innerHTML = `
+
+      <!-- ABOUT PETAL -->
+
+      <section class="petal-about">
+
+        <div class="petal-about-eyebrow">
+          a little about petal
+        </div>
+
+        <h2 class="petal-about-title">
+          Revision, but make it <span>personal.</span>
+        </h2>
+
+        <p class="petal-about-intro">
+          Petal is a personalised study space designed to make
+          revision feel a little less overwhelming and a little
+          more meaningful. Instead of simply telling you what
+          you already know, Petal helps you recognise the things
+          you find difficult, revisit them, and turn mistakes
+          into progress.
+        </p>
+
+
+        <div class="petal-about-grid">
+
+          <div class="petal-about-card">
+
+            <div class="petal-about-icon">
+              🌷
+            </div>
+
+            <h3>
+              Learn from your mistakes
+            </h3>
+
+            <p>
+              Your mistakes aren't something to hide.
+              They're clues that help Petal understand
+              where your learning can grow.
+            </p>
+
+          </div>
+
+
+          <div class="petal-about-card">
+
+            <div class="petal-about-icon">
+              🪷
+            </div>
+
+            <h3>
+              Revision that remembers
+            </h3>
+
+            <p>
+              Petal keeps your revision personal,
+              helping you return to the concepts that
+              deserve another little look.
+            </p>
+
+          </div>
+
+
+          <div class="petal-about-card">
+
+            <div class="petal-about-icon">
+              ✨
+            </div>
+
+            <h3>
+              Progress at your pace
+            </h3>
+
+            <p>
+              There is no perfect pace for learning.
+              Petal is here to help you keep moving
+              forward, one small step at a time.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- CREATOR -->
+
+        <div class="petal-creator">
+
+          <div class="petal-creator-flower">
+            🌸
+          </div>
+
+          <h3 class="petal-creator-title">
+            Grown with love
+          </h3>
+
+          <p class="petal-creator-text">
+            Petal was created with the hope of making
+            studying feel more organised, encouraging,
+            and a little more beautiful.
+            <br><br>
+            What started as an idea became a little
+            digital garden for learning, built around
+            the belief that progress doesn't have to
+            be perfect to be meaningful.
+          </p>
+
+          <div class="petal-creator-name">
+            — Nirvana ♡
+          </div>
+
+        </div>
+
+
+        <!-- PHILOSOPHY -->
+
+        <div class="petal-philosophy">
+
+          <div class="petal-philosophy-quote">
+            "You don't have to bloom all at once."
+          </div>
+
+          <div class="petal-philosophy-small">
+            Keep learning. Keep growing. Keep going. 🌷
+          </div>
+
+        </div>
+
+      </section>
+    `;
+
+
+    /*
+      Add the section to the Subjects page if possible.
+    */
+
+    if (subjectsPage) {
+
+      subjectsPage.appendChild(aboutSection);
+
+    } else if (main) {
+
+      main.appendChild(aboutSection);
+
+    }
+
+  });
+
+</script>
 </body>
 </html>

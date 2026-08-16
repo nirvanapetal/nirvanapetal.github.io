@@ -14,53 +14,37 @@
 
 <style>
 
-/* =====================================================
-   PETAL — DESIGN SYSTEM
-===================================================== */
+/* =========================================================
+   PETAL DESIGN SYSTEM
+========================================================= */
 
 :root{
-
   --ink:#272529;
   --muted:#8c8589;
-
-  --white:#ffffff;
+  --white:#fff;
   --cream:#fdfbf9;
-  --paper:#ffffff;
-
   --pink:#f3d9df;
   --pink-deep:#d894a2;
   --pink-soft:#f9edef;
-
   --blue:#d9e8f2;
   --blue-deep:#89aec8;
   --blue-soft:#edf5f9;
-
   --yellow:#f5e7b9;
   --yellow-deep:#c9aa5f;
   --yellow-soft:#faf5df;
-
   --purple:#e4dbef;
   --purple-deep:#a993bd;
   --purple-soft:#f3eff8;
-
   --red:#efd2d2;
   --red-deep:#bd7d82;
   --red-soft:#f8eaea;
-
   --sage:#dce9da;
   --sage-deep:#8ea88a;
   --sage-soft:#edf4eb;
-
   --line:#eee9e7;
-
-  --shadow:
-    0 18px 55px rgba(65,49,57,.07);
-
-  --shadow-hover:
-    0 22px 65px rgba(65,49,57,.11);
-
+  --shadow:0 18px 55px rgba(65,49,57,.07);
+  --shadow-hover:0 22px 65px rgba(65,49,57,.11);
   --radius:24px;
-
 }
 
 *{
@@ -72,9 +56,7 @@ html{
 }
 
 body{
-
   margin:0;
-
   background:
     linear-gradient(
       135deg,
@@ -82,11 +64,8 @@ body{
       #fffdfc 50%,
       #faf8fc 100%
     );
-
   color:var(--ink);
-
   font-family:"DM Sans",sans-serif;
-
 }
 
 button,
@@ -100,92 +79,52 @@ button{
   cursor:pointer;
 }
 
-
-/* =====================================================
+/* =========================================================
    ONBOARDING
-===================================================== */
+========================================================= */
 
 .onboarding{
-
   position:fixed;
-
   inset:0;
-
   z-index:1000;
-
   background:
-
-    radial-gradient(
-      circle at 12% 18%,
-      rgba(243,217,223,.65),
-      transparent 25%
-    ),
-
-    radial-gradient(
-      circle at 88% 22%,
-      rgba(217,232,242,.65),
-      transparent 26%
-    ),
-
-    radial-gradient(
-      circle at 50% 95%,
-      rgba(228,219,239,.5),
-      transparent 32%
-    ),
-
+    radial-gradient(circle at 12% 18%,rgba(243,217,223,.65),transparent 25%),
+    radial-gradient(circle at 88% 22%,rgba(217,232,242,.65),transparent 26%),
+    radial-gradient(circle at 50% 95%,rgba(228,219,239,.5),transparent 32%),
     #fffdfa;
-
   display:flex;
-
   align-items:center;
   justify-content:center;
-
   padding:30px;
-
-  transition:
-    opacity .5s ease,
-    visibility .5s ease;
-
+  overflow-y:auto;
+  transition:opacity .5s ease,visibility .5s ease;
 }
 
 .onboarding.hidden{
-
   opacity:0;
-
   visibility:hidden;
-
   pointer-events:none;
-
 }
 
 .onboard-container{
-
-  width:min(720px,100%);
-
+  width:min(760px,100%);
   text-align:center;
-
 }
 
 .onboard-brand{
-
   font-family:"Playfair Display",serif;
-
   font-size:42px;
-
-  margin-bottom:45px;
-
+  margin-bottom:35px;
 }
 
-.onboard-brand span{
+.onboard-brand span,
+.brand span{
   color:var(--pink-deep);
 }
 
 .onboard-step{
-
   display:none;
-
-  animation:onboardFade .45s ease;
-
+  animation:onboardFade .4s ease;
 }
 
 .onboard-step.active{
@@ -193,460 +132,323 @@ button{
 }
 
 @keyframes onboardFade{
-
   from{
     opacity:0;
     transform:translateY(12px);
   }
-
   to{
     opacity:1;
     transform:none;
   }
-
 }
 
 .onboard-eyebrow{
-
   font-size:10px;
-
   text-transform:uppercase;
-
   letter-spacing:3px;
-
   color:var(--pink-deep);
-
   font-weight:600;
-
   margin-bottom:15px;
-
 }
 
 .onboard-title{
-
   font-family:"Playfair Display",serif;
-
   font-weight:500;
-
   font-size:52px;
-
   line-height:1.08;
-
   margin:0 auto 18px;
-
   max-width:680px;
-
 }
 
 .onboard-sub{
-
   color:var(--muted);
-
   font-size:15px;
-
   line-height:1.7;
-
-  max-width:540px;
-
-  margin:0 auto 30px;
-
+  max-width:560px;
+  margin:0 auto 28px;
 }
 
 .onboard-input{
-
   width:min(430px,100%);
-
   border:1px solid var(--line);
-
   background:#fff;
-
   border-radius:17px;
-
   padding:16px 18px;
-
   outline:none;
-
   text-align:center;
-
   font-size:15px;
-
   transition:.2s;
-
 }
 
 .onboard-input:focus{
-
   border-color:var(--pink-deep);
-
-  box-shadow:
-    0 0 0 4px var(--pink-soft);
-
+  box-shadow:0 0 0 4px var(--pink-soft);
 }
 
 .onboard-button{
-
   border:0;
-
   background:var(--ink);
-
-  color:white;
-
+  color:#fff;
   padding:14px 23px;
-
   border-radius:14px;
-
   font-size:12px;
-
   margin-top:17px;
-
   transition:.2s;
-
+  position:relative;
+  z-index:5;
 }
 
 .onboard-button:hover{
-
   transform:translateY(-2px);
-
-  box-shadow:
-    0 10px 25px rgba(39,37,41,.12);
-
+  box-shadow:0 10px 25px rgba(39,37,41,.12);
 }
 
+.onboard-button:active{
+  transform:translateY(0);
+}
 
-/* =====================================================
-   ONBOARDING SUBJECTS
-===================================================== */
+/* =========================================================
+   SUBJECT SELECTION
+========================================================= */
 
 .subject-choices{
-
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
+  grid-template-columns:repeat(3,1fr);
   gap:11px;
-
-  max-width:600px;
-
-  margin:30px auto 18px;
-
+  max-width:620px;
+  margin:28px auto 15px;
 }
 
 .subject-choice{
-
   border:1px solid var(--line);
-
   background:#fff;
-
   border-radius:17px;
-
-  padding:17px 10px;
-
+  padding:16px 10px;
   font-size:12px;
-
   transition:.2s;
-
+  color:var(--ink);
+  min-height:76px;
 }
 
 .subject-choice:hover{
-
   transform:translateY(-2px);
-
   box-shadow:var(--shadow);
-
 }
 
 .subject-choice.selected{
-
   border-color:var(--pink-deep);
-
   background:var(--pink-soft);
-
-  box-shadow:
-    0 8px 25px rgba(216,148,162,.12);
-
+  box-shadow:0 8px 25px rgba(216,148,162,.12);
 }
 
 .subject-emoji{
-
   display:block;
-
   font-size:20px;
-
-  margin-bottom:7px;
-
+  margin-bottom:6px;
 }
 
 .custom-subject{
-
   display:none;
-
   width:min(430px,100%);
-
-  margin:12px auto 0;
-
+  margin:14px auto 0;
 }
 
 .custom-subject.visible{
   display:block;
 }
 
+.subject-helper{
+  min-height:18px;
+  margin-top:8px;
+  font-size:11px;
+  color:var(--pink-deep);
+}
+
 .progress-dots{
-
   display:flex;
-
   justify-content:center;
-
   gap:7px;
-
-  margin-top:40px;
-
+  margin-top:28px;
 }
 
 .progress-dot{
-
   width:6px;
-
   height:6px;
-
   border-radius:50%;
-
   background:#e9e3e1;
-
   transition:.2s;
-
 }
 
 .progress-dot.active{
-
   width:22px;
-
   border-radius:99px;
-
   background:var(--pink-deep);
-
 }
 
+.affirmation{
+  padding:19px;
+  border-radius:19px;
+  margin-top:22px;
+  background:linear-gradient(135deg,#fff7f8,#f8f3fb);
+  color:#70676b;
+  font-family:"Playfair Display",serif;
+  font-size:17px;
+  line-height:1.45;
+  text-align:center;
+}
 
-/* =====================================================
+.affirmation span{
+  display:block;
+  font-family:"DM Sans",sans-serif;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  color:var(--pink-deep);
+  margin-bottom:6px;
+}
+
+/* =========================================================
    APP
-===================================================== */
+========================================================= */
 
 .app{
   min-height:100vh;
 }
 
 .shell{
-
   display:flex;
-
   min-height:100vh;
-
 }
 
 aside{
-
   width:250px;
-
   background:rgba(255,255,255,.88);
-
   border-right:1px solid var(--line);
-
   padding:30px 20px;
-
   position:sticky;
-
   top:0;
-
   height:100vh;
-
   z-index:20;
-
   backdrop-filter:blur(15px);
-
 }
 
 .brand{
-
   font-family:"Playfair Display",serif;
-
   font-size:30px;
-
   padding:0 12px 35px;
-
-}
-
-.brand span{
-  color:var(--pink-deep);
 }
 
 nav button{
-
   display:flex;
-
   width:100%;
-
   border:0;
-
   background:transparent;
-
   padding:13px 14px;
-
   margin:4px 0;
-
   border-radius:14px;
-
   color:#817a7e;
-
   text-align:left;
-
   gap:12px;
-
   align-items:center;
-
   transition:.2s;
-
 }
 
 nav button.active,
 nav button:hover{
-
   background:var(--pink-soft);
-
   color:var(--ink);
-
 }
 
 .icon{
-
   width:22px;
-
   text-align:center;
-
 }
 
 .side-note{
-
   position:absolute;
-
   bottom:28px;
-
   left:28px;
-
   right:28px;
-
   padding:16px;
-
   background:#f7f4ef;
-
   border-radius:18px;
-
   font-size:12px;
-
   line-height:1.6;
-
   color:#817c73;
-
 }
 
 main{
-
   flex:1;
-
   max-width:1250px;
-
   margin:auto;
-
   padding:45px 52px;
-
   width:100%;
-
 }
 
-
-/* =====================================================
+/* =========================================================
    HEADER
-===================================================== */
+========================================================= */
 
 .top{
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:flex-start;
-
   margin-bottom:35px;
-
 }
 
 .eyebrow{
-
   text-transform:uppercase;
-
   letter-spacing:2px;
-
   font-size:10px;
-
   color:var(--pink-deep);
-
   font-weight:600;
-
 }
 
 h1{
-
   font-family:"Playfair Display",serif;
-
   font-size:42px;
-
   font-weight:500;
-
   margin:7px 0 5px;
-
 }
 
 .sub{
-
   color:var(--muted);
-
   font-size:14px;
-
 }
 
 .avatar{
-
   width:45px;
-
   height:45px;
-
   border:0;
-
   border-radius:50%;
-
   display:grid;
-
   place-items:center;
-
   background:var(--pink);
-
   font-family:"Playfair Display",serif;
-
   color:var(--ink);
-
 }
 
+.motivation{
+  margin-top:9px;
+  font-family:"Playfair Display",serif;
+  font-size:15px;
+  color:#8a7c82;
+  min-height:22px;
+  transition:opacity .4s ease,transform .4s ease;
+}
 
-/* =====================================================
+.motivation.fade{
+  opacity:0;
+  transform:translateY(3px);
+}
+
+/* =========================================================
    PAGES
-===================================================== */
+========================================================= */
 
 .page{
-
   display:none;
-
   animation:fade .3s ease;
-
 }
 
 .page.active{
@@ -654,49 +456,33 @@ h1{
 }
 
 @keyframes fade{
-
   from{
     opacity:.3;
     transform:translateY(5px);
   }
-
   to{
     opacity:1;
     transform:none;
   }
-
 }
 
-
-/* =====================================================
+/* =========================================================
    CARDS
-===================================================== */
+========================================================= */
 
 .grid{
-
   display:grid;
-
-  grid-template-columns:
-    1.5fr 1fr;
-
+  grid-template-columns:1.5fr 1fr;
   gap:22px;
-
 }
 
 .card{
-
-  background:var(--paper);
-
+  background:#fff;
   border:1px solid var(--line);
-
   border-radius:var(--radius);
-
   padding:25px;
-
   box-shadow:var(--shadow);
-
   transition:.25s;
-
 }
 
 .card:hover{
@@ -704,154 +490,86 @@ h1{
 }
 
 .card-title{
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
   margin-bottom:20px;
-
   gap:15px;
-
 }
 
 h2{
-
   font-family:"Playfair Display",serif;
-
   font-weight:500;
-
   font-size:22px;
-
   margin:0;
-
 }
 
 .small{
-
   font-size:12px;
-
   color:var(--muted);
-
 }
 
-
-/* =====================================================
+/* =========================================================
    SUBJECT CARDS
-===================================================== */
+========================================================= */
 
 .subject-grid{
-
   display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
+  grid-template-columns:repeat(2,1fr);
   gap:12px;
-
 }
 
 .subject{
-
   padding:18px;
-
   border:1px solid var(--line);
-
   border-radius:19px;
-
   background:#fff;
-
   transition:.2s;
-
 }
 
 .subject:hover{
-
   transform:translateY(-2px);
-
   box-shadow:var(--shadow);
-
 }
 
 .subject-head{
-
   display:flex;
-
   justify-content:space-between;
-
   font-size:13px;
-
   margin-bottom:12px;
-
 }
 
 .bar{
-
   height:6px;
-
   background:#f0ece9;
-
   border-radius:99px;
-
   overflow:hidden;
-
 }
 
 .fill{
-
   height:100%;
-
   border-radius:99px;
-
   transition:width .5s ease;
-
 }
 
-.rose{
-  background:#e4b0ba;
-}
+.rose{background:#e4b0ba}
+.blue{background:#a9c9dd}
+.lav{background:#c2afd4}
+.gold{background:#e0c776}
+.red{background:#d79a9e}
+.sage{background:#a9c4a4}
 
-.blue{
-  background:#a9c9dd;
-}
-
-.lav{
-  background:#c2afd4;
-}
-
-.gold{
-  background:#e0c776;
-}
-
-.red{
-  background:#d79a9e;
-}
-
-.sage{
-  background:#a9c4a4;
-}
-
-
-/* =====================================================
+/* =========================================================
    TODAY
-===================================================== */
+========================================================= */
 
 .today{
-
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
   padding:15px 0;
-
   border-bottom:1px solid var(--line);
-
   gap:12px;
-
 }
 
 .today:last-child{
@@ -859,537 +577,258 @@ h2{
 }
 
 .tag{
-
   font-size:10px;
-
   text-transform:uppercase;
-
   letter-spacing:1px;
-
   padding:6px 9px;
-
   border-radius:99px;
-
   background:var(--pink-soft);
-
   color:#a27078;
-
   white-space:nowrap;
-
 }
 
 .tag.blue-tag{
-
   background:#eaf3f8;
-
   color:#6c91a8;
-
 }
 
 .tag.lav-tag{
-
   background:#f0ebf5;
-
   color:#796783;
-
-}
-
-.tag.yellow-tag{
-
-  background:#f8f1d9;
-
-  color:#927a35;
-
 }
 
 .tag.green-tag{
-
   background:#eaf2e8;
-
   color:#6d8468;
-
 }
 
-
-/* =====================================================
+/* =========================================================
    MISTAKES
-===================================================== */
+========================================================= */
 
 .mistake{
-
   padding:16px;
-
   background:#fcf9f7;
-
   border-radius:18px;
-
   margin-bottom:10px;
-
   border:1px solid transparent;
-
   transition:.2s;
-
 }
 
 .mistake:hover{
-
   border-color:var(--line);
-
   transform:translateY(-1px);
-
 }
 
 .mistake strong{
-
   font-size:13px;
-
   font-weight:600;
-
 }
 
 .mistake p{
-
   margin:6px 0 0;
-
   font-size:12px;
-
   color:var(--muted);
-
   line-height:1.55;
-
 }
 
 .mistake-row{
-
   display:flex;
-
   justify-content:space-between;
-
   gap:12px;
-
   align-items:flex-start;
-
 }
 
-
-/* =====================================================
+/* =========================================================
    BUTTONS
-===================================================== */
+========================================================= */
 
 .btn{
-
   border:0;
-
   border-radius:13px;
-
   padding:11px 15px;
-
   background:var(--ink);
-
-  color:white;
-
+  color:#fff;
   font-size:12px;
-
   transition:.2s;
-
 }
 
 .btn:hover{
-
   transform:translateY(-1px);
-
 }
 
 .btn.soft{
-
   background:var(--pink-soft);
-
   color:#815d63;
-
-}
-
-.btn.blue-btn{
-
-  background:#eaf3f8;
-
-  color:#668ba2;
-
-}
-
-.btn.yellow-btn{
-
-  background:#f8f1d9;
-
-  color:#8f7734;
-
 }
 
 .btn.sage-btn{
-
   background:#eaf2e8;
-
   color:#60775c;
-
 }
 
 .btn.ghost{
-
   background:transparent;
-
   border:1px solid var(--line);
-
   color:#756f72;
-
 }
 
 .actions{
-
   display:flex;
-
   gap:8px;
-
   flex-wrap:wrap;
-
 }
 
-
-/* =====================================================
+/* =========================================================
    STATS
-===================================================== */
+========================================================= */
 
 .stats{
-
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
+  grid-template-columns:repeat(3,1fr);
   gap:12px;
-
   margin-bottom:22px;
-
 }
 
 .stat{
-
   padding:19px;
-
   background:#fff;
-
   border:1px solid var(--line);
-
   border-radius:20px;
-
 }
 
-.stat:nth-child(1){
-  background:#fff7f8;
-}
-
-.stat:nth-child(2){
-  background:#f4f9fc;
-}
-
-.stat:nth-child(3){
-  background:#f7f3fb;
-}
+.stat:nth-child(1){background:#fff7f8}
+.stat:nth-child(2){background:#f4f9fc}
+.stat:nth-child(3){background:#f7f3fb}
 
 .stat-number{
-
   font-family:"Playfair Display",serif;
-
   font-size:29px;
-
   margin-bottom:3px;
-
 }
 
 .stat-label{
-
   font-size:11px;
-
   color:var(--muted);
-
 }
 
-
-/* =====================================================
+/* =========================================================
    TOOLBAR
-===================================================== */
+========================================================= */
 
 .toolbar{
-
   display:flex;
-
   gap:10px;
-
   flex-wrap:wrap;
-
   margin-bottom:18px;
-
 }
 
 .toolbar input,
 .toolbar select{
-
   max-width:260px;
-
 }
 
-
-/* =====================================================
+/* =========================================================
    REVISION
-===================================================== */
+========================================================= */
 
 .revision-card{
-
   text-align:center;
-
   padding:45px;
-
   background:
-
-    radial-gradient(
-      circle at 20% 10%,
-      rgba(243,217,223,.4),
-      transparent 30%
-    ),
-
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(228,219,239,.45),
-      transparent 30%
-    ),
-
+    radial-gradient(circle at 20% 10%,rgba(243,217,223,.4),transparent 30%),
+    radial-gradient(circle at 80% 80%,rgba(228,219,239,.45),transparent 30%),
     white;
-
 }
 
 .revision-subject{
-
   font-size:11px;
-
   text-transform:uppercase;
-
   letter-spacing:2px;
-
   color:var(--pink-deep);
-
   font-weight:600;
-
   margin-bottom:8px;
-
 }
 
 .revision-title{
-
   font-family:"Playfair Display",serif;
-
   font-size:30px;
-
   line-height:1.25;
-
   margin-bottom:12px;
-
 }
 
 .revision-body{
-
   max-width:650px;
-
   margin:0 auto 25px;
-
   color:var(--muted);
-
   line-height:1.7;
-
   font-size:14px;
-
 }
 
 .reveal{
-
   background:#faf7f5;
-
   border-radius:18px;
-
   padding:18px;
-
   text-align:left;
-
   margin:0 auto 20px;
-
   max-width:650px;
-
 }
 
 .reveal b{
-
   font-size:11px;
-
   text-transform:uppercase;
-
   letter-spacing:1px;
-
   color:#81797d;
-
 }
 
 .reveal p{
-
   font-size:13px;
-
   line-height:1.6;
-
   margin:7px 0 0;
-
 }
 
-
-/* =====================================================
-   AFFIRMATIONS
-===================================================== */
-
-.affirmation{
-
-  padding:19px;
-
-  border-radius:19px;
-
-  margin-top:22px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff7f8,
-      #f8f3fb
-    );
-
-  color:#70676b;
-
-  font-family:"Playfair Display",serif;
-
-  font-size:17px;
-
-  line-height:1.45;
-
-  text-align:center;
-
-}
-
-.affirmation span{
-
-  display:block;
-
-  font-family:"DM Sans",sans-serif;
-
-  font-size:10px;
-
-  text-transform:uppercase;
-
-  letter-spacing:1.5px;
-
-  color:var(--pink-deep);
-
-  margin-bottom:6px;
-
-}
-
-
-/* =====================================================
-   MOTIVATION
-===================================================== */
-
-.motivation{
-
-  margin-top:15px;
-
-  font-family:"Playfair Display",serif;
-
-  font-size:15px;
-
-  color:#8a7c82;
-
-  transition:opacity .4s ease;
-
-}
-
-.motivation.fade{
-  opacity:0;
-}
-
-
-/* =====================================================
+/* =========================================================
    EMPTY STATES
-===================================================== */
+========================================================= */
 
 .empty{
-
   padding:42px 20px;
-
   text-align:center;
-
   color:var(--muted);
-
   font-size:13px;
-
   background:#fcf9f7;
-
   border-radius:18px;
-
 }
 
 .empty-title{
-
   font-family:"Playfair Display",serif;
-
   font-size:21px;
-
   color:var(--ink);
-
   margin-bottom:6px;
-
 }
 
 .muted-box{
-
   padding:20px;
-
   background:#f7f4ef;
-
   border-radius:18px;
-
   color:#817c73;
-
   font-size:12px;
-
   line-height:1.65;
-
 }
 
-
-/* =====================================================
+/* =========================================================
    MODALS
-===================================================== */
+========================================================= */
 
 .modal-bg{
-
   position:fixed;
-
   inset:0;
-
   background:rgba(35,29,31,.28);
-
   display:none;
-
   place-items:center;
-
   padding:20px;
-
   backdrop-filter:blur(6px);
-
   z-index:100;
-
 }
 
 .modal-bg.open{
@@ -1397,148 +836,89 @@ h2{
 }
 
 .modal{
-
   width:min(570px,100%);
-
-  background:white;
-
+  background:#fff;
   border-radius:28px;
-
   padding:30px;
-
-  box-shadow:
-    0 30px 90px rgba(0,0,0,.16);
-
+  box-shadow:0 30px 90px rgba(0,0,0,.16);
   max-height:90vh;
-
   overflow:auto;
-
 }
 
 .modal h2{
-
   font-size:28px;
-
   margin-bottom:5px;
-
 }
 
 label{
-
   display:block;
-
   font-size:11px;
-
   color:#81797d;
-
   text-transform:uppercase;
-
   letter-spacing:1px;
-
   margin:18px 0 7px;
-
 }
 
 input,
 textarea,
 select{
-
   width:100%;
-
   border:1px solid var(--line);
-
   background:#fff;
-
   border-radius:13px;
-
   padding:12px;
-
   color:var(--ink);
-
   outline:none;
-
 }
 
 textarea{
-
   min-height:90px;
-
   resize:vertical;
-
 }
 
 input:focus,
 textarea:focus,
 select:focus{
-
   border-color:var(--pink-deep);
-
-  box-shadow:
-    0 0 0 3px var(--pink-soft);
-
+  box-shadow:0 0 0 3px var(--pink-soft);
 }
 
 .modal-actions{
-
   display:flex;
-
   justify-content:flex-end;
-
   gap:8px;
-
   margin-top:22px;
-
 }
 
-
-/* =====================================================
+/* =========================================================
    TOAST
-===================================================== */
+========================================================= */
 
 .toast{
-
   position:fixed;
-
   bottom:24px;
-
   right:24px;
-
   background:var(--ink);
-
-  color:white;
-
+  color:#fff;
   padding:12px 16px;
-
   border-radius:14px;
-
   font-size:12px;
-
   box-shadow:var(--shadow);
-
   opacity:0;
-
   transform:translateY(10px);
-
   pointer-events:none;
-
   transition:.25s;
-
   z-index:200;
-
 }
 
 .toast.show{
-
   opacity:1;
-
   transform:none;
-
 }
 
-
-/* =====================================================
+/* =========================================================
    MOBILE
-===================================================== */
+========================================================= */
 
 .mobile-nav{
   display:none;
@@ -1571,55 +951,32 @@ select:focus{
   }
 
   .mobile-nav{
-
     display:flex;
-
     position:sticky;
-
     top:0;
-
     z-index:15;
-
     background:rgba(253,251,249,.95);
-
     backdrop-filter:blur(10px);
-
     padding:10px 0;
-
     margin:-10px 0 20px;
-
     gap:6px;
-
     overflow:auto;
-
   }
 
   .mobile-nav button{
-
     border:0;
-
     background:transparent;
-
     padding:9px 11px;
-
     border-radius:12px;
-
     font-size:11px;
-
     color:var(--muted);
-
     white-space:nowrap;
-
   }
 
   .mobile-nav button.active{
-
     background:var(--pink-soft);
-
     color:var(--ink);
-
   }
-
 }
 
 @media(max-width:600px){
@@ -1635,7 +992,6 @@ select:focus{
   .subject-choices{
     grid-template-columns:repeat(2,1fr);
   }
-
 }
 
 @media(max-width:500px){
@@ -1659,7 +1015,6 @@ select:focus{
   .actions .btn{
     flex:1;
   }
-
 }
 
 </style>
@@ -1667,1058 +1022,933 @@ select:focus{
 
 <body>
 
-
-<!-- =====================================================
+<!-- =========================================================
      ONBOARDING
-===================================================== -->
+========================================================= -->
 
 <div class="onboarding" id="onboarding">
 
-<div class="onboard-container">
+  <div class="onboard-container">
 
-<div class="onboard-brand">
-petal<span>˚</span>
-</div>
+    <div class="onboard-brand">
+      petal<span>˚</span>
+    </div>
 
+    <!-- STEP 1 -->
 
-<!-- STEP 1 -->
+    <div class="onboard-step active" id="step1">
 
-<div class="onboard-step active" id="step1">
+      <div class="onboard-eyebrow">
+        intelligent revision
+      </div>
 
-<div class="onboard-eyebrow">
-intelligent revision
-</div>
-
-<h1 class="onboard-title">
-Revision that remembers where you struggle.
-</h1>
-
-<p class="onboard-sub">
-
-Petal turns your mistakes into a personalised
-revision system, helping you spend less time
-repeating what you already know and more time
-improving what actually matters.
-
-</p>
-
-<button
-class="onboard-button"
-onclick="nextOnboarding(2)"
->
-Let's begin →
-</button>
-
-<div class="affirmation">
-
-<span>A little reminder</span>
-
-You don't need to know everything today.
-You just need to keep going.
-
-</div>
-
-</div>
-
-
-<!-- STEP 2 -->
-
-<div class="onboard-step" id="step2">
-
-<div class="onboard-eyebrow">
-make it yours
-</div>
-
-<h1 class="onboard-title">
-First, let's make Petal yours.
-</h1>
-
-<p class="onboard-sub">
-What should we call you?
-</p>
-
-<input
-class="onboard-input"
-id="onboardingNameInput"
-maxlength="30"
-placeholder="Your name..."
-autocomplete="name"
->
-
-<br>
-
-<button
-class="onboard-button"
-onclick="saveOnboardingName()"
->
-Continue →
-</button>
-
-</div>
-
-
-<!-- STEP 3 -->
-
-<div class="onboard-step" id="step3">
-
-<div class="onboard-eyebrow">
-your study world
-</div>
-
-<h1 class="onboard-title">
-What are you studying?
-</h1>
-
-<p class="onboard-sub">
-
-Choose everything you'd like Petal to
-remember. You can add your own subjects too.
-
-</p>
-
-
-<div class="subject-choices">
-
-<button
-class="subject-choice"
-data-subject="Biology"
-onclick="toggleSubject(this)"
->
-<span class="subject-emoji">🧬</span>
-Biology
-</button>
-
-<button
-class="subject-choice"
-data-subject="Chemistry"
-onclick="toggleSubject(this)"
->
-<span class="subject-emoji">⚗️</span>
-Chemistry
-</button>
-
-<button
-class="subject-choice"
-data-subject="Physics"
-onclick="toggleSubject(this)"
->
-<span class="subject-emoji">⚡</span>
-Physics
-</button>
-
-<button
-class="subject-choice"
-data-subject="Mathematics"
-onclick="toggleSubject(this)"
->
-<span class="subject-emoji">📐</span>
-Mathematics
-</button>
-
-<button
-class="subject-choice"
-data-subject="English"
-onclick="toggleSubject(this)"
->
-<span class="subject-emoji">🌸</span>
-English
-</button>
-
-<button
-class="subject-choice"
-data-subject="Geography"
-onclick="toggleSubject(this)"
->
-<span class="subject-emoji">🌎</span>
-Geography
-</button>
-
-<button
-class="subject-choice"
-data-subject="Psychology"
-onclick="toggleSubject(this)"
->
-<span class="subject-emoji">🧠</span>
-Psychology
-</button>
-
-<button
-class="subject-choice"
-data-subject="Other"
-onclick="toggleOtherSubject(this)"
->
-<span class="subject-emoji">✦</span>
-Other
-</button>
-
-</div>
-
-
-<input
-class="onboard-input custom-subject"
-id="customSubject"
-placeholder="Type your subject..."
-maxlength="40"
->
-
-
-<button
-class="onboard-button"
-onclick="saveSubjects()"
->
-Continue →
-</button>
-
-</div>
-
-
-<!-- STEP 4 -->
-
-<div class="onboard-step" id="step4">
-
-<div class="onboard-eyebrow">
-your space is ready
-</div>
-
-<h1
-class="onboard-title"
-id="welcomeTitle"
->
-Welcome.
-</h1>
-
-<p class="onboard-sub">
-
-Your Petal garden is ready to grow.
-
-<br><br>
-
-Every mistake you record,
-every concept you understand,
-and every small study session
-becomes part of your progress.
-
-</p>
-
-<div class="affirmation">
-
-<span>Your first Petal thought</span>
-
-Progress doesn't have to be loud.
-Small steps still count.
-
-</div>
-
-<button
-class="onboard-button"
-onclick="finishOnboarding()"
->
-Enter Petal →
-</button>
+      <h1 class="onboard-title">
+        Revision that remembers where you struggle.
+      </h1>
+
+      <p class="onboard-sub">
+        Petal turns your mistakes into a personalised
+        revision system, helping you spend less time
+        repeating what you already know and more time
+        improving what actually matters.
+      </p>
+
+      <button
+        type="button"
+        class="onboard-button"
+        onclick="nextOnboarding(2)"
+      >
+        Let's begin →
+      </button>
+
+      <div class="affirmation">
+        <span>A little reminder</span>
+        You don't need to know everything today.
+        You just need to keep going.
+      </div>
+
+    </div>
+
+
+    <!-- STEP 2 -->
+
+    <div class="onboard-step" id="step2">
+
+      <div class="onboard-eyebrow">
+        make it yours
+      </div>
+
+      <h1 class="onboard-title">
+        First, let's make Petal yours.
+      </h1>
+
+      <p class="onboard-sub">
+        What should we call you?
+      </p>
+
+      <input
+        class="onboard-input"
+        id="onboardNameInput"
+        maxlength="30"
+        placeholder="Your name..."
+        autocomplete="name"
+      >
+
+      <br>
+
+      <button
+        type="button"
+        class="onboard-button"
+        onclick="saveOnboardingName()"
+      >
+        Continue →
+      </button>
+
+    </div>
+
+
+    <!-- STEP 3 -->
+
+    <div class="onboard-step" id="step3">
+
+      <div class="onboard-eyebrow">
+        your study world
+      </div>
+
+      <h1 class="onboard-title">
+        What are you studying?
+      </h1>
+
+      <p class="onboard-sub">
+        Choose everything you'd like Petal to remember.
+        You can add your own subjects too.
+      </p>
+
+      <div class="subject-choices">
+
+        <button type="button" class="subject-choice"
+          data-subject="Biology"
+          onclick="toggleSubject(this)">
+          <span class="subject-emoji">🧬</span>
+          Biology
+        </button>
+
+        <button type="button" class="subject-choice"
+          data-subject="Chemistry"
+          onclick="toggleSubject(this)">
+          <span class="subject-emoji">⚗️</span>
+          Chemistry
+        </button>
+
+        <button type="button" class="subject-choice"
+          data-subject="Physics"
+          onclick="toggleSubject(this)">
+          <span class="subject-emoji">⚡</span>
+          Physics
+        </button>
+
+        <button type="button" class="subject-choice"
+          data-subject="Mathematics"
+          onclick="toggleSubject(this)">
+          <span class="subject-emoji">📐</span>
+          Mathematics
+        </button>
+
+        <button type="button" class="subject-choice"
+          data-subject="English"
+          onclick="toggleSubject(this)">
+          <span class="subject-emoji">🌸</span>
+          English
+        </button>
+
+        <button type="button" class="subject-choice"
+          data-subject="Geography"
+          onclick="toggleSubject(this)">
+          <span class="subject-emoji">🌎</span>
+          Geography
+        </button>
+
+        <button type="button" class="subject-choice"
+          data-subject="Psychology"
+          onclick="toggleSubject(this)">
+          <span class="subject-emoji">🧠</span>
+          Psychology
+        </button>
+
+        <button type="button" class="subject-choice"
+          data-subject="Other"
+          onclick="toggleOtherSubject(this)">
+          <span class="subject-emoji">✦</span>
+          Other
+        </button>
+
+      </div>
+
+      <input
+        class="onboard-input custom-subject"
+        id="customSubject"
+        placeholder="Type your subject..."
+        maxlength="40"
+      >
+
+      <div
+        class="subject-helper"
+        id="subjectHelper"
+      ></div>
+
+      <!-- IMPORTANT:
+           This button has type="button" and no overlay.
+           It calls the renamed onboarding function.
+      -->
+
+      <button
+        type="button"
+        class="onboard-button"
+        id="subjectContinueButton"
+        onclick="saveSubjectsAndContinue()"
+      >
+        Continue →
+      </button>
+
+    </div>
+
+
+    <!-- STEP 4 -->
+
+    <div class="onboard-step" id="step4">
+
+      <div class="onboard-eyebrow">
+        your space is ready
+      </div>
+
+      <h1
+        class="onboard-title"
+        id="welcomeTitle"
+      >
+        Welcome.
+      </h1>
+
+      <p class="onboard-sub">
+        Your Petal garden is ready to grow.
+        <br><br>
+        Every mistake you record,
+        every concept you understand,
+        and every small study session
+        becomes part of your progress.
+      </p>
+
+      <div class="affirmation">
+        <span>Your first Petal thought</span>
+        Progress doesn't have to be loud.
+        Small steps still count.
+      </div>
+
+      <button
+        type="button"
+        class="onboard-button"
+        onclick="finishOnboarding()"
+      >
+        Enter Petal →
+      </button>
+
+    </div>
+
+
+    <div class="progress-dots">
+
+      <div class="progress-dot active" id="dot1"></div>
+      <div class="progress-dot" id="dot2"></div>
+      <div class="progress-dot" id="dot3"></div>
+      <div class="progress-dot" id="dot4"></div>
+
+    </div>
+
+  </div>
 
 </div>
 
 
-<div class="progress-dots">
-
-<div class="progress-dot active" id="dot1"></div>
-<div class="progress-dot" id="dot2"></div>
-<div class="progress-dot" id="dot3"></div>
-<div class="progress-dot" id="dot4"></div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
+<!-- =========================================================
      APP
-===================================================== -->
+========================================================= -->
 
-<div class="app" id="app">
+<div class="app" id="app" style="display:none">
 
-<div class="shell">
+  <div class="shell">
 
+    <aside>
 
-<aside>
+      <div class="brand">
+        petal<span>˚</span>
+      </div>
 
-<div class="brand">
-petal<span>˚</span>
-</div>
+      <nav>
 
-<nav>
+        <button type="button" class="active" data-page="overview">
+          <span class="icon">⌂</span>
+          Overview
+        </button>
 
-<button
-class="active"
-data-page="overview"
->
-<span class="icon">⌂</span>
-Overview
-</button>
+        <button type="button" data-page="mistakes">
+          <span class="icon">✦</span>
+          My mistakes
+        </button>
 
-<button data-page="mistakes">
-<span class="icon">✦</span>
-My mistakes
-</button>
+        <button type="button" data-page="revision">
+          <span class="icon">◷</span>
+          Revision
+        </button>
 
-<button data-page="revision">
-<span class="icon">◷</span>
-Revision
-</button>
+        <button type="button" data-page="subjects">
+          <span class="icon">♡</span>
+          Subjects
+        </button>
 
-<button data-page="subjects">
-<span class="icon">♡</span>
-Subjects
-</button>
+      </nav>
 
-</nav>
+      <div class="side-note">
+        <b>A little reminder</b>
+        <br><br>
+        You are allowed to learn slowly.
+        Understanding one difficult thing
+        is still progress.
+      </div>
 
+    </aside>
 
-<div class="side-note">
 
-<b>A little reminder</b>
+    <main>
 
-<br><br>
+      <div class="mobile-nav">
 
-You are allowed to learn slowly.
-Understanding one difficult thing
-is still progress.
+        <button type="button" class="active" data-page="overview">
+          Overview
+        </button>
 
-</div>
+        <button type="button" data-page="mistakes">
+          Mistakes
+        </button>
 
-</aside>
+        <button type="button" data-page="revision">
+          Revision
+        </button>
 
+        <button type="button" data-page="subjects">
+          Subjects
+        </button>
 
-<main>
+      </div>
 
 
-<!-- MOBILE NAV -->
+      <!-- HEADER -->
 
-<div class="mobile-nav">
+      <div class="top">
 
-<button class="active" data-page="overview">
-Overview
-</button>
+        <div>
 
-<button data-page="mistakes">
-Mistakes
-</button>
+          <div
+            class="eyebrow"
+            id="dateLabel"
+          ></div>
 
-<button data-page="revision">
-Revision
-</button>
+          <h1 id="greeting">
+            Good afternoon ♡
+          </h1>
 
-<button data-page="subjects">
-Subjects
-</button>
+          <div
+            class="sub"
+            id="revisionGreeting"
+          >
+            You have 3 things worth revisiting today.
+          </div>
 
-</div>
+          <div
+            class="motivation"
+            id="motivation"
+          >
+            You can do difficult things. ♡
+          </div>
 
+        </div>
 
-<!-- HEADER -->
+        <button
+          type="button"
+          class="avatar"
+          id="avatarBtn"
+          onclick="openNameModal()"
+        >
+          P
+        </button>
 
-<div class="top">
+      </div>
 
-<div>
 
-<div
-class="eyebrow"
-id="dateLabel"
-></div>
+      <!-- =====================================================
+           OVERVIEW
+      ===================================================== -->
 
-<h1 id="greeting">
-Good afternoon.
-</h1>
+      <section class="page active" id="page-overview">
 
-<div
-class="sub"
-id="revisionGreeting"
->
-Let's make today's revision feel
-a little lighter.
-</div>
+        <div class="grid">
 
-<div
-class="motivation"
-id="motivation"
->
-You can do difficult things.
-</div>
+          <section class="card">
 
-</div>
+            <div class="card-title">
 
+              <div>
+                <h2>Your subjects</h2>
+                <span class="small">
+                  your study world
+                </span>
+              </div>
 
-<button
-class="avatar"
-id="avatarBtn"
-onclick="openNameModal()"
->
-P
-</button>
+              <button
+                type="button"
+                class="btn soft"
+                onclick="navigate('subjects')"
+              >
+                View all
+              </button>
 
-</div>
+            </div>
 
+            <div
+              class="subject-grid"
+              id="overviewSubjects"
+            ></div>
 
-<!-- =====================================================
-     OVERVIEW
-===================================================== -->
+            <div class="affirmation">
+              <span>Keep going</span>
+              One concept at a time.
+              You don't need to master everything
+              in one sitting.
+            </div>
 
-<section
-class="page active"
-id="page-overview"
->
+          </section>
 
-<div class="grid">
 
+          <section class="card">
 
-<!-- SUBJECTS -->
+            <div class="card-title">
 
-<section class="card">
+              <h2>Today's revision</h2>
 
-<div class="card-title">
+              <span
+                class="small"
+                id="todayCount"
+              >
+                0 ready
+              </span>
 
-<div>
+            </div>
 
-<h2>Your subjects</h2>
+            <div id="todayList"></div>
 
-<span class="small">
-your study world
-</span>
+          </section>
 
-</div>
 
-<button
-class="btn soft"
-onclick="navigate('subjects')"
->
-View all
-</button>
+          <section class="card">
 
-</div>
+            <div class="card-title">
 
+              <div>
+                <h2>Mistakes to revisit</h2>
+                <span class="small">
+                  your personal revision map
+                </span>
+              </div>
 
-<div
-class="subject-grid"
-id="overviewSubjects"
-></div>
+              <button
+                type="button"
+                class="btn soft"
+                onclick="openMistakeModal()"
+              >
+                + Add
+              </button>
 
+            </div>
 
-<div class="affirmation">
+            <div id="overviewMistakes"></div>
 
-<span>Keep going</span>
+          </section>
 
-One concept at a time.
-You don't need to master everything
-in one sitting.
 
-</div>
+          <section class="card">
 
-</section>
+            <div class="card-title">
 
+              <h2>Your little win</h2>
 
-<!-- TODAY -->
+              <span>✦</span>
 
-<section class="card">
+            </div>
 
-<div class="card-title">
+            <div
+              class="stat-number"
+              id="winNumber"
+            >
+              0 mistakes
+            </div>
 
-<h2>Today's revision</h2>
+            <div class="small">
+              Every mistake you understand
+              is one less mistake standing
+              between you and your goals.
+            </div>
 
-<span
-class="small"
-id="todayCount"
->
-0 ready
-</span>
+            <div
+              class="actions"
+              style="margin-top:18px"
+            >
 
-</div>
+              <button
+                type="button"
+                class="btn"
+                onclick="navigate('revision')"
+              >
+                Start revision
+              </button>
 
+              <button
+                type="button"
+                class="btn ghost"
+                onclick="openNameModal()"
+              >
+                Personalise
+              </button>
 
-<div id="todayList"></div>
+            </div>
 
-</section>
+            <div class="affirmation">
+              <span>Remember</span>
+              You are more capable than
+              one difficult question makes you feel.
+            </div>
 
+          </section>
 
-<!-- MISTAKES -->
+        </div>
 
-<section class="card">
+      </section>
 
-<div class="card-title">
 
-<div>
+      <!-- =====================================================
+           MISTAKES
+      ===================================================== -->
 
-<h2>Mistakes to revisit</h2>
+      <section class="page" id="page-mistakes">
 
-<span class="small">
-your personal revision map
-</span>
+        <div class="stats">
 
-</div>
+          <div class="stat">
+            <div class="stat-number" id="statTotal">0</div>
+            <div class="stat-label">mistakes recorded</div>
+          </div>
 
-<button
-class="btn soft"
-onclick="openMistakeModal()"
->
-+ Add
-</button>
+          <div class="stat">
+            <div class="stat-number" id="statReview">0</div>
+            <div class="stat-label">ready to review</div>
+          </div>
 
-</div>
+          <div class="stat">
+            <div class="stat-number" id="statMastered">0</div>
+            <div class="stat-label">mastered</div>
+          </div>
 
+        </div>
 
-<div id="overviewMistakes"></div>
 
-</section>
+        <section class="card">
 
+          <div class="card-title">
 
-<!-- WIN -->
+            <div>
+              <h2>My mistakes</h2>
+              <span class="small">
+                Your mistakes are your revision map.
+              </span>
+            </div>
 
-<section class="card">
+            <button
+              type="button"
+              class="btn"
+              onclick="openMistakeModal()"
+            >
+              + Add mistake
+            </button>
 
-<div class="card-title">
+          </div>
 
-<h2>Your little win</h2>
 
-<span>✦</span>
+          <div class="toolbar">
 
-</div>
+            <input
+              id="searchMistakes"
+              placeholder="Search your mistakes..."
+            >
 
+            <select id="filterSubject">
+              <option value="All">
+                All subjects
+              </option>
+            </select>
 
-<div
-class="stat-number"
-id="winNumber"
->
-0 mistakes
-</div>
+            <select id="filterStatus">
 
-<div class="small">
+              <option value="All">
+                All statuses
+              </option>
 
-Every mistake you understand
-is one less mistake standing
-between you and your goals.
+              <option value="review">
+                Needs review
+              </option>
 
-</div>
+              <option value="mastered">
+                Mastered
+              </option>
 
+            </select>
 
-<div
-class="actions"
-style="margin-top:18px"
->
+          </div>
 
-<button
-class="btn"
-onclick="navigate('revision')"
->
-Start revision
-</button>
 
-<button
-class="btn ghost"
-onclick="openNameModal()"
->
-Personalise
-</button>
+          <div id="mistakesList"></div>
 
-</div>
 
+          <div class="affirmation">
 
-<div class="affirmation">
+            <span>A note from Petal</span>
 
-<span>Remember</span>
+            Mistakes aren't evidence that
+            you're bad at something.
+            They're evidence that you're learning.
 
-You are more capable than
-one difficult question makes you feel.
+          </div>
 
-</div>
+        </section>
 
-</section>
+      </section>
 
 
-</div>
+      <!-- =====================================================
+           REVISION
+      ===================================================== -->
 
-</section>
+      <section class="page" id="page-revision">
 
+        <section class="card revision-card">
 
-<!-- =====================================================
-     MISTAKES
-===================================================== -->
+          <div
+            class="revision-subject"
+            id="revisionSubject"
+          >
+            PETAL REVISION
+          </div>
 
-<section
-class="page"
-id="page-mistakes"
->
+          <div
+            class="revision-title"
+            id="revisionTitle"
+          >
+            You're ready when you are.
+          </div>
 
-<div class="stats">
+          <div
+            class="revision-body"
+            id="revisionIntro"
+          >
+            Petal will choose a mistake that still
+            needs your attention.
+          </div>
 
-<div class="stat">
+          <div id="revisionContent">
 
-<div
-class="stat-number"
-id="statTotal"
->
-0
-</div>
+            <div class="muted-box">
 
-<div class="stat-label">
-mistakes recorded
-</div>
+              Add a few mistakes first and Petal
+              will build your revision queue here.
 
-</div>
+            </div>
 
+          </div>
 
-<div class="stat">
+          <div
+            class="actions"
+            style="justify-content:center;margin-top:22px"
+          >
 
-<div
-class="stat-number"
-id="statReview"
->
-0
-</div>
+            <button
+              type="button"
+              class="btn"
+              id="revisionStartBtn"
+              onclick="startRevision()"
+            >
+              Start revision
+            </button>
 
-<div class="stat-label">
-ready to review
-</div>
+            <button
+              type="button"
+              class="btn ghost"
+              onclick="navigate('mistakes')"
+            >
+              View mistake bank
+            </button>
 
-</div>
+          </div>
 
+          <div class="affirmation">
 
-<div class="stat">
+            <span>Take your time</span>
 
-<div
-class="stat-number"
-id="statMastered"
->
-0
-</div>
+            Understanding something deeply
+            is more valuable than rushing through it.
 
-<div class="stat-label">
-mastered
-</div>
+          </div>
 
-</div>
+        </section>
 
-</div>
+      </section>
 
 
-<section class="card">
+      <!-- =====================================================
+           SUBJECTS
+      ===================================================== -->
 
-<div class="card-title">
+      <section class="page" id="page-subjects">
 
-<div>
+        <section class="card">
 
-<h2>My mistakes</h2>
+          <div class="card-title">
 
-<span class="small">
-Your mistakes are your revision map.
-</span>
+            <div>
+              <h2>Your subjects</h2>
+              <span class="small">
+                Your progress, your pace.
+              </span>
+            </div>
 
-</div>
+            <button
+              type="button"
+              class="btn soft"
+              onclick="openMistakeModal()"
+            >
+              + Add mistake
+            </button>
 
-<button
-class="btn"
-onclick="openMistakeModal()"
->
-+ Add mistake
-</button>
+          </div>
 
-</div>
+          <div
+            class="subject-grid"
+            id="subjectsFull"
+          ></div>
 
+        </section>
 
-<div class="toolbar">
 
-<input
-id="searchMistakes"
-placeholder="Search your mistakes..."
-oninput="renderMistakesPage()"
->
+        <section
+          class="card"
+          style="margin-top:22px"
+        >
 
-<select
-id="filterSubject"
-onchange="renderMistakesPage()"
->
+          <div class="card-title">
+            <h2>Your Petal philosophy</h2>
+          </div>
 
-<option value="All">
-All subjects
-</option>
+          <div class="muted-box">
 
-</select>
+            Petal isn't here to tell you
+            how smart you are.
 
-<select
-id="filterStatus"
-onchange="renderMistakesPage()"
->
+            <br><br>
 
-<option value="All">
-All statuses
-</option>
+            It helps you see where your
+            understanding can grow.
 
-<option value="review">
-Needs review
-</option>
+            <br><br>
 
-<option value="mastered">
-Mastered
-</option>
+            Your progress belongs to you.
+            There is no perfect pace.
 
-</select>
+          </div>
 
-</div>
+          <div class="affirmation">
 
+            <span>You've got this</span>
 
-<div id="mistakesList"></div>
+            Slow progress is still progress.
 
+          </div>
 
-<div class="affirmation">
+        </section>
 
-<span>A note from Petal</span>
+      </section>
 
-Mistakes aren't evidence that
-you're bad at something.
-They're evidence that you're learning.
+    </main>
 
-</div>
-
-</section>
-
-</section>
-
-
-<!-- =====================================================
-     REVISION
-===================================================== -->
-
-<section
-class="page"
-id="page-revision"
->
-
-<section class="card revision-card">
-
-<div
-class="revision-subject"
-id="revisionSubject"
->
-PETAL REVISION
-</div>
-
-<div
-class="revision-title"
-id="revisionTitle"
->
-You're ready when you are.
-</div>
-
-<div
-class="revision-body"
-id="revisionIntro"
->
-
-Petal will choose a mistake that still
-needs your attention.
-
-The goal isn't simply to remember
-that you were wrong.
-
-It's to understand why.
-
-</div>
-
-
-<div id="revisionContent">
-
-<div class="muted-box">
-
-Add a few mistakes first and Petal
-will build your revision queue here.
-
-</div>
-
-</div>
-
-
-<div
-class="actions"
-style="justify-content:center;margin-top:22px"
->
-
-<button
-class="btn"
-id="revisionStartBtn"
-onclick="startRevision()"
->
-Start revision
-</button>
-
-<button
-class="btn ghost"
-onclick="navigate('mistakes')"
->
-View mistake bank
-</button>
+  </div>
 
 </div>
 
 
-<div class="affirmation">
-
-<span>Take your time</span>
-
-Understanding something deeply
-is more valuable than rushing through it.
-
-</div>
-
-</section>
-
-</section>
-
-
-<!-- =====================================================
-     SUBJECTS
-===================================================== -->
-
-<section
-class="page"
-id="page-subjects"
->
-
-<section class="card">
-
-<div class="card-title">
-
-<div>
-
-<h2>Your subjects</h2>
-
-<span class="small">
-Your progress, your pace.
-</span>
-
-</div>
-
-<button
-class="btn soft"
-onclick="openMistakeModal()"
->
-+ Add mistake
-</button>
-
-</div>
-
-
-<div
-class="subject-grid"
-id="subjectsFull"
-></div>
-
-</section>
-
-
-<section
-class="card"
-style="margin-top:22px"
->
-
-<div class="card-title">
-
-<h2>Your Petal philosophy</h2>
-
-</div>
-
-
-<div class="muted-box">
-
-Petal isn't here to tell you
-how smart you are.
-
-<br><br>
-
-It helps you see where your
-understanding can grow.
-
-<br><br>
-
-Your progress belongs to you.
-There is no perfect pace.
-
-</div>
-
-
-<div class="affirmation">
-
-<span>You've got this</span>
-
-Slow progress is still progress.
-
-</div>
-
-</section>
-
-</section>
-
-
-</main>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
+<!-- =========================================================
      ADD MISTAKE MODAL
-===================================================== -->
+========================================================= -->
 
 <div
-class="modal-bg"
-id="mistakeModal"
+  class="modal-bg"
+  id="mistakeModal"
 >
 
-<div class="modal">
+  <div class="modal">
 
-<h2>Add a mistake</h2>
+    <h2>Add a mistake</h2>
 
-<div class="small">
+    <div class="small">
+      Tell Petal what happened.
+      Your mistakes become your
+      personalised revision map.
+    </div>
 
-Tell Petal what happened.
-Your mistakes become your
-personalised revision map.
+    <label>Subject</label>
+
+    <select id="subject"></select>
+
+    <label>What did you get wrong?</label>
+
+    <input
+      id="mistakeTitle"
+      placeholder="e.g. Forgot the sign convention..."
+    >
+
+    <label>What went wrong?</label>
+
+    <textarea
+      id="mistakeBody"
+      placeholder="Explain the mistake in your own words..."
+    ></textarea>
+
+    <label>Topic</label>
+
+    <input
+      id="mistakeTopic"
+      placeholder="e.g. Differentiation, enzymes, acids & bases..."
+    >
+
+    <div class="modal-actions">
+
+      <button
+        type="button"
+        class="btn ghost"
+        onclick="closeModal('mistakeModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="button"
+        class="btn"
+        onclick="addMistake()"
+      >
+        Save mistake
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
 
 
-<label>Subject</label>
-
-<select id="subject"></select>
-
-
-<label>What did you get wrong?</label>
-
-<input
-id="mistakeTitle"
-placeholder="e.g. Forgot the sign convention..."
->
-
-
-<label>What went wrong?</label>
-
-<textarea
-id="mistakeBody"
-placeholder="Explain the mistake in your own words..."
-></textarea>
-
-
-<label>Topic</label>
-
-<input
-id="mistakeTopic"
-placeholder="e.g. Differentiation, enzymes, acids & bases..."
->
-
-
-<div class="modal-actions">
-
-<button
-class="btn ghost"
-onclick="closeModal('mistakeModal')"
->
-Cancel
-</button>
-
-<button
-class="btn"
-onclick="addMistake()"
->
-Save mistake
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
+<!-- =========================================================
      NAME MODAL
-===================================================== -->
+========================================================= -->
 
 <div
-class="modal-bg"
-id="nameModal"
+  class="modal-bg"
+  id="nameModal"
 >
 
-<div class="modal">
+  <div class="modal">
 
-<h2>Make Petal yours</h2>
+    <h2>Make Petal yours</h2>
 
-<div class="small">
-Update the name Petal uses for you.
-</div>
+    <div class="small">
+      Update the name Petal uses for you.
+    </div>
 
+    <label>Your name</label>
 
-<label>Your name</label>
+    <input
+      id="profileNameInput"
+      maxlength="30"
+      placeholder="Your name..."
+    >
 
-<input
-id="profileNameInput"
-maxlength="30"
-placeholder="Your name..."
->
+    <div class="modal-actions">
 
+      <button
+        type="button"
+        class="btn ghost"
+        onclick="closeModal('nameModal')"
+      >
+        Cancel
+      </button>
 
-<div class="modal-actions">
+      <button
+        type="button"
+        class="btn"
+        onclick="saveName()"
+      >
+        Save
+      </button>
 
-<button
-class="btn ghost"
-onclick="closeModal('nameModal')"
->
-Cancel
-</button>
+    </div>
 
-<button
-class="btn"
-onclick="saveName()"
->
-Save
-</button>
-
-</div>
-
-</div>
+  </div>
 
 </div>
 
 
 <div
-class="toast"
-id="toast"
+  class="toast"
+  id="toast"
 ></div>
 
 
 <script>
 
-/* =====================================================
-   STORAGE
-===================================================== */
+/* =========================================================
+   PETAL JAVASCRIPT
+========================================================= */
 
-const DATA_KEY = "petal_v16_data";
-const NAME_KEY = "petal_v16_name";
-const SUBJECT_KEY = "petal_v16_subjects";
-const ONBOARDING_KEY = "petal_v16_onboarding";
+/*
+  IMPORTANT FIX:
 
+  The old version had TWO functions called saveSubjects().
+
+  That caused the onboarding Continue button to break.
+
+  This version has:
+    persistSubjects()
+    saveSubjectsAndContinue()
+
+  They are completely separate.
+*/
+
+const DATA_KEY = "petal_v17_data";
+const NAME_KEY = "petal_v17_name";
+const SUBJECT_KEY = "petal_v17_subjects";
+const ONBOARDING_KEY = "petal_v17_onboarding";
 
 let mistakes = loadMistakes();
-
 let selectedSubjects = loadSubjects();
 
 let revisionIndex = 0;
-
 let revisionActive = false;
 
 
-/* =====================================================
+/* =========================================================
    SUBJECT METADATA
-===================================================== */
+========================================================= */
 
 const subjectMeta = {
 
@@ -2760,83 +1990,36 @@ const subjectMeta = {
 };
 
 
-/* =====================================================
-   CUSTOM SUBJECT PALETTE
-===================================================== */
+const motivationMessages = [
 
-const customSubjectMeta = [
+  "You can do difficult things. ♡",
 
-  {emoji:"✦",class:"rose"},
-  {emoji:"♡",class:"blue"},
-  {emoji:"✧",class:"lav"},
-  {emoji:"☼",class:"gold"},
-  {emoji:"❀",class:"red"},
-  {emoji:"☘",class:"sage"}
+  "One small step is still a step forward.",
 
-];
+  "You don't need to be perfect to make progress.",
 
+  "Future you will be grateful you started today.",
 
-function getMeta(subject){
-
-  if(subjectMeta[subject]){
-    return subjectMeta[subject];
-  }
-
-  const index =
-    subject
-      .split("")
-      .reduce(
-        (sum,char)=>
-          sum + char.charCodeAt(0),
-        0
-      )
-      %
-      customSubjectMeta.length;
-
-  return customSubjectMeta[index];
-
-}
-
-
-/* =====================================================
-   AFFIRMATIONS
-===================================================== */
-
-const affirmationList = [
-
-  "You don't have to understand everything today.",
-
-  "One difficult question does not define your ability.",
-
-  "Small, consistent effort compounds.",
-
-  "You are allowed to learn at your own pace.",
-
-  "Understanding one thing deeply is progress.",
-
-  "You can do difficult things.",
+  "Understanding one thing deeply is enough for now.",
 
   "Your mistakes are giving you information.",
 
-  "Keep going. Future you will thank you.",
+  "Keep going gently. You've got this. 🌷",
 
-  "Progress doesn't have to be perfect.",
+  "A little progress counts more than you think.",
 
-  "You already know more than you think.",
+  "You are capable of learning hard things.",
 
-  "You are building something every time you study.",
-
-  "Be proud of the effort nobody else can see."
+  "Slow progress is still progress."
 
 ];
-
 
 let motivationIndex = 0;
 
 
-/* =====================================================
+/* =========================================================
    STORAGE
-===================================================== */
+========================================================= */
 
 function loadMistakes(){
 
@@ -2845,12 +2028,19 @@ function loadMistakes(){
     const saved =
       localStorage.getItem(DATA_KEY);
 
-    return saved
-      ? JSON.parse(saved)
+    if(!saved)
+      return [];
+
+    const parsed =
+      JSON.parse(saved);
+
+    return Array.isArray(parsed)
+      ? parsed
       : [];
 
-  }catch(e){
+  }catch(error){
 
+    console.error(error);
     return [];
 
   }
@@ -2875,12 +2065,29 @@ function loadSubjects(){
     const saved =
       localStorage.getItem(SUBJECT_KEY);
 
-    return saved
-      ? JSON.parse(saved)
-      : [];
+    if(!saved)
+      return [];
 
-  }catch(e){
+    const parsed =
+      JSON.parse(saved);
 
+    if(!Array.isArray(parsed))
+      return [];
+
+    return [
+      ...new Set(
+        parsed.filter(
+          subject =>
+            typeof subject === "string" &&
+            subject.trim() &&
+            subject !== "Other"
+        )
+      )
+    ];
+
+  }catch(error){
+
+    console.error(error);
     return [];
 
   }
@@ -2888,7 +2095,14 @@ function loadSubjects(){
 }
 
 
-function saveSubjects(){
+/*
+  RENAMED FROM saveSubjects()
+
+  This is ONLY responsible for saving
+  the selected subjects.
+*/
+
+function persistSubjects(){
 
   localStorage.setItem(
     SUBJECT_KEY,
@@ -2908,9 +2122,9 @@ function getName(){
 }
 
 
-/* =====================================================
+/* =========================================================
    ONBOARDING
-===================================================== */
+========================================================= */
 
 function hasCompletedOnboarding(){
 
@@ -2925,23 +2139,28 @@ function hasCompletedOnboarding(){
 
 function startApp(){
 
+  const onboarding =
+    document.getElementById(
+      "onboarding"
+    );
+
+  const app =
+    document.getElementById(
+      "app"
+    );
+
+
   if(hasCompletedOnboarding()){
 
-    document
-      .getElementById("onboarding")
-      .classList.add("hidden");
-
-    document
-      .getElementById("app")
-      .style.display="block";
+    onboarding.classList.add("hidden");
+    app.style.display = "block";
 
     initialiseApp();
 
   }else{
 
-    document
-      .getElementById("app")
-      .style.display="none";
+    onboarding.classList.remove("hidden");
+    app.style.display = "none";
 
   }
 
@@ -2953,32 +2172,49 @@ function nextOnboarding(step){
   document
     .querySelectorAll(".onboard-step")
     .forEach(
-      x =>
-        x.classList.remove("active")
+      element =>
+        element.classList.remove("active")
     );
 
 
-  document
-    .getElementById(
-      "step"+step
-    )
-    .classList.add("active");
+  const target =
+    document.getElementById(
+      "step" + step
+    );
 
+
+  if(!target)
+    return;
+
+
+  target.classList.add("active");
 
   updateDots(step);
 
 
-  if(step===2){
+  if(step === 2){
 
     setTimeout(
-      () =>
-        document
-          .getElementById(
-            "onboardingNameInput"
-          )
-          .focus(),
+      () => {
+
+        const input =
+          document.getElementById(
+            "onboardNameInput"
+          );
+
+        if(input)
+          input.focus();
+
+      },
       100
     );
+
+  }
+
+
+  if(step === 3){
+
+    restoreSubjectSelections();
 
   }
 
@@ -2994,7 +2230,7 @@ function updateDots(step){
 
         dot.classList.toggle(
           "active",
-          index === step-1
+          index === step - 1
         );
 
       }
@@ -3003,16 +2239,22 @@ function updateDots(step){
 }
 
 
+/* =========================================================
+   ONBOARDING NAME
+========================================================= */
+
 function saveOnboardingName(){
 
   const input =
     document.getElementById(
-      "onboardingNameInput"
+      "onboardNameInput"
     );
 
 
   const name =
-    input.value.trim();
+    input
+      ? input.value.trim()
+      : "";
 
 
   if(!name){
@@ -3021,7 +2263,8 @@ function saveOnboardingName(){
       "Tell Petal your name first 🌷"
     );
 
-    input.focus();
+    if(input)
+      input.focus();
 
     return;
 
@@ -3039,36 +2282,119 @@ function saveOnboardingName(){
 }
 
 
-/* =====================================================
+/* =========================================================
    SUBJECT SELECTION
-===================================================== */
+========================================================= */
+
+function restoreSubjectSelections(){
+
+  document
+    .querySelectorAll(
+      ".subject-choice"
+    )
+    .forEach(
+      button => {
+
+        const subject =
+          button.dataset.subject;
+
+
+        if(subject === "Other")
+          return;
+
+
+        button.classList.toggle(
+          "selected",
+          selectedSubjects.includes(
+            subject
+          )
+        );
+
+      }
+    );
+
+
+  const otherButton =
+    document.querySelector(
+      '[data-subject="Other"]'
+    );
+
+
+  const customInput =
+    document.getElementById(
+      "customSubject"
+    );
+
+
+  /*
+    Find a custom subject that isn't
+    one of the built-in subjects.
+  */
+
+  const builtIns =
+    Object.keys(subjectMeta);
+
+
+  const customSubjects =
+    selectedSubjects.filter(
+      subject =>
+        !builtIns.includes(subject)
+    );
+
+
+  if(customSubjects.length){
+
+    otherButton?.classList.add("selected");
+
+    customInput?.classList.add("visible");
+
+    if(customInput)
+      customInput.value =
+        customSubjects[0];
+
+  }
+
+}
+
 
 function toggleSubject(button){
+
+  if(!button)
+    return;
+
 
   const subject =
     button.dataset.subject;
 
 
-  if(selectedSubjects.includes(subject)){
+  if(!subject ||
+     subject === "Other")
+    return;
+
+
+  if(
+    selectedSubjects.includes(subject)
+  ){
 
     selectedSubjects =
       selectedSubjects.filter(
-        s => s !== subject
+        item =>
+          item !== subject
       );
 
-    button.classList.remove(
-      "selected"
-    );
+    button.classList.remove("selected");
 
   }else{
 
     selectedSubjects.push(subject);
 
-    button.classList.add(
-      "selected"
-    );
+    button.classList.add("selected");
 
   }
+
+
+  selectedSubjects =
+    [...new Set(selectedSubjects)];
 
 }
 
@@ -3081,6 +2407,10 @@ function toggleOtherSubject(button){
     );
 
 
+  if(!button || !input)
+    return;
+
+
   const selected =
     button.classList.contains(
       "selected"
@@ -3089,46 +2419,29 @@ function toggleOtherSubject(button){
 
   if(selected){
 
-    button.classList.remove(
-      "selected"
-    );
+    button.classList.remove("selected");
 
-    input.classList.remove(
-      "visible"
-    );
+    input.classList.remove("visible");
 
-    input.value="";
+    input.value = "";
 
-    selectedSubjects =
-      selectedSubjects.filter(
-        s => s !== "Other"
+    const helper =
+      document.getElementById(
+        "subjectHelper"
       );
+
+    if(helper)
+      helper.textContent = "";
 
   }else{
 
-    button.classList.add(
-      "selected"
-    );
+    button.classList.add("selected");
 
-    input.classList.add(
-      "visible"
-    );
-
-    if(
-      !selectedSubjects.includes(
-        "Other"
-      )
-    ){
-
-      selectedSubjects.push(
-        "Other"
-      );
-
-    }
+    input.classList.add("visible");
 
     setTimeout(
       () => input.focus(),
-      100
+      50
     );
 
   }
@@ -3136,92 +2449,172 @@ function toggleOtherSubject(button){
 }
 
 
-function saveSubjects(){
+/*
+  THIS IS THE FIXED CONTINUE FUNCTION.
 
-  const input =
+  It does NOT call itself.
+*/
+
+function saveSubjectsAndContinue(){
+
+  const customInput =
     document.getElementById(
       "customSubject"
     );
 
 
   const custom =
-    input.value.trim();
+    customInput
+      ? customInput.value.trim()
+      : "";
 
 
-  let subjects =
-    [...selectedSubjects];
+  const otherButton =
+    document.querySelector(
+      '[data-subject="Other"]'
+    );
 
 
-  if(subjects.includes("Other")){
+  const wantsCustom =
+    otherButton &&
+    otherButton.classList.contains(
+      "selected"
+    );
 
-    if(!custom){
 
-      showToast(
-        "Type your subject in the Other box 🌷"
+  /*
+    If Other is selected,
+    require a custom subject.
+  */
+
+  if(wantsCustom && !custom){
+
+    const helper =
+      document.getElementById(
+        "subjectHelper"
       );
 
-      input.focus();
 
-      return;
+    if(helper)
+      helper.textContent =
+        "Type your subject above ✦";
+
+
+    if(customInput){
+
+      customInput.classList.add("visible");
+      customInput.focus();
 
     }
-
-
-    subjects =
-      subjects.filter(
-        s => s !== "Other"
-      );
-
-
-    subjects.push(
-      custom
-    );
-
-  }
-
-
-  subjects =
-    [
-      ...new Set(
-        subjects
-          .map(
-            s => String(s).trim()
-          )
-          .filter(Boolean)
-      )
-    ];
-
-
-  if(!subjects.length){
-
-    showToast(
-      "Choose at least one subject 🌷"
-    );
 
     return;
 
   }
 
 
+  /*
+    Remove invalid old values.
+  */
+
   selectedSubjects =
-    subjects;
+    selectedSubjects.filter(
+      subject =>
+        subject &&
+        subject !== "Other"
+    );
 
 
-  saveSubjects();
+  /*
+    Add custom subject exactly like
+    a built-in subject.
+  */
+
+  if(wantsCustom && custom){
+
+    /*
+      Prevent duplicate custom subject.
+    */
+
+    if(
+      !selectedSubjects.some(
+        subject =>
+          subject.toLowerCase() ===
+          custom.toLowerCase()
+      )
+    ){
+
+      selectedSubjects.push(custom);
+
+    }
+
+  }
+
+
+  /*
+    Remove duplicates.
+  */
+
+  selectedSubjects =
+    [
+      ...new Set(
+        selectedSubjects
+      )
+    ];
+
+
+  /*
+    Make sure at least one subject
+    has actually been chosen.
+  */
+
+  if(
+    selectedSubjects.length === 0
+  ){
+
+    const helper =
+      document.getElementById(
+        "subjectHelper"
+      );
+
+
+    if(helper)
+      helper.textContent =
+        "Choose at least one subject to continue 🌷";
+
+
+    return;
+
+  }
+
+
+  /*
+    SAVE TO STORAGE.
+
+    Notice this calls persistSubjects(),
+    NOT saveSubjectsAndContinue().
+  */
+
+  persistSubjects();
 
 
   const name =
     getName();
 
 
-  document
-    .getElementById(
+  const welcome =
+    document.getElementById(
       "welcomeTitle"
-    )
-    .textContent =
+    );
+
+
+  if(welcome){
+
+    welcome.textContent =
       name
-        ? `Welcome, ${name}.`
-        : "Welcome.";
+        ? `Welcome, ${name} ♡`
+        : "Welcome ♡";
+
+  }
 
 
   nextOnboarding(4);
@@ -3229,9 +2622,9 @@ function saveSubjects(){
 }
 
 
-/* =====================================================
+/* =========================================================
    FINISH ONBOARDING
-===================================================== */
+========================================================= */
 
 function finishOnboarding(){
 
@@ -3248,7 +2641,7 @@ function finishOnboarding(){
 
   document
     .getElementById("app")
-    .style.display="block";
+    .style.display = "block";
 
 
   initialiseApp();
@@ -3261,9 +2654,9 @@ function finishOnboarding(){
 }
 
 
-/* =====================================================
+/* =========================================================
    HEADER
-===================================================== */
+========================================================= */
 
 function updateHeader(){
 
@@ -3271,11 +2664,15 @@ function updateHeader(){
     new Date();
 
 
-  document
-    .getElementById(
+  const dateLabel =
+    document.getElementById(
       "dateLabel"
-    )
-    .textContent =
+    );
+
+
+  if(dateLabel){
+
+    dateLabel.textContent =
       now.toLocaleDateString(
         undefined,
         {
@@ -3284,6 +2681,8 @@ function updateHeader(){
           month:"long"
         }
       );
+
+  }
 
 
   const hour =
@@ -3302,56 +2701,80 @@ function updateHeader(){
     getName();
 
 
-  document
-    .getElementById(
+  const greetingElement =
+    document.getElementById(
       "greeting"
-    )
-    .textContent =
+    );
+
+
+  if(greetingElement){
+
+    greetingElement.textContent =
       name
         ? `${greeting}, ${name} ♡`
         : `${greeting} ♡`;
 
+  }
+
+
+  const avatar =
+    document.getElementById(
+      "avatarBtn"
+    );
+
+
+  if(avatar){
+
+    avatar.textContent =
+      name
+        ? name.charAt(0).toUpperCase()
+        : "P";
+
+  }
+
+
+  /*
+    Dynamic "3 things worth revisiting today"
+  */
 
   const unresolved =
     mistakes.filter(
-      m => !m.mastered
+      item => !item.mastered
     ).length;
 
 
-  document
-    .getElementById(
+  const revisionGreeting =
+    document.getElementById(
       "revisionGreeting"
-    )
-    .textContent =
-
-      unresolved === 0
-
-        ? "Your revision garden is looking beautifully clear."
-
-        : unresolved === 1
-
-        ? "You have 1 thing worth revisiting today."
-
-        : `You have ${unresolved} things worth revisiting today.`;
+    );
 
 
-  document
-    .getElementById(
-      "avatarBtn"
-    )
-    .textContent =
-      name
-        ? name
-            .charAt(0)
-            .toUpperCase()
-        : "P";
+  if(revisionGreeting){
+
+    if(unresolved === 0){
+
+      revisionGreeting.textContent =
+        "Nothing is waiting for you right now. ♡";
+
+    }else{
+
+      revisionGreeting.textContent =
+        `You have ${unresolved} ${
+          unresolved === 1
+            ? "thing"
+            : "things"
+        } worth revisiting today.`;
+
+    }
+
+  }
 
 }
 
 
-/* =====================================================
-   MOTIVATION
-===================================================== */
+/* =========================================================
+   ROTATING MOTIVATION
+========================================================= */
 
 function rotateMotivation(){
 
@@ -3365,9 +2788,7 @@ function rotateMotivation(){
     return;
 
 
-  element.classList.add(
-    "fade"
-  );
+  element.classList.add("fade");
 
 
   setTimeout(
@@ -3378,18 +2799,16 @@ function rotateMotivation(){
           motivationIndex + 1
         )
         %
-        affirmationList.length;
+        motivationMessages.length;
 
 
       element.textContent =
-        affirmationList[
+        motivationMessages[
           motivationIndex
         ];
 
 
-      element.classList.remove(
-        "fade"
-      );
+      element.classList.remove("fade");
 
     },
     400
@@ -3398,60 +2817,60 @@ function rotateMotivation(){
 }
 
 
-/* =====================================================
+setInterval(
+  rotateMotivation,
+  4500
+);
+
+
+/* =========================================================
    NAVIGATION
-===================================================== */
+========================================================= */
 
 function navigate(page){
 
   document
     .querySelectorAll(".page")
     .forEach(
-      p =>
-        p.classList.remove(
-          "active"
-        )
+      element =>
+        element.classList.remove("active")
     );
 
 
   const target =
     document.getElementById(
-      "page-"+page
+      "page-" + page
     );
 
 
   if(target)
-    target.classList.add(
-      "active"
-    );
+    target.classList.add("active");
 
 
   document
-    .querySelectorAll(
-      "[data-page]"
-    )
+    .querySelectorAll("[data-page]")
     .forEach(
-      btn =>
-        btn.classList.toggle(
+      button => {
+
+        button.classList.toggle(
           "active",
-          btn.dataset.page === page
-        )
+          button.dataset.page === page
+        );
+
+      }
     );
 
 
-  if(page==="overview")
+  if(page === "overview")
     renderOverview();
 
-
-  if(page==="mistakes")
+  if(page === "mistakes")
     renderMistakesPage();
 
-
-  if(page==="revision")
+  if(page === "revision")
     renderRevisionPage();
 
-
-  if(page==="subjects")
+  if(page === "subjects")
     renderSubjects();
 
 
@@ -3464,24 +2883,22 @@ function navigate(page){
 
 
 document
-  .querySelectorAll(
-    "[data-page]"
-  )
+  .querySelectorAll("[data-page]")
   .forEach(
-    btn =>
-      btn.addEventListener(
+    button =>
+      button.addEventListener(
         "click",
         () =>
           navigate(
-            btn.dataset.page
+            button.dataset.page
           )
       )
   );
 
 
-/* =====================================================
+/* =========================================================
    MODALS
-===================================================== */
+========================================================= */
 
 function openMistakeModal(){
 
@@ -3491,8 +2908,10 @@ function openMistakeModal(){
   if(!selectedSubjects.length){
 
     showToast(
-      "Add a subject to Petal first 🌷"
+      "Add a subject first 🌷"
     );
+
+    navigate("subjects");
 
     return;
 
@@ -3503,18 +2922,21 @@ function openMistakeModal(){
     .getElementById(
       "mistakeModal"
     )
-    .classList.add(
-      "open"
-    );
+    .classList.add("open");
 
 
   setTimeout(
-    () =>
-      document
-        .getElementById(
+    () => {
+
+      const input =
+        document.getElementById(
           "mistakeTitle"
-        )
-        .focus(),
+        );
+
+      if(input)
+        input.focus();
+
+    },
     50
   );
 
@@ -3523,11 +2945,14 @@ function openMistakeModal(){
 
 function openNameModal(){
 
-  document
-    .getElementById(
+  const input =
+    document.getElementById(
       "profileNameInput"
-    )
-    .value =
+    );
+
+
+  if(input)
+    input.value =
       getName();
 
 
@@ -3535,50 +2960,48 @@ function openNameModal(){
     .getElementById(
       "nameModal"
     )
-    .classList.add(
-      "open"
-    );
+    .classList.add("open");
 
 }
 
 
 function closeModal(id){
 
-  document
-    .getElementById(id)
-    .classList.remove(
-      "open"
-    );
+  const modal =
+    document.getElementById(id);
+
+
+  if(modal)
+    modal.classList.remove("open");
 
 }
 
 
 document
-  .querySelectorAll(
-    ".modal-bg"
-  )
+  .querySelectorAll(".modal-bg")
   .forEach(
-    bg =>
-      bg.addEventListener(
+    background => {
+
+      background.addEventListener(
         "click",
-        e => {
+        event => {
 
-          if(e.target===bg){
+          if(event.target === background){
 
-            bg.classList.remove(
-              "open"
-            );
+            background.classList.remove("open");
 
           }
 
         }
-      )
+      );
+
+    }
   );
 
 
-/* =====================================================
+/* =========================================================
    PROFILE NAME
-===================================================== */
+========================================================= */
 
 function saveName(){
 
@@ -3589,7 +3012,9 @@ function saveName(){
 
 
   const name =
-    input.value.trim();
+    input
+      ? input.value.trim()
+      : "";
 
 
   if(!name){
@@ -3611,11 +3036,7 @@ function saveName(){
 
   updateHeader();
 
-
-  closeModal(
-    "nameModal"
-  );
-
+  closeModal("nameModal");
 
   showToast(
     "Petal is yours now 🌷"
@@ -3624,9 +3045,9 @@ function saveName(){
 }
 
 
-/* =====================================================
+/* =========================================================
    SUBJECT SELECTOR
-===================================================== */
+========================================================= */
 
 function populateSubjectSelectors(){
 
@@ -3636,61 +3057,118 @@ function populateSubjectSelectors(){
     );
 
 
+  if(!select)
+    return;
+
+
   select.innerHTML =
     selectedSubjects
       .map(
         subject =>
-          `<option value="${escapeHtml(subject)}">
-            ${getMeta(subject).emoji}
+          `
+          <option value="${escapeHtml(subject)}">
             ${escapeHtml(subject)}
-          </option>`
+          </option>
+          `
       )
       .join("");
 
 }
 
 
-/* =====================================================
+/* =========================================================
+   SUBJECT METADATA
+========================================================= */
+
+function getMeta(subject){
+
+  if(subjectMeta[subject])
+    return subjectMeta[subject];
+
+
+  const colours =
+    [
+      "rose",
+      "blue",
+      "lav",
+      "gold",
+      "red",
+      "sage"
+    ];
+
+
+  const emojis =
+    [
+      "✦",
+      "♡",
+      "✧",
+      "🌷",
+      "☁️",
+      "˚"
+    ];
+
+
+  const index =
+    subject
+      .split("")
+      .reduce(
+        (sum,char) =>
+          sum +
+          char.charCodeAt(0),
+        0
+      );
+
+
+  return {
+
+    emoji:
+      emojis[
+        index % emojis.length
+      ],
+
+    class:
+      colours[
+        index % colours.length
+      ]
+
+  };
+
+}
+
+
+/* =========================================================
    ADD MISTAKE
-===================================================== */
+========================================================= */
 
 function addMistake(){
 
   const subject =
-    document
-      .getElementById(
-        "subject"
-      )
-      .value;
+    document.getElementById(
+      "subject"
+    )?.value;
 
 
   const title =
-    document
-      .getElementById(
-        "mistakeTitle"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "mistakeTitle"
+    )?.value
+    .trim();
 
 
   const body =
-    document
-      .getElementById(
-        "mistakeBody"
-      )
-      .value
-      .trim();
+    document.getElementById(
+      "mistakeBody"
+    )?.value
+    .trim();
 
 
   const topic =
-    document
-      .getElementById(
-        "mistakeTopic"
-      )
-      .value
-      .trim()
-      ||
-      "General";
+    document.getElementById(
+      "mistakeTopic"
+    )?.value
+    .trim()
+    ||
+    "General";
 
 
   if(!subject){
@@ -3745,17 +3223,19 @@ function addMistake(){
     "mistakeTopic"
   ]
   .forEach(
-    id =>
-      document
-        .getElementById(id)
-        .value=""
+    id => {
+
+      const element =
+        document.getElementById(id);
+
+      if(element)
+        element.value = "";
+
+    }
   );
 
 
-  closeModal(
-    "mistakeModal"
-  );
-
+  closeModal("mistakeModal");
 
   renderAll();
 
@@ -3767,15 +3247,16 @@ function addMistake(){
 }
 
 
-/* =====================================================
+/* =========================================================
    MASTER / REOPEN / DELETE
-===================================================== */
+========================================================= */
 
 function markMastered(id){
 
   const item =
     mistakes.find(
-      m => m.id===id
+      mistake =>
+        mistake.id === id
     );
 
 
@@ -3783,14 +3264,11 @@ function markMastered(id){
     return;
 
 
-  item.mastered=true;
-
-  item.masteredAt =
-    Date.now();
+  item.mastered = true;
+  item.masteredAt = Date.now();
 
 
   saveMistakes();
-
   renderAll();
 
 
@@ -3805,7 +3283,8 @@ function reopenMistake(id){
 
   const item =
     mistakes.find(
-      m => m.id===id
+      mistake =>
+        mistake.id === id
     );
 
 
@@ -3813,13 +3292,12 @@ function reopenMistake(id){
     return;
 
 
-  item.mastered=false;
+  item.mastered = false;
 
   delete item.masteredAt;
 
 
   saveMistakes();
-
   renderAll();
 
 
@@ -3842,12 +3320,12 @@ function deleteMistake(id){
 
   mistakes =
     mistakes.filter(
-      m => m.id!==id
+      mistake =>
+        mistake.id !== id
     );
 
 
   saveMistakes();
-
   renderAll();
 
 
@@ -3858,16 +3336,16 @@ function deleteMistake(id){
 }
 
 
-/* =====================================================
+/* =========================================================
    SUBJECT PROGRESS
-===================================================== */
+========================================================= */
 
 function subjectProgress(subject){
 
   const items =
     mistakes.filter(
-      m =>
-        m.subject===subject
+      mistake =>
+        mistake.subject === subject
     );
 
 
@@ -3878,7 +3356,8 @@ function subjectProgress(subject){
   return Math.round(
     (
       items.filter(
-        m => m.mastered
+        mistake =>
+          mistake.mastered
       ).length
       /
       items.length
@@ -3888,9 +3367,9 @@ function subjectProgress(subject){
 }
 
 
-/* =====================================================
+/* =========================================================
    SUBJECT CARD
-===================================================== */
+========================================================= */
 
 function renderSubjectCard(subject){
 
@@ -3904,179 +3383,196 @@ function renderSubjectCard(subject){
 
   const items =
     mistakes.filter(
-      m =>
-        m.subject===subject
+      mistake =>
+        mistake.subject === subject
     );
 
 
   const mastered =
     items.filter(
-      m =>
-        m.mastered
+      mistake =>
+        mistake.mastered
     ).length;
 
 
   return `
 
-<div class="subject">
+    <div class="subject">
 
-<div class="subject-head">
+      <div class="subject-head">
 
-<span>
+        <span>
+          ${meta.emoji}
+          ${escapeHtml(subject)}
+        </span>
 
-${meta.emoji}
+        <b>
+          ${progress}%
+        </b>
 
-${escapeHtml(subject)}
+      </div>
 
-</span>
+      <div class="bar">
 
-<b>
-${progress}%
-</b>
+        <div
+          class="fill ${meta.class}"
+          style="width:${progress}%"
+        ></div>
 
-</div>
+      </div>
 
+      <div
+        class="small"
+        style="margin-top:8px"
+      >
 
-<div class="bar">
+        ${
+          items.length
+            ? `${mastered} of ${items.length} mastered`
+            : "No mistakes recorded yet"
+        }
 
-<div
-class="fill ${meta.class}"
-style="width:${progress}%"
-></div>
+      </div>
 
-</div>
+    </div>
 
-
-<div
-class="small"
-style="margin-top:8px"
->
-
-${
-  items.length
-    ? `${mastered} of ${items.length} mastered`
-    : "No mistakes recorded yet"
-}
-
-</div>
-
-</div>
-
-`;
+  `;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    OVERVIEW
-===================================================== */
+========================================================= */
 
 function renderOverview(){
 
-  const subjectContainer =
+  const subjects =
     document.getElementById(
       "overviewSubjects"
     );
 
 
-  subjectContainer.innerHTML =
-    selectedSubjects.length
+  if(subjects){
 
-      ?
+    subjects.innerHTML =
+      selectedSubjects.length
 
-      selectedSubjects
-        .map(
-          renderSubjectCard
-        )
-        .join("")
+        ?
 
-      :
+        selectedSubjects
+          .map(renderSubjectCard)
+          .join("")
 
-      `
-      <div class="empty">
-        <div class="empty-title">
-          Your garden is waiting.
+        :
+
+        `
+        <div class="empty">
+          <div class="empty-title">
+            Your study world is waiting. ♡
+          </div>
+          Add some subjects to begin.
         </div>
-        Add your first subject.
-      </div>
-      `;
+        `;
+
+  }
 
 
   const review =
     mistakes
       .filter(
-        m => !m.mastered
+        mistake =>
+          !mistake.mastered
       )
       .slice(0,3);
 
 
-  document
-    .getElementById(
+  const count =
+    mistakes.filter(
+      mistake =>
+        !mistake.mastered
+    ).length;
+
+
+  const todayCount =
+    document.getElementById(
       "todayCount"
-    )
-    .textContent =
-      `${mistakes.filter(
-        m => !m.mastered
-      ).length} ready`;
+    );
 
 
-  document
-    .getElementById(
+  if(todayCount)
+    todayCount.textContent =
+      `${count} ready`;
+
+
+  const todayList =
+    document.getElementById(
       "todayList"
-    )
-    .innerHTML =
+    );
 
+
+  if(todayList){
+
+    todayList.innerHTML =
       review.length
 
         ?
 
         review
           .map(
-            (m,index) => {
+            (mistake,index) => {
 
               const tag =
-                index===0
+                index === 0
                   ? "priority"
-                  : index===1
+                  : index === 1
                   ? "review"
                   : "quick";
 
 
               const cls =
-                index===1
+                index === 1
                   ? "blue-tag"
-                  : index===2
+                  : index === 2
                   ? "lav-tag"
                   : "";
 
 
               return `
 
-<div class="today">
+                <div class="today">
 
-<div>
+                  <div>
 
-<b style="font-size:13px">
-${escapeHtml(m.title)}
-</b>
+                    <b style="font-size:13px">
+                      ${escapeHtml(
+                        mistake.title
+                      )}
+                    </b>
 
-<div class="small">
+                    <div class="small">
 
-${escapeHtml(m.subject)}
-·
-${escapeHtml(m.topic)}
+                      ${escapeHtml(
+                        mistake.subject
+                      )}
 
-</div>
+                      ·
 
-</div>
+                      ${escapeHtml(
+                        mistake.topic
+                      )}
 
-<span class="tag ${cls}">
-${tag}
-</span>
+                    </div>
 
-</div>
+                  </div>
 
-`;
+                  <span class="tag ${cls}">
+                    ${tag}
+                  </span>
+
+                </div>
+
+              `;
 
             }
           )
@@ -4085,98 +3581,98 @@ ${tag}
         :
 
         `
+        <div class="empty">
 
-<div class="empty">
+          <div class="empty-title">
+            A clear little mind. ♡
+          </div>
 
-<div class="empty-title">
-A clear little mind. 🌷
-</div>
+          Nothing is waiting
+          for review right now.
 
-No mistakes are waiting
-for review.
+        </div>
+        `;
 
-</div>
-
-`;
-
-
-  const recent =
-    mistakes
-      .filter(
-        m => !m.mastered
-      )
-      .slice(0,3);
+  }
 
 
-  document
-    .getElementById(
+  const overviewMistakes =
+    document.getElementById(
       "overviewMistakes"
-    )
-    .innerHTML =
+    );
 
-      recent.length
+
+  if(overviewMistakes){
+
+    overviewMistakes.innerHTML =
+      review.length
 
         ?
 
-        recent
-          .map(
-            mistakeCard
-          )
+        review
+          .map(mistakeCard)
           .join("")
 
         :
 
         `
+        <div class="empty">
 
-<div class="empty">
+          <div class="empty-title">
+            Nothing to revisit.
+          </div>
 
-<div class="empty-title">
-Nothing to revisit.
-</div>
+          Add a mistake when you
+          learn from an error.
 
-Add a mistake when you
-learn from an error.
+        </div>
+        `;
 
-</div>
-
-`;
+  }
 
 
   const mastered =
     mistakes.filter(
-      m => m.mastered
+      mistake =>
+        mistake.mastered
     ).length;
 
 
-  document
-    .getElementById(
+  const win =
+    document.getElementById(
       "winNumber"
-    )
-    .textContent =
+    );
+
+
+  if(win){
+
+    win.textContent =
       `${mastered} ${
-        mastered===1
+        mastered === 1
           ? "mistake"
           : "mistakes"
       } mastered`;
 
+  }
+
 }
 
 
-/* =====================================================
+/* =========================================================
    MISTAKE CARD
-===================================================== */
+========================================================= */
 
-function mistakeCard(m){
+function mistakeCard(mistake){
 
   const meta =
     getMeta(
-      m.subject
+      mistake.subject
     );
 
 
   const date =
     new Date(
-      m.created
+      mistake.created
     )
     .toLocaleDateString(
       undefined,
@@ -4189,140 +3685,151 @@ function mistakeCard(m){
 
   return `
 
-<div class="mistake">
+    <div class="mistake">
 
-<div class="mistake-row">
+      <div class="mistake-row">
 
-<div>
+        <div>
 
-<strong>
+          <strong>
 
-${meta.emoji}
+            ${meta.emoji}
 
-${escapeHtml(
-  m.title
-)}
+            ${escapeHtml(
+              mistake.title
+            )}
 
-</strong>
+          </strong>
 
+          <p>
 
-<p>
+            ${escapeHtml(
+              mistake.subject
+            )}
 
-${escapeHtml(
-  m.subject
-)}
+            ·
 
-·
+            ${escapeHtml(
+              mistake.topic
+            )}
 
-${escapeHtml(
-  m.topic
-)}
+            · Added ${date}
 
-·
+          </p>
 
-Added ${date}
+        </div>
 
-</p>
+        ${
+          mistake.mastered
 
-</div>
+            ?
 
+            `
+            <span class="tag green-tag">
+              mastered
+            </span>
+            `
 
-${
-  m.mastered
+            :
 
-  ?
+            `
+            <span class="tag">
+              review
+            </span>
+            `
+        }
 
-  `<span class="tag green-tag">
-    mastered
-  </span>`
-
-  :
-
-  `<span class="tag">
-    review
-  </span>`
-}
-
-</div>
-
-
-<div
-class="actions"
-style="margin-top:10px"
->
-
-${
-  m.body
-
-  ?
-
-  `<button
-    class="btn ghost"
-    onclick="showMistakeDetails('${m.id}')"
-  >
-    Read note
-  </button>`
-
-  :
-
-  ""
-}
+      </div>
 
 
-${
-  m.mastered
+      <div
+        class="actions"
+        style="margin-top:10px"
+      >
 
-  ?
+        ${
+          mistake.body
 
-  `<button
-    class="btn sage-btn"
-    onclick="reopenMistake('${m.id}')"
-  >
-    Review again
-  </button>`
+            ?
 
-  :
+            `
+            <button
+              type="button"
+              class="btn ghost"
+              onclick="showMistakeDetails('${mistake.id}')"
+            >
+              Read note
+            </button>
+            `
 
-  `<button
-    class="btn soft"
-    onclick="markMastered('${m.id}')"
-  >
-    ✓ Mark mastered
-  </button>`
-}
+            :
+
+            ""
+        }
 
 
-<button
-class="btn ghost"
-onclick="deleteMistake('${m.id}')"
->
-Remove
-</button>
+        ${
+          mistake.mastered
 
-</div>
+            ?
 
-</div>
+            `
+            <button
+              type="button"
+              class="btn sage-btn"
+              onclick="reopenMistake('${mistake.id}')"
+            >
+              Review again
+            </button>
+            `
 
-`;
+            :
+
+            `
+            <button
+              type="button"
+              class="btn soft"
+              onclick="markMastered('${mistake.id}')"
+            >
+              ✓ Mark mastered
+            </button>
+            `
+        }
+
+
+        <button
+          type="button"
+          class="btn ghost"
+          onclick="deleteMistake('${mistake.id}')"
+        >
+          Remove
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
 
 }
 
 
 function showMistakeDetails(id){
 
-  const m =
+  const mistake =
     mistakes.find(
-      x => x.id===id
+      item =>
+        item.id === id
     );
 
 
-  if(!m)
+  if(!mistake)
     return;
 
 
   alert(
-    `${m.title}\n\n${
-      m.body ||
+    `${mistake.title}\n\n${
+      mistake.body ||
       "No explanation was added."
     }`
   );
@@ -4330,19 +3837,17 @@ function showMistakeDetails(id){
 }
 
 
-/* =====================================================
-   MISTAKE PAGE
-===================================================== */
+/* =========================================================
+   MISTAKES PAGE
+========================================================= */
 
 function renderMistakesPage(){
 
   const search =
     (
-      document
-        .getElementById(
-          "searchMistakes"
-        )
-        ?.value
+      document.getElementById(
+        "searchMistakes"
+      )?.value
       ||
       ""
     )
@@ -4350,183 +3855,171 @@ function renderMistakesPage(){
 
 
   const subject =
-    document
-      .getElementById(
-        "filterSubject"
-      )
-      ?.value
+    document.getElementById(
+      "filterSubject"
+    )?.value
     ||
     "All";
 
 
   const status =
-    document
-      .getElementById(
-        "filterStatus"
-      )
-      ?.value
+    document.getElementById(
+      "filterStatus"
+    )?.value
     ||
     "All";
 
 
-  const list =
+  const filtered =
     mistakes.filter(
-      m => {
+      mistake => {
 
         const text =
           [
-            m.title,
-            m.body,
-            m.topic,
-            m.subject
+            mistake.title,
+            mistake.body,
+            mistake.topic,
+            mistake.subject
           ]
           .join(" ")
           .toLowerCase();
 
 
+        const matchesSearch =
+          text.includes(search);
+
+
+        const matchesSubject =
+          subject === "All"
+          ||
+          mistake.subject === subject;
+
+
+        const matchesStatus =
+          status === "All"
+          ||
+
+          (
+            status === "review"
+            &&
+            !mistake.mastered
+          )
+
+          ||
+
+          (
+            status === "mastered"
+            &&
+            mistake.mastered
+          );
+
+
         return (
-
-          text.includes(
-            search
-          )
-
-          &&
-
-          (
-            subject==="All"
-            ||
-            m.subject===subject
-          )
-
-          &&
-
-          (
-            status==="All"
-
-            ||
-
-            (
-              status==="review"
-              &&
-              !m.mastered
-            )
-
-            ||
-
-            (
-              status==="mastered"
-              &&
-              m.mastered
-            )
-          )
-
+          matchesSearch &&
+          matchesSubject &&
+          matchesStatus
         );
 
       }
     );
 
 
-  document
-    .getElementById(
-      "statTotal"
-    )
-    .textContent =
-      mistakes.length;
+  document.getElementById(
+    "statTotal"
+  ).textContent =
+    mistakes.length;
 
 
-  document
-    .getElementById(
-      "statReview"
-    )
-    .textContent =
-      mistakes.filter(
-        m => !m.mastered
-      ).length;
+  document.getElementById(
+    "statReview"
+  ).textContent =
+    mistakes.filter(
+      mistake =>
+        !mistake.mastered
+    ).length;
 
 
-  document
-    .getElementById(
-      "statMastered"
-    )
-    .textContent =
-      mistakes.filter(
-        m => m.mastered
-      ).length;
+  document.getElementById(
+    "statMastered"
+  ).textContent =
+    mistakes.filter(
+      mistake =>
+        mistake.mastered
+    ).length;
 
 
-  document
-    .getElementById(
+  const list =
+    document.getElementById(
       "mistakesList"
-    )
-    .innerHTML =
+    );
 
-      list.length
 
-        ?
+  if(!list)
+    return;
 
-        list
-          .map(
-            mistakeCard
-          )
-          .join("")
 
-        :
+  list.innerHTML =
+    filtered.length
 
-        `
+      ?
 
-<div class="empty">
+      filtered
+        .map(mistakeCard)
+        .join("")
 
-<div class="empty-title">
-No mistakes found.
-</div>
+      :
 
-Try another search
-or add your first one.
+      `
+      <div class="empty">
 
-</div>
+        <div class="empty-title">
+          No mistakes found.
+        </div>
 
-`;
+        Try another search
+        or add your first one.
+
+      </div>
+      `;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    SUBJECT PAGE
-===================================================== */
+========================================================= */
 
 function renderSubjects(){
 
-  document
-    .getElementById(
+  const full =
+    document.getElementById(
       "subjectsFull"
-    )
-    .innerHTML =
+    );
 
+
+  if(full){
+
+    full.innerHTML =
       selectedSubjects.length
 
         ?
 
         selectedSubjects
-          .map(
-            renderSubjectCard
-          )
+          .map(renderSubjectCard)
           .join("")
 
         :
 
         `
+        <div class="empty">
+          <div class="empty-title">
+            No subjects yet. ♡
+          </div>
+          Return to onboarding to add them.
+        </div>
+        `;
 
-<div class="empty">
-
-<div class="empty-title">
-Your study world is waiting.
-</div>
-
-Choose your subjects during onboarding.
-
-</div>
-
-`;
+  }
 
 
   const filter =
@@ -4542,7 +4035,6 @@ Choose your subjects during onboarding.
 
 
     filter.innerHTML =
-
       `
       <option value="All">
         All subjects
@@ -4553,10 +4045,12 @@ Choose your subjects during onboarding.
 
       selectedSubjects
         .map(
-          s =>
-            `<option value="${escapeHtml(s)}">
-              ${escapeHtml(s)}
-            </option>`
+          subject =>
+            `
+            <option value="${escapeHtml(subject)}">
+              ${escapeHtml(subject)}
+            </option>
+            `
         )
         .join("");
 
@@ -4573,21 +4067,20 @@ Choose your subjects during onboarding.
 }
 
 
-/* =====================================================
+/* =========================================================
    REVISION QUEUE
-===================================================== */
+========================================================= */
 
 function getRevisionQueue(){
 
   return mistakes
-
     .filter(
-      m => !m.mastered
+      mistake =>
+        !mistake.mastered
     )
-
     .sort(
       (a,b) =>
-        a.created-b.created
+        a.created - b.created
     );
 
 }
@@ -4599,56 +4092,48 @@ function renderRevisionPage(){
     getRevisionQueue();
 
 
+  const startButton =
+    document.getElementById(
+      "revisionStartBtn"
+    );
+
+
   if(!queue.length){
 
-    document
-      .getElementById(
-        "revisionSubject"
-      )
-      .textContent =
-        "PETAL REVISION";
+    document.getElementById(
+      "revisionSubject"
+    ).textContent =
+      "PETAL REVISION";
 
 
-    document
-      .getElementById(
-        "revisionTitle"
-      )
-      .textContent =
-        "Your queue is clear. 🌷";
+    document.getElementById(
+      "revisionTitle"
+    ).textContent =
+      "Your queue is clear. 🌷";
 
 
-    document
-      .getElementById(
-        "revisionIntro"
-      )
-      .textContent =
-        "There are no unresolved mistakes waiting for you right now. Keep learning, and Petal will be here when you need it.";
+    document.getElementById(
+      "revisionIntro"
+    ).textContent =
+      "There are no unresolved mistakes waiting for you right now. Keep learning, and Petal will be here when you need it.";
 
 
-    document
-      .getElementById(
-        "revisionContent"
-      )
-      .innerHTML =
+    document.getElementById(
+      "revisionContent"
+    ).innerHTML =
 
-        `
+      `
+      <div class="muted-box">
 
-<div class="muted-box">
+        Your next mistake will appear here
+        when you need to revisit it.
 
-Your next mistake will appear here
-when you need to revisit it.
-
-</div>
-
-`;
+      </div>
+      `;
 
 
-    document
-      .getElementById(
-        "revisionStartBtn"
-      )
-      .style.display =
-        "none";
+    if(startButton)
+      startButton.style.display = "none";
 
 
     return;
@@ -4656,78 +4141,60 @@ when you need to revisit it.
   }
 
 
-  document
-    .getElementById(
-      "revisionStartBtn"
-    )
-    .style.display="";
+  if(startButton){
+
+    startButton.style.display = "";
+    startButton.textContent = "Start revision";
+
+  }
 
 
-  document
-    .getElementById(
-      "revisionSubject"
-    )
-    .textContent =
-      "TODAY'S REVISION";
+  document.getElementById(
+    "revisionSubject"
+  ).textContent =
+    "TODAY'S REVISION";
 
 
-  document
-    .getElementById(
-      "revisionTitle"
-    )
-    .textContent =
-      `${queue.length}
-      ${
-        queue.length===1
-          ? "mistake is"
-          : "mistakes are"
-      }
-      waiting for you.`;
+  document.getElementById(
+    "revisionTitle"
+  ).textContent =
+    `${queue.length}
+     ${
+       queue.length === 1
+         ? "mistake is"
+         : "mistakes are"
+     }
+     waiting for you.`;
 
 
-  document
-    .getElementById(
-      "revisionIntro"
-    )
-    .textContent =
-      "Petal prioritises the mistakes you haven't mastered yet, so you can spend your energy where it matters most.";
+  document.getElementById(
+    "revisionIntro"
+  ).textContent =
+    "Petal prioritises the mistakes you haven't mastered yet, so you can spend your energy where it matters most.";
 
 
-  document
-    .getElementById(
-      "revisionContent"
-    )
-    .innerHTML =
+  document.getElementById(
+    "revisionContent"
+  ).innerHTML =
 
-      `
+    `
+    <div class="muted-box">
 
-<div class="muted-box">
+      <b>Your first review:</b>
+      <br><br>
 
-<b>Your first review:</b>
+      ${escapeHtml(
+        queue[0].title
+      )}
 
-<br><br>
+      ·
 
-${escapeHtml(
-  queue[0].title
-)}
+      ${escapeHtml(
+        queue[0].subject
+      )}
 
-·
-
-${escapeHtml(
-  queue[0].subject
-)}
-
-</div>
-
-`;
-
-
-  document
-    .getElementById(
-      "revisionStartBtn"
-    )
-    .textContent =
-      "Start revision";
+    </div>
+    `;
 
 }
 
@@ -4747,13 +4214,13 @@ function startRevision(){
   }
 
 
-  revisionActive=true;
+  revisionActive = true;
 
 
   revisionIndex =
     Math.min(
       revisionIndex,
-      queue.length-1
+      queue.length - 1
     );
 
 
@@ -4770,7 +4237,7 @@ function renderActiveRevision(){
 
   if(!queue.length){
 
-    revisionActive=false;
+    revisionActive = false;
 
     renderRevisionPage();
 
@@ -4780,12 +4247,11 @@ function renderActiveRevision(){
 
 
   if(
-    revisionIndex>=queue.length
+    revisionIndex >= queue.length
   ){
 
-    revisionActive=false;
-
-    revisionIndex=0;
+    revisionActive = false;
+    revisionIndex = 0;
 
     renderRevisionPage();
 
@@ -4798,106 +4264,94 @@ function renderActiveRevision(){
   }
 
 
-  const m =
-    queue[
-      revisionIndex
-    ];
+  const mistake =
+    queue[revisionIndex];
 
 
   const meta =
     getMeta(
-      m.subject
+      mistake.subject
     );
 
 
-  document
-    .getElementById(
-      "revisionSubject"
-    )
-    .textContent =
-      `${meta.emoji}
-       ${m.subject}
-       ·
-       ${m.topic}`;
+  document.getElementById(
+    "revisionSubject"
+  ).textContent =
+    `${meta.emoji}
+     ${mistake.subject}
+     ·
+     ${mistake.topic}`;
 
 
-  document
-    .getElementById(
-      "revisionTitle"
-    )
-    .textContent =
-      m.title;
+  document.getElementById(
+    "revisionTitle"
+  ).textContent =
+    mistake.title;
 
 
-  document
-    .getElementById(
-      "revisionIntro"
-    )
-    .textContent =
-      `Mistake ${
-        revisionIndex+1
-      } of ${
-        queue.length
-      }. Take a moment to explain the correct idea to yourself before deciding whether you've mastered it.`;
+  document.getElementById(
+    "revisionIntro"
+  ).textContent =
+    `Mistake ${
+      revisionIndex + 1
+    } of ${
+      queue.length
+    }. Take a moment to explain the correct idea to yourself before deciding whether you've mastered it.`;
 
 
-  document
-    .getElementById(
-      "revisionContent"
-    )
-    .innerHTML =
+  document.getElementById(
+    "revisionContent"
+  ).innerHTML =
 
-      `
+    `
 
-<div class="reveal">
+    <div class="reveal">
 
-<b>
-Your original note
-</b>
+      <b>Your original note</b>
 
-<p>
+      <p>
 
-${
-  m.body
-    ? escapeHtml(m.body)
-    : "You didn't add a note for this mistake."
-}
+        ${
+          mistake.body
+            ? escapeHtml(mistake.body)
+            : "You didn't add a note for this mistake."
+        }
 
-</p>
+      </p>
 
-</div>
+    </div>
 
 
-<div
-class="actions"
-style="justify-content:center"
->
+    <div
+      class="actions"
+      style="justify-content:center"
+    >
 
-<button
-class="btn sage-btn"
-onclick="finishCurrentRevision()"
->
-✓ I understand this now
-</button>
-
-<button
-class="btn ghost"
-onclick="nextRevision()"
->
-I still need to review it
-</button>
-
-</div>
-
-`;
+      <button
+        type="button"
+        class="btn sage-btn"
+        onclick="finishCurrentRevision()"
+      >
+        ✓ I understand this now
+      </button>
 
 
-  document
-    .getElementById(
-      "revisionStartBtn"
-    )
-    .style.display =
-      "none";
+      <button
+        type="button"
+        class="btn ghost"
+        onclick="nextRevision()"
+      >
+        I still need to review it
+      </button>
+
+    </div>
+
+    `;
+
+
+  document.getElementById(
+    "revisionStartBtn"
+  ).style.display = "none";
 
 }
 
@@ -4908,18 +4362,14 @@ function finishCurrentRevision(){
     getRevisionQueue();
 
 
-  const m =
-    queue[
-      revisionIndex
-    ];
+  const mistake =
+    queue[revisionIndex];
 
 
-  if(m){
+  if(mistake){
 
-    m.mastered=true;
-
-    m.masteredAt =
-      Date.now();
+    mistake.mastered = true;
+    mistake.masteredAt = Date.now();
 
   }
 
@@ -4934,7 +4384,7 @@ function finishCurrentRevision(){
 
 
   if(
-    revisionIndex<
+    revisionIndex <
     getRevisionQueue().length
   ){
 
@@ -4942,9 +4392,8 @@ function finishCurrentRevision(){
 
   }else{
 
-    revisionActive=false;
-
-    revisionIndex=0;
+    revisionActive = false;
+    revisionIndex = 0;
 
     renderRevisionPage();
 
@@ -4963,13 +4412,12 @@ function nextRevision(){
 
 
   if(
-    revisionIndex>=
+    revisionIndex >=
     getRevisionQueue().length
   ){
 
-    revisionActive=false;
-
-    revisionIndex=0;
+    revisionActive = false;
+    revisionIndex = 0;
 
     renderRevisionPage();
 
@@ -4986,9 +4434,9 @@ function nextRevision(){
 }
 
 
-/* =====================================================
+/* =========================================================
    RENDER EVERYTHING
-===================================================== */
+========================================================= */
 
 function renderAll(){
 
@@ -5001,33 +4449,31 @@ function renderAll(){
   renderSubjects();
 
 
+  const revisionPage =
+    document.getElementById(
+      "page-revision"
+    );
+
+
   if(
-    document
-      .getElementById(
-        "page-revision"
-      )
-      .classList
-      .contains("active")
+    revisionPage &&
+    revisionPage.classList.contains("active")
   ){
 
-    if(revisionActive){
-
+    if(revisionActive)
       renderActiveRevision();
 
-    }else{
-
+    else
       renderRevisionPage();
-
-    }
 
   }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    INITIALISE
-===================================================== */
+========================================================= */
 
 function initialiseApp(){
 
@@ -5035,24 +4481,12 @@ function initialiseApp(){
 
   renderAll();
 
-
-  setInterval(
-    updateHeader,
-    60000
-  );
-
-
-  setInterval(
-    rotateMotivation,
-    6500
-  );
-
 }
 
 
-/* =====================================================
+/* =========================================================
    TOAST
-===================================================== */
+========================================================= */
 
 function showToast(message){
 
@@ -5062,13 +4496,15 @@ function showToast(message){
     );
 
 
+  if(!toast)
+    return;
+
+
   toast.textContent =
     message;
 
 
-  toast.classList.add(
-    "show"
-  );
+  toast.classList.add("show");
 
 
   clearTimeout(
@@ -5079,40 +4515,96 @@ function showToast(message){
   window.petalToast =
     setTimeout(
       () =>
-        toast.classList.remove(
-          "show"
-        ),
-      2600
+        toast.classList.remove("show"),
+      2500
     );
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ESCAPE HTML
-===================================================== */
+========================================================= */
 
-function escapeHtml(s){
+function escapeHtml(value){
 
-  return String(s)
+  return String(value)
     .replace(
       /[&<>"']/g,
-      m =>
+      character =>
         ({
           "&":"&amp;",
           "<":"&lt;",
           ">":"&gt;",
           '"':"&quot;",
           "'":"&#039;"
-        }[m])
+        }[character])
     );
 
 }
 
 
-/* =====================================================
-   START
-===================================================== */
+/* =========================================================
+   SEARCH / FILTER EVENTS
+========================================================= */
+
+document
+  .getElementById("searchMistakes")
+  ?.addEventListener(
+    "input",
+    renderMistakesPage
+  );
+
+
+document
+  .getElementById("filterSubject")
+  ?.addEventListener(
+    "change",
+    renderMistakesPage
+  );
+
+
+document
+  .getElementById("filterStatus")
+  ?.addEventListener(
+    "change",
+    renderMistakesPage
+  );
+
+
+/* =========================================================
+   ENTER KEY SUPPORT
+========================================================= */
+
+document
+  .getElementById("onboardNameInput")
+  ?.addEventListener(
+    "keydown",
+    event => {
+
+      if(event.key === "Enter")
+        saveOnboardingName();
+
+    }
+  );
+
+
+document
+  .getElementById("customSubject")
+  ?.addEventListener(
+    "keydown",
+    event => {
+
+      if(event.key === "Enter")
+        saveSubjectsAndContinue();
+
+    }
+  );
+
+
+/* =========================================================
+   START PETAL
+========================================================= */
 
 startApp();
 

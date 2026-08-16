@@ -10752,5 +10752,477 @@ document.addEventListener("DOMContentLoaded", function () {
 
 })();
 </script>
+   <!-- =========================================================
+     PETAL — ABOUT PETAL
+     SAFE SELF-CONTAINED VERSION
+     ========================================================= -->
+
+<style>
+  .petal-about-page {
+    width: 100%;
+  }
+
+  .petal-about-hero {
+    padding: 46px 38px;
+    border-radius: 30px;
+    background:
+      radial-gradient(circle at 90% 10%, rgba(255,255,255,.9), transparent 32%),
+      linear-gradient(135deg, #fffdfb, #fdf7f8);
+    border: 1px solid rgba(180,150,150,.14);
+    box-shadow: 0 14px 40px rgba(90,60,60,.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .petal-about-hero::before {
+    content: "✿";
+    position: absolute;
+    right: 35px;
+    top: 18px;
+    font-size: 60px;
+    opacity: .07;
+  }
+
+  .petal-about-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    opacity: .5;
+    margin-bottom: 12px;
+  }
+
+  .petal-about-title {
+    margin: 0 0 16px;
+    font-family: "Playfair Display", serif;
+    font-size: clamp(30px, 4vw, 46px);
+    line-height: 1.1;
+    font-weight: 500;
+  }
+
+  .petal-about-intro {
+    max-width: 760px;
+    font-size: 16px;
+    line-height: 1.8;
+    opacity: .68;
+    margin: 0;
+  }
+
+  .petal-about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 22px;
+  }
+
+  .petal-about-card {
+    padding: 26px;
+    border-radius: 22px;
+    background: rgba(255,255,255,.7);
+    border: 1px solid rgba(180,150,150,.12);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .petal-about-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(90,60,60,.06);
+  }
+
+  .petal-about-icon {
+    font-size: 25px;
+    margin-bottom: 13px;
+  }
+
+  .petal-about-card h3 {
+    margin: 0 0 9px;
+    font-size: 16px;
+  }
+
+  .petal-about-card p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    opacity: .62;
+  }
+
+  .petal-story,
+  .petal-creator,
+  .petal-philosophy {
+    margin-top: 20px;
+    padding: 32px;
+    border-radius: 24px;
+    background: rgba(255,255,255,.62);
+    border: 1px solid rgba(180,150,150,.11);
+  }
+
+  .petal-story h2 {
+    margin: 0 0 14px;
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+  }
+
+  .petal-story p {
+    max-width: 780px;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.8;
+    opacity: .65;
+  }
+
+  .petal-creator {
+    text-align: center;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255,255,255,.75),
+        rgba(252,246,247,.8)
+      );
+  }
+
+  .petal-creator-flower {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .petal-creator-title {
+    margin: 0 0 12px;
+    font-family: "Playfair Display", serif;
+    font-size: 25px;
+    font-weight: 500;
+  }
+
+  .petal-creator-text {
+    max-width: 650px;
+    margin: auto;
+    font-size: 13px;
+    line-height: 1.75;
+    opacity: .62;
+  }
+
+  .petal-creator-name {
+    margin-top: 15px;
+    font-family: "Playfair Display", serif;
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  .petal-philosophy {
+    text-align: center;
+  }
+
+  .petal-philosophy-quote {
+    max-width: 650px;
+    margin: 0 auto 10px;
+    font-family: "Playfair Display", serif;
+    font-size: 23px;
+    line-height: 1.5;
+  }
+
+  .petal-philosophy-small {
+    font-size: 12px;
+    opacity: .48;
+  }
+
+  @media (max-width: 760px) {
+    .petal-about-hero {
+      padding: 32px 23px;
+    }
+
+    .petal-about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+
+<script>
+(function () {
+
+  function addPetalAbout() {
+
+    /* -------------------------------------------------------
+       FIND THE MAIN NAVIGATION
+       ------------------------------------------------------- */
+
+    const sidebarNav = document.querySelector("aside nav");
+    const mobileNav = document.querySelector(".mobile-nav");
+    const main = document.querySelector("main");
+
+    if (!main) return;
+
+
+    /* -------------------------------------------------------
+       CREATE SIDEBAR BUTTON
+       ------------------------------------------------------- */
+
+    if (sidebarNav &&
+        !sidebarNav.querySelector('[data-page="about"]')) {
+
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.setAttribute("data-page", "about");
+
+      button.innerHTML = `
+        <span class="icon">♡</span>
+        About Petal
+      `;
+
+      sidebarNav.appendChild(button);
+    }
+
+
+    /* -------------------------------------------------------
+       CREATE MOBILE BUTTON
+       ------------------------------------------------------- */
+
+    if (mobileNav &&
+        !mobileNav.querySelector('[data-page="about"]')) {
+
+      const button = document.createElement("button");
+
+      button.type = "button";
+      button.setAttribute("data-page", "about");
+
+      button.textContent = "About";
+
+      mobileNav.appendChild(button);
+    }
+
+
+    /* -------------------------------------------------------
+       CREATE PAGE
+       ------------------------------------------------------- */
+
+    let aboutPage = document.getElementById("page-about");
+
+    if (!aboutPage) {
+
+      aboutPage = document.createElement("section");
+
+      aboutPage.className = "page";
+      aboutPage.id = "page-about";
+
+      aboutPage.innerHTML = `
+
+        <div class="petal-about-page">
+
+          <section class="petal-about-hero">
+
+            <div class="petal-about-eyebrow">
+              a little about petal
+            </div>
+
+            <h1 class="petal-about-title">
+              Revision, but make it personal.
+            </h1>
+
+            <p class="petal-about-intro">
+              Petal is a personalised study space designed to make
+              revision feel a little less overwhelming and a little
+              more meaningful.
+              <br><br>
+              Instead of simply telling you what you already know,
+              Petal helps you recognise the things you find difficult,
+              revisit them, and turn mistakes into progress.
+            </p>
+
+          </section>
+
+
+          <div class="petal-about-grid">
+
+            <div class="petal-about-card">
+
+              <div class="petal-about-icon">🌷</div>
+
+              <h3>
+                Learn from your mistakes
+              </h3>
+
+              <p>
+                Your mistakes aren't something to hide.
+                They're clues that help you understand
+                where your learning can grow.
+              </p>
+
+            </div>
+
+
+            <div class="petal-about-card">
+
+              <div class="petal-about-icon">🪷</div>
+
+              <h3>
+                Revision that remembers
+              </h3>
+
+              <p>
+                Petal keeps your revision personal,
+                helping you return to the concepts
+                that deserve another little look.
+              </p>
+
+            </div>
+
+
+            <div class="petal-about-card">
+
+              <div class="petal-about-icon">✨</div>
+
+              <h3>
+                Progress at your pace
+              </h3>
+
+              <p>
+                There is no perfect pace for learning.
+                Petal is here to help you keep moving
+                forward, one small step at a time.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <section class="petal-story">
+
+            <h2>
+              Why Petal?
+            </h2>
+
+            <p>
+              Studying can sometimes feel like you're expected
+              to remember everything, get everything right,
+              and somehow keep up with everything at once.
+              Petal was created to offer a different approach.
+              <br><br>
+              Your mistakes become part of your revision map.
+              Your subjects stay organised in one place.
+              Your progress is something you can build slowly,
+              consistently, and on your own terms.
+            </p>
+
+          </section>
+
+
+          <section class="petal-creator">
+
+            <div class="petal-creator-flower">
+              🌸
+            </div>
+
+            <h2 class="petal-creator-title">
+              Grown with love
+            </h2>
+
+            <p class="petal-creator-text">
+              Petal was created with the hope of making studying
+              feel more organised, encouraging, and a little more
+              beautiful.
+              <br><br>
+              What started as an idea became a little digital
+              garden for learning — built around the belief that
+              progress doesn't have to be perfect to be meaningful.
+            </p>
+
+            <div class="petal-creator-name">
+              — Nirvana ♡
+            </div>
+
+          </section>
+
+
+          <section class="petal-philosophy">
+
+            <div class="petal-philosophy-quote">
+              “You don't have to bloom all at once.”
+            </div>
+
+            <div class="petal-philosophy-small">
+              Keep learning. Keep growing. Keep going. 🌷
+            </div>
+
+          </section>
+
+        </div>
+      `;
+
+      main.appendChild(aboutPage);
+    }
+
+
+    /* -------------------------------------------------------
+       CONNECT BUTTONS
+       ------------------------------------------------------- */
+
+    document
+      .querySelectorAll('[data-page="about"]')
+      .forEach(button => {
+
+        if (button.dataset.petalConnected === "true") {
+          return;
+        }
+
+        button.dataset.petalConnected = "true";
+
+        button.addEventListener("click", function () {
+
+          /* Use existing Petal navigation */
+          if (typeof window.navigate === "function") {
+
+            window.navigate("about");
+
+          } else {
+
+            /* Fallback */
+
+            document
+              .querySelectorAll(".page")
+              .forEach(page => {
+                page.classList.remove("active");
+              });
+
+            aboutPage.classList.add("active");
+
+            document
+              .querySelectorAll("[data-page]")
+              .forEach(btn => {
+                btn.classList.remove("active");
+              });
+
+            document
+              .querySelectorAll('[data-page="about"]')
+              .forEach(btn => {
+                btn.classList.add("active");
+              });
+
+          }
+
+        });
+
+      });
+
+  }
+
+
+  /* ---------------------------------------------------------
+     WAIT UNTIL THE WHOLE DASHBOARD EXISTS
+     --------------------------------------------------------- */
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      addPetalAbout
+    );
+
+  } else {
+
+    addPetalAbout();
+
+  }
+
+})();
+</script>
 </body>
 </html>

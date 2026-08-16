@@ -9582,5 +9582,582 @@ if (
 })();
 
 </script>
+   <!-- =========================================================
+     PETAL RETURNING USER LOADING SCREEN
+     ========================================================= -->
+
+<div id="petalLoadingScreen" class="petal-loading-screen">
+
+  <div class="petal-loading-glow"></div>
+
+  <div class="petal-loading-content">
+
+    <div class="petal-loading-brand">
+      petal<span>˚</span>
+    </div>
+
+    <div class="petal-loading-eyebrow">
+      a little moment before we begin
+    </div>
+
+    <div class="petal-bouquet" aria-hidden="true">
+      <span class="lily lily-one">✿</span>
+      <span class="lily lily-two">❀</span>
+      <span class="lily lily-three">✿</span>
+      <span class="lily lily-four">❁</span>
+      <span class="lily lily-five">✿</span>
+    </div>
+
+    <div
+      id="petalLoadingQuote"
+      class="petal-loading-quote"
+    >
+      Small steps still take you somewhere.
+    </div>
+
+    <div class="petal-loading-dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </div>
+
+</div>
+
+
+<style>
+
+/* =========================================================
+   PETAL LOADING SCREEN
+   ========================================================= */
+
+.petal-loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255, 247, 250, 0.98),
+      rgba(250, 241, 245, 1) 55%,
+      rgba(246, 235, 240, 1)
+    );
+
+  opacity: 1;
+  visibility: visible;
+
+  transition:
+    opacity 0.8s ease,
+    visibility 0.8s ease;
+}
+
+.petal-loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.petal-loading-glow {
+  position: absolute;
+
+  width: 520px;
+  height: 520px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0) 70%
+    );
+
+  animation:
+    petalLoadingGlow 5s ease-in-out infinite;
+}
+
+.petal-loading-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(90%, 620px);
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.petal-loading-brand {
+  font-family: Georgia, serif;
+
+  font-size: clamp(42px, 7vw, 64px);
+
+  letter-spacing: -2px;
+
+  color: #3e3438;
+
+  margin-bottom: 10px;
+}
+
+.petal-loading-brand span {
+  font-size: 0.65em;
+
+  position: relative;
+  top: -8px;
+}
+
+.petal-loading-eyebrow {
+  font-size: 11px;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+  color: #9b7f88;
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   LITTLE LILY BOUQUET
+   ========================================================= */
+
+.petal-bouquet {
+  position: relative;
+
+  width: 240px;
+  height: 130px;
+
+  margin-bottom: 20px;
+}
+
+.lily {
+  position: absolute;
+
+  font-size: 48px;
+
+  color: #d9aebc;
+
+  opacity: 0;
+
+  animation:
+    petalLilyAppear 1.2s ease forwards,
+    petalLilyFloat 4s ease-in-out infinite;
+}
+
+.lily-one {
+  left: 35px;
+  top: 30px;
+
+  animation-delay: 0.15s;
+}
+
+.lily-two {
+  left: 92px;
+  top: 5px;
+
+  font-size: 58px;
+
+  animation-delay: 0.35s;
+}
+
+.lily-three {
+  right: 32px;
+  top: 28px;
+
+  animation-delay: 0.55s;
+}
+
+.lily-four {
+  left: 65px;
+  top: 58px;
+
+  font-size: 38px;
+
+  animation-delay: 0.75s;
+}
+
+.lily-five {
+  right: 68px;
+  top: 62px;
+
+  font-size: 35px;
+
+  animation-delay: 0.95s;
+}
+
+
+/* =========================================================
+   QUOTE
+   ========================================================= */
+
+.petal-loading-quote {
+  max-width: 520px;
+
+  min-height: 75px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 15px;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(23px, 4vw, 31px);
+
+  line-height: 1.35;
+
+  font-style: italic;
+
+  color: #59474e;
+
+  animation:
+    petalQuoteAppear 1s ease;
+}
+
+.petal-loading-quote.quote-changing {
+  animation:
+    petalQuoteChange 0.7s ease;
+}
+
+
+/* =========================================================
+   LOADING DOTS
+   ========================================================= */
+
+.petal-loading-dots {
+  display: flex;
+
+  gap: 7px;
+
+  margin-top: 28px;
+}
+
+.petal-loading-dots span {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #c79ba9;
+
+  animation:
+    petalLoadingDot 1.4s infinite ease-in-out;
+}
+
+.petal-loading-dots span:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.petal-loading-dots span:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes petalLoadingGlow {
+
+  0%,
+  100% {
+    transform: scale(0.95);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+
+}
+
+@keyframes petalLilyAppear {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(12px)
+      scale(0.8);
+  }
+
+  to {
+    opacity: 0.82;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+@keyframes petalLilyFloat {
+
+  0%,
+  100% {
+    margin-top: 0;
+  }
+
+  50% {
+    margin-top: -5px;
+  }
+
+}
+
+@keyframes petalQuoteAppear {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+@keyframes petalQuoteChange {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+@keyframes petalLoadingDot {
+
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+
+    transform:
+      translateY(0);
+  }
+
+  40% {
+    opacity: 1;
+
+    transform:
+      translateY(-5px);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .petal-loading-brand {
+    font-size: 48px;
+  }
+
+  .petal-loading-eyebrow {
+    font-size: 9px;
+
+    letter-spacing: 2px;
+  }
+
+  .petal-bouquet {
+    transform: scale(0.85);
+
+    margin-top: -5px;
+    margin-bottom: 15px;
+  }
+
+  .petal-loading-quote {
+    font-size: 22px;
+  }
+
+}
+
+</style>
+
+
+<script>
+
+/* =========================================================
+   PETAL LOADING QUOTES
+   ========================================================= */
+
+(function () {
+
+  const loadingScreen =
+    document.getElementById(
+      "petalLoadingScreen"
+    );
+
+  const quoteElement =
+    document.getElementById(
+      "petalLoadingQuote"
+    );
+
+
+  if (!loadingScreen || !quoteElement) {
+    return;
+  }
+
+
+  /* -------------------------------------------------------
+     IMPORTANT
+
+     We check whether Petal already has a saved name.
+
+     If there is no saved name, the person is treated as
+     a new user and the loading screen stays hidden so
+     onboarding can appear normally.
+     ------------------------------------------------------- */
+
+  const petalName =
+    localStorage.getItem("petalName");
+
+
+  if (!petalName) {
+
+    loadingScreen.classList.add("hidden");
+
+    return;
+
+  }
+
+
+  /* -------------------------------------------------------
+     PETAL THOUGHTS
+     ------------------------------------------------------- */
+
+  const petalQuotes = [
+
+    "A negative mind will never give you a positive life.",
+
+    "Everything happens for a reason.",
+
+    "You never fail until you start trying.",
+
+    "You can start again like the sun does every morning.",
+
+    "Small steps still take you somewhere.",
+
+    "Progress doesn't have to be loud.",
+
+    "You are allowed to learn at your own pace.",
+
+    "One difficult day does not define your journey.",
+
+    "Keep going. Your future self will thank you.",
+
+    "Bloom slowly. You're still blooming.",
+
+    "You don't have to have it all figured out today.",
+
+    "There is something beautiful about beginning again."
+
+  ];
+
+
+  /* -------------------------------------------------------
+     FIRST QUOTE
+     ------------------------------------------------------- */
+
+  let quoteIndex =
+    Math.floor(
+      Math.random() *
+      petalQuotes.length
+    );
+
+
+  quoteElement.textContent =
+    petalQuotes[quoteIndex];
+
+
+  /* -------------------------------------------------------
+     ROTATE QUOTES
+     ------------------------------------------------------- */
+
+  const quoteInterval =
+    setInterval(function () {
+
+      quoteIndex =
+        (quoteIndex + 1)
+        % petalQuotes.length;
+
+
+      quoteElement.classList.remove(
+        "quote-changing"
+      );
+
+
+      /*
+       * Restart the CSS animation.
+       */
+
+      void quoteElement.offsetWidth;
+
+
+      quoteElement.textContent =
+        petalQuotes[quoteIndex];
+
+
+      quoteElement.classList.add(
+        "quote-changing"
+      );
+
+    }, 1700);
+
+
+  /* -------------------------------------------------------
+     HIDE AFTER 5 SECONDS
+     ------------------------------------------------------- */
+
+  setTimeout(function () {
+
+    clearInterval(quoteInterval);
+
+    loadingScreen.classList.add(
+      "hidden"
+    );
+
+  }, 5000);
+
+
+})();
+
+</script>
 </body>
 </html>
